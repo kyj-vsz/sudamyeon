@@ -1,0 +1,41 @@
+<header xmlns:th="http://www.thymeleaf.org">
+    <div class="header-content">
+        <div class="logo-icon">
+            <img th:src="@{/img/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
+        </div>
+        <div class="name">수 다 면</div>
+        <div class="header-controls">
+            <div class="search-box">
+                <input type="text" placeholder="검색" class="searchplace">
+                <i class="fas fa-magnifying-glass search-icon"></i> <!-- FontAwesome 아이콘 추가 -->
+            </div>
+            <div class="login-button">
+                <a th:href="@{/login}" style="text-decoration: none; color: black;">로그인</a>
+            </div>
+            <div>|</div>
+            <div class="signup-button">
+                <a th:href="@{/signup}" style="text-decoration: none; color: black;">회원가입</a>
+            </div>
+        </div>
+    </div>
+    <main class="mainimg">
+        <!-- main 태그 내에 사진이 들어갈 영역 -->
+        <div class="image-placeholder">
+            <img src="이미지URL" alt="사진 설명">
+        </div>
+    </main>
+    <div class="container" id="box_item">
+        <div class="boxes">
+            <div class="box" style="padding-top:30px; border-right: none;">라면 정보 & 리뷰
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <div class="box" style="padding-top:30px; border-right: none;">레시피 공유
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <div class="box" style="padding-top:30px; border-right: none;">라면 NEWS
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <div class="box" style="padding-top:30px;">커뮤니티</div>
+        </div>
+    </div>
+</header>
