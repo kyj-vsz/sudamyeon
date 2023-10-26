@@ -21,12 +21,14 @@
 
     <!-- MAIN CSS -->
     <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
-
+    <script>
+        
+    </script>
 </head>
 
 <body>
+    
     <div th:replace="fragments/header :: header"></div> 
-
     <div class="container">        
         <div class="row main_page">
             <div class="col-3">                
@@ -275,19 +277,19 @@
                             <div class="col-md-3" style="text-align: left;">
                                 <div>
                                     <span class="number">1</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[0].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[0].get_thumbnail_url()}|"></a>
                                 </div>
                             </div>
                             <div class="col-md-3" style="text-align: center;">
                                 <div>
                                     <span class="number" style=" margin-left: 70px;">2</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px; margin-left: 70px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[1].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[1].get_thumbnail_url()}|" style="padding-left: 70px;"></a>
                                 </div>
                             </div>
                             <div class="col-md-3" style="text-align: right;">
                                 <div>
                                     <span class="number" style="margin-left: 140px;">3</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px; margin-left: 140px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[2].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[2].get_thumbnail_url()}|" style="padding-left: 140px;"></a>
                                 </div>
                             </div>
                         </div>
@@ -295,19 +297,19 @@
                             <div class="col-md-3" style="text-align: left;">
                                 <div>
                                     <span class="number">4</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[3].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[3].get_thumbnail_url()}|"></a>
                                 </div>
                             </div>
                             <div class="col-md-3" style="text-align: center;">
                                 <div>
                                     <span class="number" style=" margin-left: 70px;">5</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px; margin-left: 70px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[4].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[4].get_thumbnail_url()}|" style="padding-left: 70px;"></a>
                                 </div>
                             </div>
                             <div class="col-md-3" style="text-align: right;">
                                 <div>
                                     <span class="number" style="margin-left: 140px;">6</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px; margin-left: 140px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[5].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[5].get_thumbnail_url()}|" style="padding-left: 140px;"></a>
                                 </div>
                             </div>
                         </div>
@@ -315,19 +317,19 @@
                             <div class="col-md-3" style="text-align: left;">
                                 <div>
                                     <span class="number">7</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[6].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[6].get_thumbnail_url()}|"></a>
                                 </div>
                             </div>
                             <div class="col-md-3" style="text-align: center;">
                                 <div>
                                     <span class="number" style=" margin-left: 70px;">8</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px; margin-left: 70px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[7].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[7].get_thumbnail_url()}|" style="padding-left: 70px;"></a>
                                 </div>
                             </div>
                             <div class="col-md-3" style="text-align: right;">
                                 <div>
                                     <span class="number" style="margin-left: 140px;">9</span>
-                                    <img src="img/sudamyeon.png" style="width: 100px; height: 100px; margin-left: 140px;">
+                                    <a th:href="@{/members/read(mno=${dto.ImageDTO_list[8].getMno()})}"><img th:src="|/display?file_name=${dto.ImageDTO_list[8].get_thumbnail_url()}|" style="padding-left: 140px;"></a>
                                 </div>
                             </div>
                         </div>
