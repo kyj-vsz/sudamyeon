@@ -2,78 +2,298 @@
     margin: 0;
     padding: 0;
 }
+ul li{
+    list-style: none;
+}
 a{
     text-decoration-line: none !important;
     color: #000;
 }
-#box1, #box2, #box3{
-    width:100%;
-    height:300px;
-    /* border: 1px solid #000; */
-    background-color: #aaa;
-    margin-left: 30px;
+.main_ramyeon_read_menu1 {
+    width: 840px;
+    height: 370px;
+    border: 1px solid #000;
+    background-color: #ddd;
+    margin-bottom: 30px;
+    float:left
 }
-#box4{
-    width:100%;
-    height:500px;
-    /* border: 1px solid #000; */
-    background-color: #aaa;
-    margin-left: 30px;
+.main_ramyeon_read_menu_img {
+    width: 300px;
+    height: 340px;
+    border: 1px solid #000;
+    background-color: #ffffff;
+    float:left
 }
-#image, #info, #chart, #nutrition{
-    margin-left: 35px;
+.main_ramyeon_read_menu_table {
+    width: 492px;
+    height: 340px;
+    border: 1px solid #000;
+    background-color: #ffffff;
+    margin-left: 315px;
+    margin-top: 14px;
 }
 #image{
-    width: 325px;
-    height: 275px;
-    /* border: 1px solid #000; */
-    background-color: #fff;
-    margin-top: 10px;
-    float:left;
-    margin-left:35px;
+    width: 250px;
+    height: 230px;
+    margin-left: 25px;
+    margin-top: 20px;
 }
-#info{
-    width: 400px;
-    height: 275px;
-    /* border: 1px solid #000; */
-    background-color: #fff;
-    margin-top: 10px;
-    float:left;
-    margin-left:35px;
-}        
-#chart, #nutrition{
-    width: 325px;
-    height: 275px;
-    /* border: 1px solid #000; */
-    background-color: #fff;
-    margin-top: 10px;
-    float:left;
-    margin-left:35px;
+.main_ramyeon_read_menu_table_font {
+    font-size: 17px;
+    margin-top: 13px;
 }
-#nutrition_title{
-    width:304px;
-    height: 100%;
-    margin: auto;
+.main_ramyeon_read_menu_table1 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+    margin-top: -7px;
+    margin-bottom: 15px;
+}
+.main_ramyeon_read_menu_table2 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+}
+.main_ramyeon_read_menu_table3 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+    margin-top: -7px;
+    margin-bottom: 15px;
+    margin-left: 26px;
+}
+.main_ramyeon_read_menu_table4 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+    margin-left: 26px;
+}
+.main_ramyeon_read_menu_table5 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+    margin-top: -7px;
+    margin-bottom: 15px;
+    margin-left: 66px;
+}
+.main_ramyeon_read_menu_table6 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+    margin-left: 66px;
+}
+.main_ramyeon_read_menu_table7 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+    margin-top: -7px;
+    margin-bottom: 15px;
+    margin-left: 106px;
+}
+.main_ramyeon_read_menu_table8 {
+    width: 100px;
+    height: 130px;
+    border: 1px solid #000;
+    margin-left: 106px;
+}
+.main_ramyeon_read_menu_table_img {
+    width: 75px;
+    height: 75px;
+    border: 1px solid #000;
+    margin-top: 8px;
+    margin-left: -3.5px;
+}
+.main_ramyeon_read_menu_table_img img {
+    width: 65px;
+    height: 65px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.main_ramyeon_read_menu_table_column {
+    font-size: 11px;
     text-align: center;
+    width: 75px;
+    margin-top: 3px;
+    margin-left: -2px;
+    border-bottom: 2px solid #ddd;
 }
-.item{
-    width:300px;
-    height:100%;
-    margin: auto;
+.main_ramyeon_read_menu_table_dto {
+    font-size: 15px;
     text-align: center;
+    width: 75px;
+    margin-top: 1.5px;
+    margin-left: -2px;
 }
-.info_space{
-    width:100%;
+.main_ramyeon_read_menu2 {
+    width: 840px;
+    height: 370px;
+    border: 1px solid #000;
+    background-color: #ddd;
+    margin-bottom: 30px;
 }
-.review_space{
-    width:100%;
+.chart {
+    width: 387px;
+    height: 342px;
+    border: 1px solid #000;
+    background-color: #fff;
+    margin-top: 14px;
 }
-.card-body{
-    background-color: #ff0777;
+#myChart {
+    width: 320px;
+    height: 320px;
+    margin-left: 22px;
+    margin-top: 10px;
 }
-.empty{
-    width: 100%;    
-    height: 25px;
+.main_ramyeon_read_menu2_table {
+    width: 406px;
+    height: 342px;
+    border: 1px solid #000;
+    background-color: #fff;
+    margin-left: -2px;
+    margin-top: 14px;
+    float:left
+}
+table { 
+    border-collapse : collapse;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+th {
+      text-align: center;
+      border: 1px solid #000;
+      font-size: 13px; 
+      
+      vertical-align: top;	/* 위 */
+      vertical-align: bottom;   /* 아래 */
+      vertical-align: middle;   /* 가운데 */
+}
+.first_th {
+    width: 62px;
+    height: 53.5px;
+    background-color: #ddd;
+}
+.second_th1 {
+    width: 62px;
+    height: 53.5px;
+    background-color: #ddd;
+}
+.third_th1 {
+    width: 67px;
+    height: 53.5px;
+    background-color: #ddd;
+}
+.second_th2 {
+    width: 62px;
+    height: 53.5px;
+}
+.third_th2 {
+    width: 67px;
+    height: 53.5px;
+}
+.fourth_th {
+    width: 62px;
+    height: 53.5px;
+    background-color: #ddd;
+}
+.fifth_th1 {
+    width: 62px;
+    height: 53.5px;
+    background-color: #ddd;
+}
+.sixth_th1 {
+    width: 67px;
+    height: 53.5px;
+    background-color: #ddd;
+}
+.fifth_th2 {
+    width: 62px;
+    height: 53.5px;
+}
+.sixth_th2 {
+    width: 67px;
+    height: 53.5px;
+}
+.main_ramyeon_read_menu3 {
+    width: 840px;
+    height: 265px;
+    border: 1px solid #000;
+    background-color: #ddd;
+    margin-bottom: 30px;
+    float:left
+}
+.main_ramyeon_read_menu3_content {
+    border: 1px solid #000;
+}
+.content_box_font {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.main_ramyeon_read_menu4 {
+    width: 840px;
+    height: 30px;
+    margin-top: 8px;
+}
+.main_ramyeon_read_menu4 a {
+    float: right;
+    margin-left: 8px;
+}
+.main_ramyeon_read_menu4_btn {
+    margin-bottom: -15px;
+}
+.main_ramyeon_read_menu5 {
+    width: 840px;
+    height: 385px;
+    border: 1px solid #000;
+    background-color: #ddd;
+    margin-left: 0px;
+    float:left
+}
+.main_ramyeon_read_menu5_font {
+    font-size: 15px;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+.main_ramyeon_read_menu5_btn {
+    margin-top: 10px;
+}
+.card-body-box{
+    width: 808px;
+    margin-top: 5px;
+}
+.card-body {
+    border: 1px solid #000;
+    background-color: #fff;
+    height: 75px;
+}
+.card-body-text-box {
+    margin-top: -24px;
+}
+.card-title {
+    font-size: 15px;
+    margin-top: -1px;
+    margin-left: 5px;
+}
+.card-subtitle {
+    font-size: 11px;
+    margin-left: 5px;
+    margin-top: -10px;
+}
+.card-text {
+    font-size: 8px;
+    margin-left: 4px;    
+    margin-top: -20px;
+}
+.reviewgrade_text {
+    font-size: 13px;
+    margin-left: 655px;
+    margin-top: 10px;
+}
+.reviewgrade-text-box {
+    margin-top: -9.5px;
+}
+.reviewgrade {
+    margin-left: 5px;
 }
 .bordered {
     border: 1px solid #000; /* 테두리 스타일 지정 */
@@ -81,9 +301,6 @@ a{
 }
 .col-lg-12{
     font-size: 13px;
-}
-.table{
-    width:100%;
 }
 .main_page {
     margin: 25px 0px 25px 0px;
@@ -106,7 +323,7 @@ a{
 }
 .banner_community {
     margin-left: 10px;
-    margin-top: 30px;
+    margin-top: -450px;
 }
 /* banner_sub */
 .banner_sub {
@@ -185,38 +402,6 @@ margin-left: -2px;
     margin-top: 5px;
     margin-left: 2px;
 }
-.info_wrap{
-    margin-top: 10px;
-}
-.info_wrap h4{
-    text-decoration-line: underline;
-    text-decoration-style: double;
-}
-.info_item{
-    width: 70px;
-    height: 100px;
-    /* border: 0.5px solid #000; */
-    border-radius: 5px;
-    margin-top: 5px;        
-    text-align: center;
-}
-.info_item .row{
-    width: 85px;
-    height: 100px;
-    border: 0.5px solid #000;
-    border-radius: 5px;      
-    text-align: center;
-}
-.info_item .row .col-12 div:nth-child(1){
-    width:55px;
-    height:45px;
-    border: 0.5px solid #000;
-    border-radius: 5px; 
-    margin-top: 5px; 
-}
-.info_item .row .col-12 div:nth-child(2){       
-    border-bottom: 0.5px solid #000;       
-}
 .box4_space{
     margin-top: 3px;
 }
@@ -224,20 +409,19 @@ margin-left: -2px;
     font-size: 30px; 
     margin-top: 7px;
 }
-.table{
-    width: 100%;
-    height: 250px;
-    font-size: 10.5px;
-    margin-top: 15px;
-    text-align: center;
-}
-.table_item{
-    width: 100%;
-    height: 100%;
-    margin-top: 10px;
-}
-img{
-    width:100%;
-    height:100%;
+img {
     margin-top: 3px;
+}
+.img_border_box {
+    width: 260px;
+    height: 230px;
+    border: 1px solid #000;
+    margin-top: 18px;
+    margin-left: 19px;
+}
+.img_box {
+    width:250px;
+    height:220px;
+    margin-top: 5px;
+    margin-left: 2px;
 }

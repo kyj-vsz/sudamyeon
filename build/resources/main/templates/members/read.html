@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/css/read.css}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <script th:src="@{/starrr.js}"></script>
+    <link th:href="@{/css/starrr.css}" rel="stylesheet">
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function (){
+
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['맵기', '별점', '면굵기', '별첨 스프 구성', '조리시간'],
+                    datasets: [{
+                    label: '주관평가',
+                    data: [4, 4.3, 3, 3, 3],
+                    borderWidth: 3
+                    }]
+                },
+                options:{
+                    responsive: false,
+                    plugins: {
+                        legend: false
+                    },
+                    scale: {
+                        r:{
+                            min:0,
+                            max:5
+                        }                    
+                    }
+                }
+            });
+        });
+        $(document).ready(function(){
+            var msg = [[${msg}]];               
+
+            console.log(msg);
+
+            checkModal(msg);
+            // showList(dto);
+
+            function checkModal(msg){
+                if(msg == null){
+                    return;
+                }
+                /**************************************************************************
+                // 글 작성 후 작성한 글의 상세보기로 이동하는 방식일 경우 이 주석을 해제하여 사용
+
+                if(msg > 0){
+                    $(".modal-body").html("게시글 "+msg+"번이 등록되었습니다.");
+                }
+                ***************************************************************************/
+                else if(msg == "modify"){
+                    $("#alert-body").html("수정이 완료되었습니다.");
+                }
+                $("#alertModal").modal();               
+            }
+
+            var grade = 0;
+
+            $(".starrr").starrr({
+                rating: grade,
+                change: function(e, value){
+                    if(value){
+                        console.log(value);
+                        grade = value;
+                    }
+                }
+            });
+
+            var reviewModal = $(".reviewModal");
+            var reply_modal = $(".reply_modal");
+            var inputMid = $("input[name='mid']");
+            var inputText = $("input[name='text']");
+
+            $(".add_review_btn").click(function(){
+                grade=0;
+                inputMid.val("");
+                inputText.val("");
+                //.starrr초기화
+                
+                var star = $(".starrr").clone();
+                $(".starrr").remove();
+                $("#divGrade").append(star);
+                $(".starrr").starrr({
+                    rating: grade,
+                    change: function(e, value){
+                        if(value){
+                            console.log(value);
+                            grade = value;
+                        }
+                    }
+                });
+                $(".removeBtn, .modifyBtn").hide();
+                $(".reviewSaveBtn").show();                
+                reviewModal.modal("show");
+            });
+
+            $(".reply_add_btn").click(function(){
+                reviewModal.modal("hide");
+                reply_modal.modal("show");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <div class="row main_page">
+            <div class="col-3">                
+                <div class="row banner">
+                    <!-- 라면 리뷰 배너 시작 -->
+                    <div class="banner_review">
+                        <div class="col-12 bordered">
+                            <div class="banner_main">
+                                <a href="#" class="banner_main_font">New Review</a>
+                            </div>
+                            <div class="row banner_sub">
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[짜파게티]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">일요일은 내가 요리사!</a><br/>
+                                                <p class="banner_sub_review_main_date">15분 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[너구리]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">오동통한 면발 너구리..</a><br/>
+                                                <p class="banner_sub_review_main_date">1시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[스파게티]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">최고의 가설비 인정</a><br/>
+                                                <p class="banner_sub_review_main_date">3시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[진라면]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">역시 매운맛이 진리다</a><br/>
+                                                <p class="banner_sub_review_main_date">4시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[신라면]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">농심을 먹여살림</a><br/>
+                                                <p class="banner_sub_review_main_date">6시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img_final">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main_final">
+                                                <a href="#" class="banner_sub_review_main_title">[안성탕면]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">우리 아빠가 좋아하는 맛</a><br/>
+                                                <p class="banner_sub_review_main_date">10시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 라면 리뷰 배너 끝 -->
+                    <!-- 커뮤니티 배너 시작-->
+                    <div class="banner_community">
+                        <div class="col-12 bordered">
+                            <div class="banner_main">
+                                <a href="#" class="banner_main_font">Community</a>
+                            </div>
+                            <div class="row banner_sub">
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">라면에 대한 진실..</a>
+                                                <p class="banner_sub_community_main_date">30분 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">매운라면 잘 먹는 법</a>
+                                                <p class="banner_sub_community_main_date">45분 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">짜파게티에 관한 견해</a>
+                                                <p class="banner_sub_community_main_date">1시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">신라면 개인적인 생각</a>
+                                                <p class="banner_sub_community_main_date">2시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">라면과 계란의 조화</a>
+                                                <p class="banner_sub_community_main_date">5시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community_final">
+                                                <a href="#" class="banner_sub_community_main_title">라면 공장 방문 후기</a>
+                                                <p class="banner_sub_community_main_date">5시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 커뮤니티 배너 끝 -->
+                </div>
+            </div>
+            <div class="col-9">
+                <!-- col-9 안의 새로운 row -->
+                <div class="row info_space">
+                    <div id="box1" class="container form-group">
+                        <div id="image" class="col-lg-4">
+                            img space
+                        </div>
+                        <div id="info" class="col-lg-8">
+                            <div class="info_wrap">                            
+                                <h4>상품명</h4>
+                                <div class="row" style="margin-left: 3.7px;">
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div>img</div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div><img th:src="@{/img/cost.png}" alt="소비자가격"></div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div><img th:src="@{/img/weight.png}" alt="무게"></div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div><img th:src="@{/img/lamen.png}" alt="칼로리"></div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                            
+                                <div class="row" style="margin-left: 3.7px;">
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div><img th:src="@{/img/snack.png}" alt="라면종류"></div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div><img th:src="@{/img/cooking2.png}" alt="조리방법"></div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div><img th:src="@{/img/time.png}" alt="유통기한"></div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 info_item">
+                                        <div class="row">
+                                            <div class="col-12">                                            
+                                                <div><img th:src="@{/img/calender.png}" alt="출시년도"></div>
+                                                <div>img</div>
+                                                <div>img</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                      
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div id="box2" class="container form-group">
+                        <div id="chart" class="col-lg-6">
+                            <canvas id="myChart" style="margin:auto" width="270px;" height="270px;"></canvas>
+                        </div>
+                        <div id="nutrition" class="col-lg-6">
+                            <div class="table-responsive">                                    
+                                <table class="table table-bordered table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>영양소</th>
+                                            <th>105g</th>
+                                            <th>성분비</th>
+                                            <th>영양소</th>
+                                            <th>105g</th>
+                                            <th>성분비</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><div class="table_item">나트륨</div></td>
+                                            <td><div class="table_item">1,780mg</div></td>
+                                            <td><div class="table_item">89%</div></td>
+                                            <td><div class="table_item">지방</div></td>
+                                            <td><div class="table_item">17g</div></td>
+                                            <td><div class="table_item">31%</div></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td><div class="table_item">탄수화물</div></td>
+                                            <td><div class="table_item">81g</div></td>
+                                            <td><div class="table_item">25%</div></td>
+                                            <td><div class="table_item">포화지방</div></td>
+                                            <td><div class="table_item">7g</div></td>
+                                            <td><div class="table_item">47%</div></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td><div class="table_item">단백질</div></td>
+                                            <td><div class="table_item">10g</div></td>
+                                            <td><div class="table_item">18%</div></td>
+                                            <td><div class="table_item">트랜스지방</div></td>
+                                            <td><div class="table_item">0g</div></td>
+                                            <td><div class="table_item">0%</div></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td><div class="table_item">당류</div></td>
+                                            <td><div class="table_item">3g</div></td>
+                                            <td><div class="table_item">3%</div></td>
+                                            <td><div class="table_item">콜레스테롤</div></td>
+                                            <td><div class="table_item">0mg</div></td>
+                                            <td><div class="table_item">0%</div></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td><div class="table_item">기타</div></td>
+                                            <td colspan="5"><div class="table_item">칼슘 : 13g 성분비율 : 21% </div></td>
+                                        </tr>
+                                    </tbody>                                   
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="box3" class="container form-group">
+                        <label>Content</label>
+                        <textarea name="content" class="form-control" rows="10"></textarea>
+                    </div>        
+                </div>
+
+                <div class="empty container">
+                    <div class="float-right form-group">
+                        <a class="btn btn-primary" th:href="@{/modify}">    
+                            Modify  
+                        </a>
+                        <a class="btn btn-danger" th:href="@{/remove}">
+                            Remove
+                        </a>
+                        <a class="btn btn-info" th:href="@{list}">
+                            List
+                        </a>
+                    </div>            
+                </div>
+                <div class="row review_space">
+                    <div id="box4" class="container form-group">
+                        <div class="box4_space">                        
+                            <label>댓글수(0)</label>
+                            <button class="btn btn-primary btn-sm float-right add_review_btn" type="button">ReviewAdd</button>                            
+                            <div style="cursor:pointer;" class="card-body">
+                                <h5 class="card-title">review.text<span class="reviewgrade"></span>
+                                    <button class="btn btn-primary btn-sm float-right reply_add_btn" type="button">ReplyAdd</button>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">review.nickname</h6>
+                                <p class="card-text">formatTime(review.regDate)</p>
+                            </div>
+                        </div>
+                    </div>        
+                </div>               
+            </div>
+        </div>
+    </div>
+    <div id="alertModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">===처리상태알림===</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="alert-body" class="modal-body">
+                    <p>처리가 완료 되었습니다</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reviewModal modal" tabindex="-2" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ramyeon Review</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Reviewer ID</label>
+                        <input type="text" class="form-control" name="mid" >
+                    </div>
+                    <div class="form-group" id="divGrade">
+                        <label >Grade <span class="grade"></span></label>
+                        <div class="starrr"></div>
+                    </div>
+                    <div class="form-group">
+                        <label >Review Text</label>
+                        <textarea class="form-control" name="review_content" rows="15" placeholder="내용입력!"></textarea>                        
+                    </div>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary reviewSaveBtn">Save changes</button>
+                    <button type="button" class="btn btn-warning modifyBtn">Modify </button>
+                    <button type="button" class="btn btn-danger removeBtn">Remove </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reply_modal modal" tabindex="-2" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Review Reply</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Reviewer ID</label>
+                        <input type="text" class="form-control" name="mid" >
+                    </div>                    
+                    <div class="form-group">
+                        <label >Review Text</label>
+                        <textarea class="form-control" name="review_content" rows="15" placeholder="내용입력!"></textarea>                        
+                    </div>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary reviewSaveBtn">Save changes</button>
+                    <button type="button" class="btn btn-warning modifyBtn">Modify </button>
+                    <button type="button" class="btn btn-danger removeBtn">Remove </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+    </body>
+</html>
