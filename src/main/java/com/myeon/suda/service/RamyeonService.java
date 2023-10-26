@@ -11,7 +11,15 @@ import com.myeon.suda.entity.Image;
 import com.myeon.suda.entity.Ramyeon;
 
 public interface RamyeonService {
+    Long register(RamyeonDTO ramyeonDTO);
+
+    RamyeonDTO get_img();
+
     RamyeonDTO get_ramyeon(Long mno);
+
+    void remove(Long mno);
+
+    void modify(RamyeonDTO ramyeonDTO);
     
     default RamyeonDTO to_dto(Ramyeon ramyeon, List<Image> images, Double avg, Long review_count){
         RamyeonDTO ramyeonDTO = RamyeonDTO.builder()
@@ -38,6 +46,7 @@ public interface RamyeonService {
                     .saturated_fat(ramyeon.getSaturatedFat())
                     .trans_fat(ramyeon.getTransFat())
                     .cholesterol(ramyeon.getCholesterol())
+                    .etc(ramyeon.getEtc())
                     .regdate(ramyeon.getRegDate())
                     .moddate(ramyeon.getModDate())
                     .build();
@@ -45,6 +54,7 @@ public interface RamyeonService {
         List<ImageDTO> imageDTO_list = images.stream().map(image -> {
             return ImageDTO.builder()
                         .inum(image.getInum())
+                        .mno(image.getRamyeon().getMno())
                         .img_name(image.getImgName())
                         .path(image.getPath())
                         .uuid(image.getUuid())
@@ -62,7 +72,6 @@ public interface RamyeonService {
         Map<String, Object> entity_map = new HashMap<>();
 
         Ramyeon ramyeon = Ramyeon.builder()
-                    .mno(ramyeonDTO.getMno())
                     .mno(ramyeonDTO.getMno())
                     .gname(ramyeonDTO.getGname())
                     .content(ramyeonDTO.getContent())
@@ -86,6 +95,7 @@ public interface RamyeonService {
                     .saturatedFat(ramyeonDTO.getSaturated_fat())
                     .transFat(ramyeonDTO.getTrans_fat())
                     .cholesterol(ramyeonDTO.getCholesterol())
+                    .etc(ramyeonDTO.getEtc())
                     .build();
 
         entity_map.put("ramyeon", ramyeon);

@@ -14,4 +14,10 @@ public interface RamyeonRepository extends JpaRepository<Ramyeon, Long>{
             " LEFT OUTER JOIN review rv ON rv.ramyeon_mno = r.mno " +
             " WHERE r.mno = ? GROUP BY i.inum ", nativeQuery = true)
     List<Object[]> get_ramyeon_with_all(@Param("mno") Long mno);
+    
+    @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno) " +
+    " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
+    " LEFT OUTER JOIN Review rv ON rv.ramyeon = r " +
+    " GROUP BY i order by AVG(COALESCE(rv.grade,0)) desc")
+    List<Object[]> get_ramyeon_img();
 }
