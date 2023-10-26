@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ImageDTO {
     private Long inum;
+    
+    private Long mno;
 
     private String img_name;
 

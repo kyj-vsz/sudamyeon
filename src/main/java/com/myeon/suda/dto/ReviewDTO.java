@@ -23,6 +23,8 @@ public class ReviewDTO {
     private String review_content;
 
     private int grade;
+
+    private int reply_count;
     
     private LocalDateTime regdate, moddate;
 }

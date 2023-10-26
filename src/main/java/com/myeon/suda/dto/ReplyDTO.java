@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 public class ReplyDTO {
     private Long reply_no;
 
+    private Long rno;
+
     private String replyer;
 
     private String reply_content;

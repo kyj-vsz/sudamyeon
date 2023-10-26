@@ -4,27 +4,155 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link th:href="@{/css/styles.css}" rel="stylesheet">
-  <link th:href="@{/css/modify.css}" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
+  
   <!-- jQuery library -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-
+  
   <!-- Popper JS -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
+  
   <!-- Latest compiled JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-  <script>
+  
+  <link th:href="@{/css/styles.css}" rel="stylesheet">
+  <!-- Modify CSS -->
+  <link th:href="@{/css/modify.css}" rel="stylesheet">
+  
+  <script th:inline="javascript">
     $(document).ready(function(){
-        
+        var gname = $("input[name='gname']");
+        var file_upload = $("input[type='file']");
+        var label = $(".custom-file-label");
+        var mno = [[${dto.mno}]];
+        console.log($("li").length);
+        $("button[type='submit']").on("click",function(e){
+            e.preventDefault();
+            if(!gname.val()){
+                alert("제목은 필수입니다!");
+                gname.focus();
+                return;
+            }
+            if(!file_upload.val() && (file_upload.val()=="" && $("li").length < 19)){
+                alert("파일 업로드는 필수입니다!");
+                file_upload.focus();
+                return;
+            }            
+            if($("li").length > 19){
+                alert("한개만 업로드 할 수 있습니다.");
+                return;
+            }
+                            
+            var str = "";
+            $(".image_space li").each(function(i,obj){
+                var target = $(obj);
+                str += "<input type='hidden' name='imageDTO_list["+i+"].img_name' value='"+target.data('name') +"'>";
+                str += "<input type='hidden' name='imageDTO_list["+i+"].path' value='"+target.data('path')+"'>";
+                str += "<input type='hidden' name='imageDTO_list["+i+"].uuid' value='"+target.data('uuid')+"'>";
+            });
+            //태그들이 추가된 것을 확인한 후에 comment를 제거
+            $(".hidden_zone").html(str);
+           
+            $("#form").submit();
+        });
+
+        var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|tiff)$"); // 파일 업로드 제한
+        var max_size = 1024*1024*10; //10MB
+        function check_extension(file_name, file_size){
+            if(file_size >= max_size){
+                alert("사이즈가 큽니다.");
+                return false;
+            }
+            if(regex.test(file_name)){
+                alert("업로드가 제한된 확장자 입니다.");
+                return false;
+            }
+            return true;
+        }
+
+        $(".custom-file-input").on("change", function() {
+            var file_name = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(file_name);
+            var form_data = new FormData();
+            var input_file = $(this);
+            var files = input_file[0].files;
+            var appended = false;
+            for (var i = 0; i < files.length; i++) {
+                if(!check_extension(files[i].name, files[i].size) ){
+                    return false;
+                }
+                console.log(files[i]);
+                form_data.append("upload_files", files[i]);
+                appended = true;
+            }
+
+            //upload를 하지 않는다.
+            if (!appended) {
+                return;
+            }
+            for (var value of form_data.values()) {
+                console.log(value);
+            }
+            //실제 업로드 부분
+            //upload ajax
+            $.ajax({
+                url: '/upload_ajax',
+                processData: false,
+                contentType: false,
+                data: form_data,
+                type: 'POST',
+                dataType:'json',
+                success: function(result){
+                    console.log(result);
+                    show_result(result);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(textStatus);
+                }
+            }); //$.ajax
+        }); //end change event
+
+        function show_result(upload_result_arr){               
+            var image_space = $(".image_space ul");
+            var str ="";
+            $(upload_result_arr).each(function(i, obj) {
+                str += "<li data-name='" + obj.file_name + "' data-path='"+obj.folder_path+"' data-uuid='"+obj.uuid+"'>";
+                str + " <div>";
+                str += "<button type='button' data-file=\'" + obj.image_url + "\' "
+                str += "class='btn-warning btn-sm'>X</button><br>";
+                str += "<img src='/display?file_name=" + obj.thumbnail_url + "'>";
+                str += "</div>";
+                str + "</li>";
+            });
+            image_space.append(str);
+            console.log($("li").length);
+        }
+
+        $(".image_space ").on("click", "li button", function(e){
+            console.log("delete file");
+            var target_file = $(this).data("file");
+            var target_li = $(this).closest("li");
+            $.ajax({
+                url: '/remove_file',
+                data: {file_name: target_file},
+                dataType:'text',
+                type: 'POST',
+                success: function(result){
+                    alert(result);
+                    target_li.remove();
+                }
+            }); //$.ajax
+            file_upload.val("");
+            label.empty();
+        });
     });
+    function reset(){
+        document.getElementById("form").reset();
+    }
   </script>
 </head>
 <body>
@@ -216,58 +344,63 @@
         
         <div class="col-9">
             <!-- col-9 안의 새로운 row -->
-            <form id="form" th:action="@{/register}" th:method="post">
-                <div class="row">
-                    <div id="box1" class="container form-group">
-                        <div id="image" class="col-lg-4">
-                            <div class="image_space">
-                                img space
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input files" id="fileInput">
-                                <label class="custom-file-label" data-browse="Browse"></label>
-                            </div>
+            <div class="row">
+                <div id="box1" class="container form-group">
+                    <div id="image" class="col-lg-4">
+                        <div class="image_space">
+                            <ul>
+                                <li style="cursor:pointer;" th:each="image: ${dto.imageDTO_list}" th:data-file="${image.get_image_url()}">
+                                    <img th:if="${image.path != null}" th:src="|/display?file_name=${image.get_image_url()}|">
+                                </li>
+                            </ul>
                         </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input files" id="fileInput">
+                            <label class="custom-file-label" data-browse="Browse"></label>
+                        </div>
+                    </div>
+                    <form id="form" action="/members/modify" method="POST">
+                        <input type="hidden" name="mno" th:value="${dto.mno}">
                         <div id="info" class="col-lg-8">
                             <div class="info_wrap">
                                 <div>
                                     <label>상품명</label>
-                                    <input type="text" name="gname" class="form-control form-control-sm">
+                                    <input type="text" name="gname" class="form-control form-control-sm" th:value="${dto.gname}">
                                 </div>
                                 <div class="row">
                                     <div class="col-3">
                                         <label>브랜드</label>
-                                        <input type="text" name="brand" class="form-control form-control-sm">
+                                        <input type="text" name="brand" class="form-control form-control-sm" th:value="${dto.brand}">
                                     </div>
                                     <div class="col-3">
                                         <label style="font-size: 12px;">소비자가격</label>
-                                        <input type="text" name="price" class="form-control form-control-sm">
+                                        <input type="text" name="price" class="form-control form-control-sm" th:value="${dto.price}">
                                     </div>
                                     <div class="col-3">
                                         <label>무게</label>
-                                        <input type="text" name="weight" class="form-control form-control-sm">
+                                        <input type="text" name="weight" class="form-control form-control-sm" th:value="${dto.weight}">
                                     </div>
                                     <div class="col-3">
                                         <label>칼로리</label>
-                                        <input type="text" name="calorie" class="form-control form-control-sm">
+                                        <input type="text" name="calorie" class="form-control form-control-sm" th:value="${dto.calorie}">
                                     </div>
                                 </div>                            
                                 <div class="row">
                                     <div class="col-3">
                                         <label>분류</label>
-                                        <input type="text" name="category" class="form-control form-control-sm">
+                                        <input type="text" name="category" class="form-control form-control-sm" th:value="${dto.category}">
                                     </div>
                                     <div class="col-3">
                                         <label>조리방법</label>
-                                        <input type="text" name="cooking" class="form-control form-control-sm">
+                                        <input type="text" name="cooking" class="form-control form-control-sm" th:value="${dto.cooking}">
                                     </div>
                                     <div class="col-3">
                                         <label>소비기한</label>
-                                        <input type="text" name="expiry" class="form-control form-control-sm">
+                                        <input type="text" name="expiry" class="form-control form-control-sm" th:value="${dto.expiry}">
                                     </div>
                                     <div class="col-3">
                                         <label>출시년도</label>
-                                        <input type="text" name="birth" class="form-control form-control-sm">
+                                        <input type="text" name="birth" class="form-control form-control-sm" th:value="${dto.birth}">
                                     </div>
                                 </div>                            
                             </div>
@@ -281,19 +414,19 @@
                             <div class="chart_wrap">                                
                                 <div>
                                     <label>맵기</label>
-                                    <input type="text" name="spicy" class="form-control form-control-sm">
+                                    <input type="text" name="spicy" class="form-control form-control-sm" th:value="${dto.spicy}">
                                 </div>
                                 <div>
                                     <label>면굵기</label>
-                                    <input type="text" name="noodle_size" class="form-control form-control-sm">
+                                    <input type="text" name="noodle_size" class="form-control form-control-sm" th:value="${dto.noodle_size}">
                                 </div>
                                 <div>
                                     <label>별첨스프구성</label>
-                                    <input type="text" name="soupnum" class="form-control form-control-sm">
+                                    <input type="text" name="soupnum" class="form-control form-control-sm" th:value="${dto.soupnum}">
                                 </div>
                                 <div>
                                     <label>조리시간</label>
-                                    <input type="text" name="cooktime" class="form-control form-control-sm">
+                                    <input type="text" name="cooktime" class="form-control form-control-sm" th:value="${dto.cooktime}">
                                 </div>
                             </div>
                         </div>
@@ -302,42 +435,42 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <label>나트륨</label>
-                                        <input type="text" name="brand" class="form-control form-control-sm">
+                                        <input type="text" name="sodum" class="form-control form-control-sm" th:value="${dto.sodum}">
                                     </div>
                                     <div class="col-3">
                                         <label style="font-size: 10px;">탄수화물</label>
-                                        <input type="text" name="price" class="form-control form-control-sm">
+                                        <input type="text" name="carbohydrate" class="form-control form-control-sm" th:value="${dto.carbohydrate}">
                                     </div>
                                     <div class="col-3">
                                         <label>단백질</label>
-                                        <input type="text" name="weight" class="form-control form-control-sm">
+                                        <input type="text" name="protein" class="form-control form-control-sm" th:value="${dto.protein}">
                                     </div>
                                     <div class="col-3">
                                         <label>당류</label>
-                                        <input type="text" name="calorie" class="form-control form-control-sm">
+                                        <input type="text" name="sugar" class="form-control form-control-sm" th:value="${dto.sugar}">
                                     </div>
                                 </div>                            
                                 <div class="row">
                                     <div class="col-3">
                                         <label>지방</label>
-                                        <input type="text" name="category" class="form-control form-control-sm">
+                                        <input type="text" name="fat" class="form-control form-control-sm" th:value="${dto.fat}">
                                     </div>
                                     <div class="col-3">
                                         <label style="font-size: 10px;">포화지방</label>
-                                        <input type="text" name="cooking" class="form-control form-control-sm">
+                                        <input type="text" name="saturated_fat" class="form-control form-control-sm" th:value="${dto.saturated_fat}">
                                     </div>
                                     <div class="col-3">
                                         <label style="font-size: 10px;">트랜스지방</label>
-                                        <input type="text" name="expiry" class="form-control form-control-sm">
+                                        <input type="text" name="trans_fat" class="form-control form-control-sm" th:value="${dto.trans_fat}">
                                     </div>
                                     <div class="col-3">
                                         <label style="font-size: 10px;">콜레스테롤</label>
-                                        <input type="text" name="birth" class="form-control form-control-sm">
+                                        <input type="text" name="cholesterol" class="form-control form-control-sm" th:value="${dto.cholesterol}">
                                     </div>
                                 </div> 
                                 <div>
                                     <label>기타성분</label>
-                                    <input type="text" name="gname" class="form-control form-control-sm">
+                                    <input type="text" name="etc" class="form-control form-control-sm" th:value="${dto.etc}">
                                 </div>     
                             </div>
                         </div>
@@ -347,14 +480,14 @@
                 <div class="row">
                   <div id="box3" class="container form-group">
                       <label>Content</label>
-                      <textarea name="content" class="form-control" rows="10"></textarea>
+                      <textarea name="content" class="form-control" rows="10">[[${dto.content}]]</textarea>
                   </div>
                 </div>
     
-                <div class="empty">
+                <div class="empty hidden_zone">
               
                 </div>
-            </form>
+                    </form>
             <div class="float-right">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button onclick="reset()" class="btn btn-dark">Reset</button>
