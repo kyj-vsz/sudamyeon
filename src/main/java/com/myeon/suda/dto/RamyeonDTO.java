@@ -22,7 +22,7 @@ public class RamyeonDTO {
 
     private String brand;
 
-    private Long price;
+    private String price;
 
     private Long weight;
 
@@ -32,33 +32,35 @@ public class RamyeonDTO {
 
     private String cooking;
 
-    private Long expiry;
+    private String expiry;
 
-    private LocalDateTime birth;
+    private String birth;
 
-    private double spicy;
+    private Long spicy;
 
-    private double cooktime;
+    private String cooktime;
 
-    private double soupnum;
+    private Long soupnum;
 
-    private double noodle_size;
+    private Long noodle_size;
     
-    private double sodum;
+    private Long sodum;
     
-    private double carbohydrate;
+    private Long carbohydrate;
     
-    private double protein;
+    private Long protein;
     
-    private double sugar;
+    private Long sugar;
     
-    private double fat;
+    private Long fat;
     
-    private double saturated_fat;
+    private Long saturated_fat;
     
-    private double trans_fat;
+    private Long trans_fat;
     
-    private double cholesterol;
+    private Long cholesterol;
+
+    private String etc;
     
     @Builder.Default
     private List<ImageDTO> imageDTO_list = new ArrayList<ImageDTO>();
