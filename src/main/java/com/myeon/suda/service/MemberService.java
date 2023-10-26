@@ -2,13 +2,11 @@ package com.myeon.suda.service;
 
 import java.util.HashSet;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.myeon.suda.dto.MemberDTO;
 import com.myeon.suda.entity.Member;
 import com.myeon.suda.entity.MemberRole;
-import com.myeon.suda.repository.MemberRepository;
 
 
 public interface MemberService {

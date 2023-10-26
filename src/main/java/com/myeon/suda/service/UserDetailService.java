@@ -43,6 +43,7 @@ public class UserDetailService implements UserDetailsService {
         );
 
         clubAuthMember.setName(Member.getName());
+         clubAuthMember.setNickname(Member.getNickname());
 
     
         return clubAuthMember;
