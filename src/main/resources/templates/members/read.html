@@ -4,30 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link th:href="@{/css/styles.css}" rel="stylesheet">
-    <link th:href="@{/css/read.css}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-
+    
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
+    
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-
+    
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
+    
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-    <script th:src="@{/starrr.js}"></script>
+    
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <!-- Read CSS -->
+    <link th:href="@{/css/read.css}" rel="stylesheet">
+    
+    <!-- Starrr JS -->
+    <script th:src="@{/js/starrr.js}"></script>
     <link th:href="@{/css/starrr.css}" rel="stylesheet">
+
     <script th:inline="javascript">
         document.addEventListener("DOMContentLoaded", function (){
 
             const ctx = document.getElementById('myChart');
+            var spicy = [[${dto.spicy}]];
+            var avg = [[${dto.avg}]];
+            var noodle_size = [[${dto.noodle_size}]];
+            var soupnum = [[${dto.soupnum}]];
+            var cooktime = [[${dto.cooktime}]];
+
+            console.log(avg);
 
             new Chart(ctx, {
                 type: 'radar',
@@ -35,20 +46,20 @@
                     labels: ['맵기', '별점', '면굵기', '별첨 스프 구성', '조리시간'],
                     datasets: [{
                     label: '주관평가',
-                    data: [4, 4.3, 3, 3, 3],
-                    borderWidth: 3
+                    data: [spicy, avg, noodle_size, soupnum, cooktime],
+                    borderWidth: 2
                     }]
                 },
                 options:{
                     responsive: false,
-                    plugins: {
+                    plugins: {  
                         legend: false
                     },
                     scale: {
                         r:{
                             min:0,
                             max:5
-                        }                    
+                        }
                     }
                 }
             });
@@ -79,6 +90,8 @@
             }
 
             var grade = 0;
+            var mno = [[${dto.mno}]];
+            
 
             $(".starrr").starrr({
                 rating: grade,
@@ -92,18 +105,20 @@
 
             var reviewModal = $(".reviewModal");
             var reply_modal = $(".reply_modal");
-            var inputMid = $("input[name='mid']");
-            var inputText = $("input[name='text']");
+            var input_id = $("input[name='email_id']");
+            var input_review_text = $("textarea[name='review_content']");
+            var input_replyer = $("input[name='replyer']");
+            var input_reply_text = $("textarea[name='reply_content']");
 
             $(".add_review_btn").click(function(){
                 grade=0;
-                inputMid.val("");
-                inputText.val("");
+                input_id.val("");
+                input_review_text.val("");
                 //.starrr초기화
                 
                 var star = $(".starrr").clone();
                 $(".starrr").remove();
-                $("#divGrade").append(star);
+                $("#divGrade").append(별);
                 $(".starrr").starrr({
                     rating: grade,
                     change: function(e, value){
@@ -113,17 +128,168 @@
                         }
                     }
                 });
-                $(".removeBtn, .modifyBtn").hide();
+                $(".removeBtn, .modifyBtn, .reply_add_btn").hide();
                 $(".reviewSaveBtn").show();                
                 reviewModal.modal("show");
             });
 
+            $(".reviewSaveBtn").click(function(){
+                var data = {mno:mno, grade:grade, review_content:input_review_text.val(), email_id:input_id.val()};
+                console.log(data);
+                $.ajax({
+                    url:"/reviews/"+mno,
+                    type:"POST",
+                    data:JSON.stringify(data),
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success:function(result){
+                        console.log("r ="+result);
+                        // self.location.reload();
+                        get_reviews();
+                    }
+                });
+                reviewModal.modal("hide");
+            });
+            
+
+            //페이지가 열리면 바로 리뷰 데이터들을 가져와서 사용한다.
+            function get_reviews(){
+                function formatTime(str){
+                    var date = new Date(str);
+                    return date.getFullYear() + "/" +
+                        (date.getMonth()+1) + "/" +
+                        date.getDate() + " " +
+                        date.getHours() + ":" +
+                        date.getMinutes();
+                }
+                $.getJSON("/reviews/"+mno+"/all", function(arr){
+                    var str = "";
+                    $.each(arr, function(idx, review){
+                        console.log(review);
+                        str += ' <div class="card-body-box"><div style="cursor:pointer;" class="card-body review_tag" data-rno='+review.rno+' data-email_id='+review.email_id+'>';
+                        str += ' <div class="reviewgrade-text-box"><span class="reviewgrade_text">평점 :</span><span class="reviewgrade" data-grade2='+review.grade+'></span></div>';
+                        str += ' <div class="card-body-text-box"><span class="card-subtitle mb-2 text-muted">'+review.nickname+'<span class="card-text">'+ formatTime(review.moddate) +'</span></span></div>';
+                        str += ' <h5 class="card-title">'+review.review_content+'</h5>';
+                        str += ' </div></div>';
+                    });
+                    $(".review_list").html(str);
+
+                    $(".reviewgrade").each(function(idx,o){
+                        console.log(o);
+                        $(this).starrr({
+                            rating: $(this).data("grade2"),
+                            readOnly: true
+                        });
+                    });
+                    $(".main_ramyeon_read_menu5_font").html("댓글수"+" "+"("+arr.length+")");
+                });
+
+                $.getJSON("/replies/"+rno+"/all", function(arr){
+                    var str = "";
+                    $.each(arr, function(idx, reply){
+                        str += ' <div style="cursr:pointer;" class="card-body reply_tag" data-reply_no='+reply.reply_no+'>';
+                        str += ' <h5 class="card-title">'+reply.reply_content+'</span>';
+                        str += ' <h6 class="card-subtitle mb-2 text-muted">'+reply.replyer+'</h6>';
+                        str += ' <p class="card-text">'+ formatTime(reply.moddate) +'</p>';
+                        str += ' </div>'    
+                    });
+                    $(".review_tag").html(str);
+                });
+            }
+            get_reviews();
+
+            //modify review
+            var rno;
+            $(".review_list").on("click", ".card-body", function(){                    
+                $(".reviewSaveBtn").hide();
+                $(".removeBtn, .modifyBtn, .reply_add_btn").show();
+                var target_review = $(this);
+                rno = target_review.data("rno");
+                console.log("rno ----" + rno);
+                input_id.val(target_review.data("email_id"));
+                // inputText.val(targetReview.find(".card-title").clone().children().remove().end().text());
+                input_review_text.val(target_review.find(".card-title").text().trim());
+                var grade2 = $(this).find(".reviewgrade").data("grade2");
+                //.starrr초기화
+                var star = $(".starrr").clone();
+                $(".starrr").remove();
+                $("#divGrade").append(별);
+                $(".starrr").starrr({
+                    rating: grade2,
+                    change: function(e, value){
+                        if(value){
+                            console.log(value);
+                            grade = value;
+                        }
+                    }
+                });
+                // $(".starrr a:nth-child("+grade+")").trigger("click");
+                $(".reviewModal").modal("show");
+            });
+
+            $(".modifyBtn").on("click", function(){
+                var data ={rno: rno, mno:mno, grade:grade, review_content:input_review_text.val(), email_id: input_id.val()};
+                console.log(data);
+                $.ajax({
+                    url:"/reviews/"+mno+"/"+rno,
+                    type:"PUT",
+                    data:JSON.stringify(data),
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success: function(result){
+                        console.log("result=====" +result);
+                        // self.location.reload();
+                        get_reviews();
+                    }
+                });
+                reviewModal.modal("hide");
+            });
+            $(".removeBtn").on("click", function(){
+                var data = {rno: rno};
+                console.log(data);
+                $.ajax({
+                    url:"/reviews/"+mno+"/"+rno,
+                    type:"DELETE",
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success:function(result){
+                        console.log("==result==");
+                        console.log(result);
+                        // self.location.reload();
+                        get_reviews();
+                    }
+                });
+                reviewModal.modal("hide");
+            });
+
             $(".reply_add_btn").click(function(){
+                input_replyer.val("");
+                input_reply_text.val("");
                 reviewModal.modal("hide");
                 reply_modal.modal("show");
+                $(".reply_remove_btn, .reply_modify_btn").hide();
             });
+
+            $(".reply_save_btn").click(function(){
+                var data = {rno:rno, reply_content:input_reply_text.val(), replyer:input_replyer.val()};
+                console.log(data);
+                $.ajax({
+                    url:"/replies/"+rno,
+                    type:"POST",
+                    data:JSON.stringify(data),
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success:function(result){
+                        console.log("r ="+result);
+                        // self.location.reload();
+                        get_reviews();
+                    }
+                });
+                reply_modal.modal("hide");
+            });
+
         });
-    </script>
+    </script>   
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -313,195 +479,218 @@
             </div>
             <div class="col-9">
                 <!-- col-9 안의 새로운 row -->
-                <div class="row info_space">
-                    <div id="box1" class="container form-group">
-                        <div id="image" class="col-lg-4">
-                            img space
-                        </div>
-                        <div id="info" class="col-lg-8">
-                            <div class="info_wrap">                            
-                                <h4>상품명</h4>
-                                <div class="row" style="margin-left: 3.7px;">
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div>img</div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
+                <div class="row">
+                    <!-- read menu 1 -->
+                    <div class="main_ramyeon_read_menu1">
+                        <div class="container form-group">
+                            <div class="main_ramyeon_read_menu_img">
+                                <div>
+                                    <ul>
+                                        <li style="cursor:pointer;" th:each="image: ${dto.imageDTO_list}" th:data-file="${image.get_image_url()}" class="img_border_box">
+                                            <img th:if="${image.path != null}" th:src="|/display?file_name=${image.get_image_url()}|" class="img_box">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="main_ramyeon_read_menu_table">
+                                <div class="col-8">
+                                    <div class="main_ramyeon_read_menu_table_font">
+                                        <p>[[${dto.gname}]]</p>
                                     </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/cost.png}" alt="소비자가격"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                    <div>                            
+                                        <div class="row" style="margin-left: 3.7px;">
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table1">
+                                                    <div class="col-12">
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <div>img</div>
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">브랜드</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="brand">[[${dto.brand}]]</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table2">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img th:src="@{/img/snack.png}" alt="분류">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">분류</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="category">[[${dto.category}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/weight.png}" alt="무게"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table3">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img th:src="@{/img/cost.png}" alt="가격">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">가격</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="price">[[${dto.price}]]</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table4">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img th:src="@{/img/cooking2.png}" alt="조리방법">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">조리방법</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="cooking">[[${dto.cooking}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/lamen.png}" alt="칼로리"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table5">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img th:src="@{/img/weight.png}" alt="무게">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">무게</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="weight">[[${dto.weight}]]</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table6">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img th:src="@{/img/time.png}" alt="소비기한">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">소비기한</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="expiry">[[${dto.expiry}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>                            
-                                <div class="row" style="margin-left: 3.7px;">
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/snack.png}" alt="라면종류"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table7">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img th:src="@{/img/lamen.png}" alt="칼로리">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">칼로리</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="calorie">[[${dto.calorie}]]</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table8">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img th:src="@{/img/calender.png}" alt="출시년도">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">출시년도</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="birth">[[${dto.birth}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/cooking2.png}" alt="조리방법"></div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/time.png}" alt="유통기한"></div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/calender.png}" alt="출시년도"></div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                      
-                            </div>  
-                        </div>
-                    </div>
-
-                    <div id="box2" class="container form-group">
-                        <div id="chart" class="col-lg-6">
-                            <canvas id="myChart" style="margin:auto" width="270px;" height="270px;"></canvas>
-                        </div>
-                        <div id="nutrition" class="col-lg-6">
-                            <div class="table-responsive">                                    
-                                <table class="table table-bordered table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>영양소</th>
-                                            <th>105g</th>
-                                            <th>성분비</th>
-                                            <th>영양소</th>
-                                            <th>105g</th>
-                                            <th>성분비</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">나트륨</div></td>
-                                            <td><div class="table_item">1,780mg</div></td>
-                                            <td><div class="table_item">89%</div></td>
-                                            <td><div class="table_item">지방</div></td>
-                                            <td><div class="table_item">17g</div></td>
-                                            <td><div class="table_item">31%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">탄수화물</div></td>
-                                            <td><div class="table_item">81g</div></td>
-                                            <td><div class="table_item">25%</div></td>
-                                            <td><div class="table_item">포화지방</div></td>
-                                            <td><div class="table_item">7g</div></td>
-                                            <td><div class="table_item">47%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">단백질</div></td>
-                                            <td><div class="table_item">10g</div></td>
-                                            <td><div class="table_item">18%</div></td>
-                                            <td><div class="table_item">트랜스지방</div></td>
-                                            <td><div class="table_item">0g</div></td>
-                                            <td><div class="table_item">0%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">당류</div></td>
-                                            <td><div class="table_item">3g</div></td>
-                                            <td><div class="table_item">3%</div></td>
-                                            <td><div class="table_item">콜레스테롤</div></td>
-                                            <td><div class="table_item">0mg</div></td>
-                                            <td><div class="table_item">0%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">기타</div></td>
-                                            <td colspan="5"><div class="table_item">칼슘 : 13g 성분비율 : 21% </div></td>
-                                        </tr>
-                                    </tbody>                                   
-                                </table>
+                                        </div>                      
+                                    </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div id="box3" class="container form-group">
-                        <label>Content</label>
-                        <textarea name="content" class="form-control" rows="10"></textarea>
-                    </div>        
-                </div>
-
-                <div class="empty container">
-                    <div class="float-right form-group">
-                        <a class="btn btn-primary" th:href="@{/modify}">    
-                            Modify  
-                        </a>
-                        <a class="btn btn-danger" th:href="@{/remove}">
-                            Remove
-                        </a>
-                        <a class="btn btn-info" th:href="@{list}">
-                            List
-                        </a>
-                    </div>            
-                </div>
-                <div class="row review_space">
-                    <div id="box4" class="container form-group">
-                        <div class="box4_space">                        
-                            <label>댓글수(0)</label>
-                            <button class="btn btn-primary btn-sm float-right add_review_btn" type="button">ReviewAdd</button>                            
-                            <div style="cursor:pointer;" class="card-body">
-                                <h5 class="card-title">review.text<span class="reviewgrade"></span>
-                                    <button class="btn btn-primary btn-sm float-right reply_add_btn" type="button">ReplyAdd</button>
-                                </h5>
-                                <h6 class="card-subtitle mb-2 text-muted">review.nickname</h6>
-                                <p class="card-text">formatTime(review.regDate)</p>
+                    <!-- read menu 1.END -->
+                    <!-- read menu 2 -->
+                    <div>
+                        <div class="main_ramyeon_read_menu2">
+                            <div class="row container">
+                                <div class="col-6">
+                                    <div class="chart">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="main_ramyeon_read_menu2_table">
+                                        <table>
+                                            <tr>
+                                                <th class="first_th" scope="col">영양소</th>
+                                                <th class="second_th1" scope="col">[[${dto.weight}]]g</th>
+                                                <th class="third_th1" scope="col">영양성분<br/>기준치(%)</th>
+                                                <th class="fourth_th" scope="col">영양소</th>
+                                                <th class="fifth_th1" scope="col">[[${dto.weight}]]g</th>
+                                                <th class="sixth_th1" scope="col">영양성분<br/>기준치(%)</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">나트륨</th>
+                                                <th class="second_th2" scope="col">[[${dto.sodum}]]g</th>
+                                                <th class="third_th2" scope="col">89%</th>
+                                                <th class="fourth_th" scope="col">지방</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.fat}]]g</th>
+                                                <th class="sixth_th2" scope="col">31%</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">탄수화물</th>
+                                                <th class="second_th2" scope="col">[[${dto.carbohydrate}]]g</th>
+                                                <th class="third_th2" scope="col">25%</th>
+                                                <th class="fourth_th" scope="col">포화지방</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.saturated_fat}]]g</th>
+                                                <th class="sixth_th2" scope="col">47%</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">단백질</th>
+                                                <th class="second_th2" scope="col">[[${dto.protein}]]g</th>
+                                                <th class="third_th2" scope="col">18%</th>
+                                                <th class="fourth_th" scope="col">트랜스<br/>지방</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.trans_fat}]]g</th>
+                                                <th class="sixth_th2" scope="col">0%</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">당류</th>
+                                                <th class="second_th2" scope="col">[[${dto.sugar}]]g</th>
+                                                <th class="third_th2" scope="col">3%</th>
+                                                <th class="fourth_th" scope="col" style="font-size: 12.1px;">콜레스테롤</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.cholesterol}]]g</th>
+                                                <th class="sixth_th2" scope="col">89%</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">기타</th>
+                                                <th class="second_th2" scope="col">[[${dto.etc}]]</th>                                            
+                                                <th class="third_th2" scope="col">0%</th>
+                                                <th class="fourth_th" scope="col"></th>
+                                                <th class="fifth_th2" scope="col"></th>
+                                                <th class="sixth_th2" scope="col"></th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>
+                    <!-- read menu 2.END -->
+                    <!-- read menu 3 -->
+                    <div>
+                        <div class="main_ramyeon_read_menu3">
+                            <div class="container form-group">
+                                <label class="content_box_font">Content</label>
+                                <textarea name="content" class="form-control main_ramyeon_read_menu3_content" rows="8">[[${dto.content}]]</textarea>
+                            </div>
+                        </div>        
+                    </div>
+                    <!-- read menu 3.END -->
+                    <!-- read menu 5 -->
+                    <div>
+                        <div class="row main_ramyeon_read_menu5">
+                            <div class="container form-group">                        
+                                    <label class="main_ramyeon_read_menu5_font">댓글수 ([[${dto.review_count}]])</label>
+                                    <button class="btn btn-primary btn-sm float-right add_review_btn main_ramyeon_read_menu5_btn" type="button">
+                                        ReviewAdd
+                                    </button>                            
+                                    <div class="list-group review_list"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- read menu 5.END -->
+                    <!-- read menu 4 -->
+                    <div class="main_ramyeon_read_menu4_btn">
+                        <div class="main_ramyeon_read_menu4">
+                                <a class="btn btn-danger" th:href="@{/members/remove}">
+                                    Remove
+                                </a>
+                                <a class="btn btn-primary" th:href="@{/members/modify}">    
+                                    Modify  
+                                </a>                                
+                                <a class="btn btn-info" th:href="@{/members/list}">
+                                    List
+                                </a>
+                        </div>            
+                    </div>
+                    <!-- read menu 4.END -->
                 </div>               
             </div>
         </div>
@@ -537,7 +726,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label >Reviewer ID</label>
-                        <input type="text" class="form-control" name="mid" >
+                        <input type="text" class="form-control" name="email_id" >
                     </div>
                     <div class="form-group" id="divGrade">
                         <label >Grade <span class="grade"></span></label>
@@ -550,6 +739,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info reply_add_btn" >ReplyAdd</button>
                     <button type="button" class="btn btn-primary reviewSaveBtn">Save changes</button>
                     <button type="button" class="btn btn-warning modifyBtn">Modify </button>
                     <button type="button" class="btn btn-danger removeBtn">Remove </button>
@@ -569,19 +759,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label >Reviewer ID</label>
-                        <input type="text" class="form-control" name="mid" >
+                        <label >Replyer ID</label>
+                        <input type="text" class="form-control" name="replyer" >
                     </div>                    
                     <div class="form-group">
-                        <label >Review Text</label>
-                        <textarea class="form-control" name="review_content" rows="15" placeholder="내용입력!"></textarea>                        
+                        <label >Reply Text</label>
+                        <textarea class="form-control" name="reply_content" rows="15" placeholder="내용입력!"></textarea>                        
                     </div>                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary reviewSaveBtn">Save changes</button>
-                    <button type="button" class="btn btn-warning modifyBtn">Modify </button>
-                    <button type="button" class="btn btn-danger removeBtn">Remove </button>
+                    <button type="button" class="btn btn-primary reply_save_btn">Save changes</button>
+                    <button type="button" class="btn btn-warning reply_modify_btn">Modify </button>
+                    <button type="button" class="btn btn-danger reply_remove_btn">Remove </button>
                 </div>
             </div>
         </div>

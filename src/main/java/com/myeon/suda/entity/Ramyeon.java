@@ -34,7 +34,7 @@ public class Ramyeon extends BaseEntity {
     @Column(length = 20)
     private String brand;
 
-    private Long price;
+    private String price;
 
     private Long weight;
 
@@ -46,45 +46,45 @@ public class Ramyeon extends BaseEntity {
     @Column(length = 20)
     private String cooking;
 
-    private Long expiry;
+    private String expiry;
 
-    private LocalDateTime birth;
-
-    @Column(nullable = false)
-    private double spicy;
+    private String birth;
 
     @Column(nullable = false)
-    private double cooktime;
+    private Long spicy;
 
     @Column(nullable = false)
-    private double soupnum;
+    private String cooktime;
 
     @Column(nullable = false)
-    private double noodleSize;
+    private Long soupnum;
 
     @Column(nullable = false)
-    private double sodum;
+    private Long noodleSize;
 
     @Column(nullable = false)
-    private double carbohydrate;
+    private Long sodum;
 
     @Column(nullable = false)
-    private double protein;
+    private Long carbohydrate;
 
     @Column(nullable = false)
-    private double sugar;
+    private Long protein;
 
     @Column(nullable = false)
-    private double fat;
+    private Long sugar;
 
     @Column(nullable = false)
-    private double saturatedFat;
+    private Long fat;
 
     @Column(nullable = false)
-    private double transFat;
+    private Long saturatedFat;
 
     @Column(nullable = false)
-    private double cholesterol;
+    private Long transFat;
+
+    @Column(nullable = false)
+    private Long cholesterol;
 
     @Column(nullable = false)
     private String etc;

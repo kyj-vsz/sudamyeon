@@ -23,11 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.myeon.suda.dto.UploadResultDTO;
 
+import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
 
 
 
 @RestController
+@Log4j2
 public class UploadController {
     @Value("${com.myeon.upload.path}")
     private String upload_path;
@@ -47,7 +49,7 @@ public class UploadController {
             Path save_path = Paths.get(save_name);
             try{
                 upload_file.transferTo(save_path);
-                String thumbnail_save_name =  upload_path + File.separator + folder_path + File.separator + uuid + "s_" + file_name;
+                String thumbnail_save_name =  upload_path + File.separator + folder_path + File.separator + "s_" + uuid + "_" + file_name;
                 File thumbnail_file = new File(thumbnail_save_name);
                 Thumbnailator.createThumbnail(save_path.toFile(), thumbnail_file, 100, 100);     
                 resultDTO_list.add(new UploadResultDTO(file_name, uuid, folder_path));
@@ -74,7 +76,9 @@ public class UploadController {
         ResponseEntity<byte[]> result = null;
         try{
             String src_file_name = URLDecoder.decode(file_name, "UTF-8");
+            log.info(src_file_name);
             File file = new File(upload_path + File.separator + src_file_name);
+            log.info(file);
             HttpHeaders header = new HttpHeaders();
             header.add("Content-Type", Files.probeContentType(file.toPath()));
             result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
