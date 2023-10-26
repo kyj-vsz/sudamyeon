@@ -1,0 +1,250 @@
+a {
+    text-decoration-line: none !important;
+    color: #000;
+}
+.bordered {
+    border: 1px solid #000;
+    padding: 10px;
+}
+/* main_page */
+.main_page {
+    margin: 25px 0px 25px 0px;
+}
+/* banner */
+.banner {
+    width: 180px;
+    height: 100%;
+    margin-left: 25px;
+}
+/* banner_main */
+.banner_main {
+    text-align: center;
+    border-bottom: 0.5px dashed #999;
+    margin: -2px 0px 10px 0px;
+    padding-bottom: 7px;
+}
+.banner_review {
+    margin-left: 10px;
+}
+.banner_community {
+    margin-left: 10px;
+    margin-top: -280px;
+}
+/* banner_sub */
+.banner_sub {
+    width: 180px;
+    height: 100%;
+    margin-left: -6px;
+}
+.banner_sub_line {
+    width: 160px;
+    border-bottom: 0.5px dashed #999;
+    padding-bottom: 10px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+}
+.banner_sub_review_img {
+    width: 70px;
+    height: 62px;
+    border: 0.5px solid #000;
+    border-radius: 5px;
+    margin-left: -10px;
+}
+.banner_sub_review_main {
+    margin-top: -7px;
+}
+.banner_sub_review_main a {
+    display: inline-block;
+    font-size: 10px;
+    line-height: -5px;
+}
+.banner_sub_review_main p {
+    font-size: 10px;
+    margin-top: -2px;
+    margin-bottom: -0px;
+}
+.banner_sub_review_main_content {
+    letter-spacing: -0.5px;
+}
+.banner_sub_review_img_final {
+    width: 70px;
+    height: 62px;
+    border: 0.5px solid #000;
+    border-radius: 5px;
+    margin-left: -10px;
+    margin-left: -5px;
+}
+.banner_sub_review_main_final {
+    margin-top: -7px;
+    margin-left: -6.5px;
+}
+.banner_sub_review_main_final a {
+    display: inline-block;
+    font-size: 10px;
+    line-height: -5px;
+}
+.banner_sub_review_main_final p {
+    font-size: 10px;
+    margin-top: -2px;
+    margin-bottom: -0px;
+}
+/* community */
+.banner_sub_community {
+    display: inline-block;
+    width: 100px;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-left: -2px;
+}
+.banner_sub_community_main_date {
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
+.banner_sub_community_final {
+    display: inline-block;
+    width: 100px;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+/* main_ramyeon_review */
+
+/* main_ramyeon_review */   
+.main_ramyeon_review_title {
+    font-size: 15px;
+    margin-left: -6px;
+    margin-bottom: 8px;
+}
+.main_ramyeon_review_category {
+    width: 840px;
+    height: 35px;
+    border: 1px solid #000;
+    background-color: #d8d8d8;
+}
+.main_ramyeon_review_brand {
+    width: 840px;
+    height: 70px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 0.5px dashed #999;
+}
+.main_ramyeon_review_cooking {
+    width: 840px;
+    height: 70px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 0.5px dashed #999;
+}
+.main_ramyeon_review_ramyeon_category {
+    width: 840px;
+    height: 45px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    margin-bottom: 30px;
+}
+/* main_ramyeon_review_category */
+.main_ramyeon_review_category_title {
+    font-size: 12px;
+    margin-top: 8px;
+}
+.main_ramyeon_review_brand_column {
+    margin-top: 2px;
+}
+/* review filter */
+.filter_label {
+    display: flex;
+    /* 상하로 배치하도록 설정 */
+    flex-direction: column;
+    /* 가운데 정렬 */
+    align-items: center;
+     /* 원하는 간격 설정 */
+    margin-bottom: -2px;
+}
+.filter_font {
+    display: flex;
+    align-items: center;
+    width: 100%; 
+    font-size: 13px;
+}
+.filter_label input {
+    margin: 0;
+    /* checkbox 간격 조절 */
+    margin-top: 7px;
+}
+.filter_text {
+    /* 원하는 수치로 조절하여 상하 위치 조절 */
+    margin-top: 7px;
+    margin-left: 5px;
+}
+.filter_label_final input {
+    margin: 0;
+    /* checkbox 간격 조절 */
+    margin-top: 9px;
+}
+.filter_text_final {
+    /* 원하는 수치로 조절하여 상하 위치 조절 */
+    margin-top: 9px;
+    margin-left: 5px;
+}
+/* main ramyeon review list */
+.main_ramyeon_review_list {
+    width: 840px;     
+    border-top: 1px solid #000;
+}
+.main_ramyeon_review_list_column1 {
+    width: 190px;
+    height: 220px;
+    border: 1px solid #777;
+    margin-left: -15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.main_ramyeon_review_list_column2 {
+    width: 190px;
+    height: 220px;
+    border: 1px solid #777;
+    margin-left: -8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.main_ramyeon_review_list_column3 {
+    width: 190px;
+    height: 220px;
+    border: 1px solid #777;
+    margin-left: -1px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.main_ramyeon_review_list_column4 {
+    width: 190px;
+    height: 220px;
+    border: 1px solid #777;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+/* main ramyeon review list column1 img */
+.main_ramyeon_review_list_column1_img {
+    width: 150px;
+    height: 130px;
+    border: 1px solid #777;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.main_ramyeon_review_list_column1_view_img {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    font-size: 10px;
+}
+.main_ramyeon_review_list_column1_title {
+    font-size: 15px;
+    margin-left: 8px;
+    color: red;
+}
+.main_ramyeon_review_list_column1_date {
+    font-size: 10px;        
+    margin-left: 8px;
+}

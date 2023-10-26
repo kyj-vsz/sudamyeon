@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    color:black; /* 헤더 텍스트 색상을 원하는 색상으로 설정하세요 */
+    padding: 10px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-weight: bold;
+}
+
+ /* 돋보기 아이콘 스타일 */
+.search-box {
+    position: relative;
+}
+
+.search-box input[type="text"] {
+    padding-left: 30px; /* 왼쪽에 아이콘을 감싸기 위한 여분의 패딩 */
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 20px; /* 아이콘 위치 조정 */
+    transform: translateY(-50%); /* 수직 가운데 정렬 */
+}
+
+.search-icon img {
+    width: 20px; /* 아이콘 이미지 크기 조정 */
+    height: 20px;
+    background-color: transparent;
+}
+  
+  .searchplace {
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: gainsboro; 
+  }
+
+.header-controls {
+    display: flex;
+    align-items: center;
+}
+
+.search-box {
+    padding: 10px;
+}
+
+.search-box input {
+    width: 500px;
+    padding: 5px;
+}
+
+.login-button, .signup-button {
+    margin: 0 10px;
+}
+
+.main {
+    text-align: center;
+}
+
+.mainimg{
+    background-color: red;
+    height: 400px;
+}
+main img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer{
+    background: #191F28;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: white;
+}
+
+footer li{
+    list-style: none;
+    padding: 5px;
+    font-size: 10px;
+}
+.boxes {
+    display: grid; /* Grid 레이아웃 사용 */
+    grid-template-columns: repeat(4, 1fr); /* 4개의 열로 나눔 */
+    gap: 0px; /* 각 상자 사이의 간격 설정 */
+    padding-left: 60px;
+}
+
+.box {
+    width: 266px;
+    height: 80px;
+    padding: 10px; /* 상자 내부 여백 설정 */
+    border: 1px solid #000;
+    border-top: none;
+    text-align: center;
+    background-color: white;
+    box-sizing: border-box;
+}
+#box_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* 높이 설정 */
+}

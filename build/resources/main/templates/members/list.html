@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수다면</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Fontawesome -->    
+    <script src="https://kit.fontawesome.com/ac43b59d41.js" crossorigin="anonymous"></script>
+
+    <!-- List CSS -->
+    <link th:href="@{/css/list.css}" rel="stylesheet" type="text/css">
+    
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>   
+    
+    <div class="container">        
+        <div class="row main_page">
+            <div class="col-3">                
+                <div class="row banner">
+                    <!-- 라면 리뷰 배너 시작 -->
+                    <div class="banner_review">
+                        <div class="col-12 bordered">
+                            <div class="banner_main">
+                                <a href="#" class="banner_main_font">New Review</a>
+                            </div>
+                            <div class="row banner_sub">
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[짜파게티]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">일요일은 내가 요리사!</a><br/>
+                                                <p class="banner_sub_review_main_date">15분 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[너구리]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">오동통한 면발 너구리..</a><br/>
+                                                <p class="banner_sub_review_main_date">1시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[스파게티]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">최고의 가설비 인정</a><br/>
+                                                <p class="banner_sub_review_main_date">3시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[진라면]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">역시 매운맛이 진리다</a><br/>
+                                                <p class="banner_sub_review_main_date">4시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main">
+                                                <a href="#" class="banner_sub_review_main_title">[신라면]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">농심을 먹여살림</a><br/>
+                                                <p class="banner_sub_review_main_date">6시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_img_final">
+                                                <a href="#">img</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="banner_sub_review_main_final">
+                                                <a href="#" class="banner_sub_review_main_title">[안성탕면]</a><br/>
+                                                <a href="#" class="banner_sub_review_main_content">우리 아빠가 좋아하는 맛</a><br/>
+                                                <p class="banner_sub_review_main_date">10시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 라면 리뷰 배너 끝 -->
+                    <!-- 커뮤니티 배너 시작-->
+                    <div class="banner_community">
+                        <div class="col-12 bordered">
+                            <div class="banner_main">
+                                <a href="#" class="banner_main_font">Community</a>
+                            </div>
+                            <div class="row banner_sub">
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">라면에 대한 진실..</a>
+                                                <p class="banner_sub_community_main_date">30분 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">매운라면 잘 먹는 법</a>
+                                                <p class="banner_sub_community_main_date">45분 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">짜파게티에 관한 견해</a>
+                                                <p class="banner_sub_community_main_date">1시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">신라면 개인적인 생각</a>
+                                                <p class="banner_sub_community_main_date">2시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row banner_sub_line">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community">
+                                                <a href="#" class="banner_sub_community_main_title">라면과 계란의 조화</a>
+                                                <p class="banner_sub_community_main_date">5시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="banner_sub_community_final">
+                                                <a href="#" class="banner_sub_community_main_title">라면 공장 방문 후기</a>
+                                                <p class="banner_sub_community_main_date">5시간 전</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 커뮤니티 배너 끝 -->
+                </div>
+            </div>
+            <div class="col-9">
+                <p class="main_ramyeon_review_title">라면 리뷰</p>
+                <div class="row main_ramyeon_review">
+                    <div class="col-12">
+                        <!-- 카테고리 시작 -->
+                        <div class="row main_ramyeon_review_category">
+                            <div class="col-12">
+                                <div class="main_ramyeon_review_category_title">
+                                    <p>카테고리</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row main_ramyeon_review_brand">
+                            <div class="col-12">
+                                <div class="row main_ramyeon_review_brand_column">
+                                    <div class="col-2">
+                                        <div class="main_ramyeon_review_category_title">
+                                            <p>제조사</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="nongshim">
+                                                <span class="filter_text">농심</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="harim">
+                                                <span class="filter_text">하림</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="ottogi">
+                                                <span class="filter_text">오뚜기</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="emart">
+                                                <span class="filter_text">이마트</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="samyang">
+                                                <span class="filter_text">삼양식품</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="vipon">
+                                                <span class="filter_text">비폰</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="paldo">
+                                                <span class="filter_text">팔도</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="homeplus">
+                                                <span class="filter_text">홈플러스</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="pulmuone">
+                                                <span class="filter_text">풀무원</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="thebornkorea">
+                                                <span class="filter_text">더본코리아</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row main_ramyeon_review_cooking">
+                            <div class="col-12">
+                                <div class="row main_ramyeon_review_brand_column">
+                                    <div class="col-2">
+                                        <div class="main_ramyeon_review_category_title">
+                                            <p>조리 방법</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="regular_ramen">
+                                                <span class="filter_text">일반라면</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="udon">
+                                                <span class="filter_text">우동</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="stir_fried_ramen">
+                                                <span class="filter_text">볶음라면</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="korean_hot_noodle">
+                                                <span class="filter_text">국수</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="jjajang_ramen">
+                                                <span class="filter_text">짜장라면</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="cold_noodle">
+                                                <span class="filter_text">냉면</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="bibim_ramen">
+                                                <span class="filter_text">비빔라면</span>
+                                            </label>
+                                        </div>
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="beef_bone_ramen">
+                                                <span class="filter_text">사골라면</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="rice_noodles">
+                                                <span class="filter_text">쌀국수</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row main_ramyeon_review_ramyeon_category">
+                            <div class="col-12">
+                                <div class="row main_ramyeon_review_brand_column">
+                                    <div class="col-2">
+                                        <div class="main_ramyeon_review_category_title">
+                                            <p>분류</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label_final">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="pack_of_ramen">
+                                                <span class="filter_text_final">봉지라면</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="filter_label_final">
+                                            <label class="filter_font">
+                                                <input type="checkbox" class="filter" data-filter="cup_ramen">
+                                                <span class="filter_text_final">컵라면</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 카테고리 끝 -->
+                        
+                    </div>
+                </div>
+
+                <p>리뷰 많은순 | 별점 높은순 | 신제품순</p>
+                <div class="row main_ramyeon_review_list">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column1">
+                                    <a href="#">
+                                        <div class="main_ramyeon_review_list_column1_img">img</div>
+                                    </a>
+                                    <a href="#" class="main_ramyeon_review_list_column1_title">신라면</a>
+                                    <div class="main_ramyeon_review_list_column1_view_img">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <span>31242</span>
+                                    </div>
+                                    <span class="main_ramyeon_review_list_column1_date">출시일 : 1555.12.31</span>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column2">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column3">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column4">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column1">
+                                    <a href="#">
+                                        <div class="main_ramyeon_review_list_column1_img">img</div>
+                                    </a>
+                                    <a href="#" class="main_ramyeon_review_list_column1_title">신라면</a>
+                                    <div class="main_ramyeon_review_list_column1_view_img">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <span>31242</span>
+                                    </div>
+                                    <a class="main_ramyeon_review_list_column1_date">출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column2">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column3">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column4">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column1">
+                                    <a href="#">
+                                        <div class="main_ramyeon_review_list_column1_img">img</div>
+                                    </a>
+                                    <a href="#" class="main_ramyeon_review_list_column1_title">신라면</a>
+                                    <div class="main_ramyeon_review_list_column1_view_img">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <span>31242</span>
+                                    </div>
+                                    <a class="main_ramyeon_review_list_column1_date">출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column2">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column3">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column4">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column1">
+                                    <a href="#">
+                                        <div class="main_ramyeon_review_list_column1_img">img</div>
+                                    </a>
+                                    <a href="#" class="main_ramyeon_review_list_column1_title">신라면</a>
+                                    <div class="main_ramyeon_review_list_column1_view_img">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <span>31242</span>
+                                    </div>
+                                    <a class="main_ramyeon_review_list_column1_date">출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column2">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column3">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="main_ramyeon_review_list_column4">
+                                    <a href="#">
+                                        <div>img</div>
+                                    </a>
+                                    <a href="#">신라면</a>
+                                    <div>
+                                        <div>img</div>
+                                        <span>31242</span>
+                                    </div>
+                                    <a>출시일 : 1555.12.31</a>
+                                    <div>별점</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div> 
+                <!-- 페이징 -->
+            </div>
+        </div>
+    </div>
+
+      
+    
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
