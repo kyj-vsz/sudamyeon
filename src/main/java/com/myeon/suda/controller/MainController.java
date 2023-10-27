@@ -1,13 +1,10 @@
 package com.myeon.suda.controller;
 
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.myeon.suda.dto.ImageDTO;
 import com.myeon.suda.dto.RamyeonDTO;
 import com.myeon.suda.service.RamyeonService;
 
