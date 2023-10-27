@@ -4,50 +4,35 @@
     align-items: center;
     padding-top: 25px;
 }
-
 .center-text {
     text-align: center; /* 텍스트를 가운데 정렬 */
 }
-
 /* 레이아웃 틀 */
 html {
     height: 100%;
 }
-
 body {
     margin: 0;
     height: 100%;
     background: #f5f6f7;
     font-family: Dotum,'돋움',Helvetica,sans-serif;
 }
-
 #wrapper {
     position: relative;
     height: 100%;
 }
-
 #content {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     width: 460px;
 }
-
-
-
-
 /* 입력폼 */
-
-
 h3 {
     margin: 19px 0 8px;
     font-size: 14px;
     font-weight: 700;
 }
-
-
-
-
 .int {
     display: block;
     position: relative;
@@ -60,20 +45,13 @@ h3 {
     background: #fff;
     font-size: 15px;
 }
-
 input {
     font-family: Dotum,'돋움',Helvetica,sans-serif;    
 }
-
-
-
-
 /* 버튼 */
-
 .btn_area {
     margin: 20px 0 91px;
 }
-
 #btnJoin {
     width: 100%;
     padding: 8px 0 17px;
