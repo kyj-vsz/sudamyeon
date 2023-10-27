@@ -241,7 +241,7 @@
                     <!-- 커뮤니티 배너 끝 -->
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-9 ">
                 <p class="main_ramyeon_review_title">라면 리뷰</p>
                 <div class="row main_ramyeon_review">
                     <div class="col-12">
@@ -466,23 +466,23 @@
                             </div>
                         </div>
                     </div>                    
-                    <!-- 페이징 -->
-                    <ul class="pagination h-100 justify-content-center align-items-center">
-                        <li class="page-item" th:if="${result.prev}">
-                            <a class="page-link" th:href="@{/members/list(page= ${result.start -1},size = ${result.size})}" tabindex="-1">Previous</a>
-                        </li>
-                        <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.page_list}">
-                            <a class="page-link main_ramyeon_review_list_paging_btn" th:href="@{/members/list(page = ${page}, size = ${result.size})}">
-                                [[${page}]]
-                            </a>
-                        </li>
-                        <li class="page-item" th:if="${result.next}">
-                            <a class="page-link" th:href="@{/members/list(page= ${result.end + 1}, size = ${result.size})}">Next</a>
-                        </li>
-                    </ul>
-                    <!-- 페이징 end -->
-                    <a th:href="@{/members/register}" class="btn btn-sm btn-primary main_ramyeon_review_list_register_btn">Register</a>
                 </div> 
+                <!-- 페이징 -->
+                <ul class="pagination justify-content-center align-items-center">
+                    <li class="page-item" th:if="${result.prev}">
+                        <a class="page-link" th:href="@{/members/list(page= ${result.start -1},size = ${result.size})}" tabindex="-1">Previous</a>
+                    </li>
+                    <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.page_list}">
+                        <a class="page-link main_ramyeon_review_list_paging_btn" th:href="@{/members/list(page = ${page}, size = ${result.size})}">
+                            [[${page}]]
+                        </a>
+                    </li>
+                    <li class="page-item" th:if="${result.next}">
+                        <a class="page-link" th:href="@{/members/list(page= ${result.end + 1}, size = ${result.size})}">Next</a>
+                    </li>
+                </ul>
+                <!-- 페이징 end -->
+                <a th:href="@{/members/register}" class="btn btn-sm btn-primary main_ramyeon_review_list_register_btn">Register</a>
                 <div class="modal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
