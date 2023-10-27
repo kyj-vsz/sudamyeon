@@ -1,74 +1,76 @@
-.horizontal-content {
-    display: flex;
-    align-items: center; /* 수직 가운데 정렬 */
-}
-
-.welcome_logout {
-    margin-left: 20px; /* 좌우 여백 추가 (선택사항) */
-}
-
-.horizontal-content > * {
-    margin: 0 10px; /* 좌우 여백 추가 (선택사항) */
-}
 body {
     font-family: Arial, sans-serif;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
 }
+
 header {
     text-align: center;
     color:black;
     padding: 10px 0;
 }
+
 .header-content {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .name {
     font-weight: bold;
 }
+
  /* 돋보기 아이콘 스타일 */
 .search-box {
     position: relative;
 }
+
 .search-box input[type="text"] {
     padding-left: 30px; /* 왼쪽에 아이콘을 감싸기 위한 여분의 패딩 */
 }
+
 .search-icon {
     position: absolute;
     top: 50%;
     left: 20px; /* 아이콘 위치 조정 */
     transform: translateY(-50%); /* 수직 가운데 정렬 */
 }
+
 .search-icon img {
     width: 20px; /* 아이콘 이미지 크기 조정 */
     height: 20px;
     background-color: transparent;
-}  
+}
+  
 .searchplace {
     border: 1px solid white;
     border-radius: 20px;
     background-color: gainsboro; 
 }
+
 .header-controls {
     display: flex;
     align-items: center;
 }
+
 .search-box {
     padding: 10px;
 }
+
 .search-box input {
     width: 500px;
     padding: 5px;
 }
+
 .login-button, .signup-button {
     margin: 0 10px;
 }
+
 .main {
     text-align: center;
 }
+
 .mainimg {
     height: 365px;
     overflow: hidden; /* 이미지가 부모 요소를 넘어가지 못하도록 함 */
@@ -127,10 +129,12 @@ li {
     color: #eee;
     padding-bottom: 2px;
 }
-.footer_column2 {
-    width: 200px;
+.footer_column2 {    
     margin-left: 40px;
     padding-left: 80px;
+}
+.footer_column2 ul {
+    width: 200px;   
 }
 .footer_column2_text1 {
     font-size: 12px;
@@ -140,6 +144,9 @@ li {
 .footer_column3 {
     width: 200px;
     padding-left: 80px;
+}
+.footer_column3 ul {
+    width: 200px;   
 }
 .footer_column3_text1 {
     font-size: 12px;
