@@ -1,13 +1,20 @@
 package com.myeon.suda.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myeon.suda.dto.PageRequestDTO;
+import com.myeon.suda.dto.PageResultDTO;
 import com.myeon.suda.dto.RamyeonDTO;
 import com.myeon.suda.entity.Image;
 import com.myeon.suda.entity.Ramyeon;
@@ -36,6 +43,19 @@ public class RamyeonServiceImpl implements RamyeonService {
         });
         return ramyeon.getMno();
     }
+
+    @Override
+    public PageResultDTO<RamyeonDTO, Object[]> get_list_page(PageRequestDTO requestDTO){
+        Pageable pageable = requestDTO.get_pageable(Sort.by("mno").descending());
+        Page<Object[]> result = ramyeon_repository.get_list(pageable);
+        Function<Object[], RamyeonDTO> fn = (arr -> to_dto(
+            (Ramyeon)arr[0], 
+            (List<Image>)(Arrays.asList((Image)arr[1])),
+            (Double)arr[2],
+            (Long)arr[3]
+            ));
+        return new PageResultDTO<>(result, fn);
+    }
     
     @Override
     public RamyeonDTO get_ramyeon(Long mno) {
@@ -56,8 +76,6 @@ public class RamyeonServiceImpl implements RamyeonService {
         ramyeon_repository.deleteById(mno);
     }
 
-    
-
     @Transactional
     @Override
     public void modify(RamyeonDTO ramyeonDTO) {
@@ -77,6 +95,11 @@ public class RamyeonServiceImpl implements RamyeonService {
     }
 
     @Override
+    public void remove_image(Long inum) {
+        image_repository.deleteById(inum);
+    }
+
+    @Override
     public RamyeonDTO get_img() {
       List<Object[]> result = ramyeon_repository.get_ramyeon_img();
         Ramyeon ramyeon =(Ramyeon) result.get(0)[0]; //<-문제
@@ -89,6 +112,5 @@ public class RamyeonServiceImpl implements RamyeonService {
         Long review_count = (Long) result.get(0)[3];
         return to_dto(ramyeon, image_list, avg, review_count);
     }
-
     
 }

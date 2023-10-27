@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.myeon.suda.dto.ImageDTO;
+import com.myeon.suda.dto.PageRequestDTO;
+import com.myeon.suda.dto.PageResultDTO;
 import com.myeon.suda.dto.RamyeonDTO;
 import com.myeon.suda.entity.Image;
 import com.myeon.suda.entity.Ramyeon;
@@ -13,13 +15,17 @@ import com.myeon.suda.entity.Ramyeon;
 public interface RamyeonService {
     Long register(RamyeonDTO ramyeonDTO);
 
-    RamyeonDTO get_img();
+    PageResultDTO<RamyeonDTO, Object[]> get_list_page(PageRequestDTO requestDTO);
 
     RamyeonDTO get_ramyeon(Long mno);
 
     void remove(Long mno);
 
     void modify(RamyeonDTO ramyeonDTO);
+    
+    void remove_image(Long inum);
+    
+    RamyeonDTO get_img();
     
     default RamyeonDTO to_dto(Ramyeon ramyeon, List<Image> images, Double avg, Long review_count){
         RamyeonDTO ramyeonDTO = RamyeonDTO.builder()
@@ -54,7 +60,6 @@ public interface RamyeonService {
         List<ImageDTO> imageDTO_list = images.stream().map(image -> {
             return ImageDTO.builder()
                         .inum(image.getInum())
-                        .mno(image.getRamyeon().getMno())
                         .img_name(image.getImgName())
                         .path(image.getPath())
                         .uuid(image.getUuid())
