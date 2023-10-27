@@ -9,10 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.myeon.suda.security.dto.ClubAuthMemberDTO;
-import com.myeon.suda.dto.MemberDTO;
+
 import com.myeon.suda.entity.Member;
 import com.myeon.suda.repository.MemberRepository;
+import com.myeon.suda.security.dto.ClubAuthMemberDTO;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
