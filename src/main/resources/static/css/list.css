@@ -194,33 +194,9 @@ a {
 }
 .main_ramyeon_review_list_column1 {
     width: 190px;
-    height: 220px;
+    height: 230px;
     border: 1px solid #777;
-    margin-left: -15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.main_ramyeon_review_list_column2 {
-    width: 190px;
-    height: 220px;
-    border: 1px solid #777;
-    margin-left: -8px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.main_ramyeon_review_list_column3 {
-    width: 190px;
-    height: 220px;
-    border: 1px solid #777;
-    margin-left: -1px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.main_ramyeon_review_list_column4 {
-    width: 190px;
-    height: 220px;
-    border: 1px solid #777;
-    margin-left: 5px;
+    margin-left: -6px;
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -228,23 +204,62 @@ a {
 .main_ramyeon_review_list_column1_img {
     width: 150px;
     height: 130px;
-    border: 1px solid #777;
-    margin-left: 20px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-left: 18px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+.main_ramyeon_review_list_column1_img_size {
+    width: 150px;
+    height: auto;
 }
 .main_ramyeon_review_list_column1_view_img {
     display: flex;
     align-items: center;
-    margin-left: 8px;
+    margin-left: 10px;
+    margin-top: -5px;
     font-size: 10px;
+}
+.main_ramyeon_review_list_register_btn {
+    height: 30px;
+    margin-left: 780px;
+    background-color: #006eff;
+    border: none;
+}
+.fa-face-smile {
+    font-size: 11px;
+    margin-top: 2px;
+    margin-left: 1.5px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+}
+.main_ramyeon_review_list_column1_review {
+    font-size: 11px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 .main_ramyeon_review_list_column1_title {
     font-size: 15px;
-    margin-left: 8px;
-    color: red;
+    margin-left: 10px;
+    margin-top: 2px;
+    color: black;
 }
 .main_ramyeon_review_list_column1_date {
-    font-size: 10px;        
-    margin-left: 8px;
+    font-size: 10px;  
+    margin-top: -1px;      
+    margin-left: 11px;
+    margin-bottom: 2px;
+}
+.main_ramyeon_review_list_column1_grade {
+    font-size: 12px;
+    margin-left: 11px;
+}
+/* 페이징 버튼 스타일 수정 */
+.main_ramyeon_review_list_paging_btn {
+    border: none;
+    background: none;
+    color: #000; /* 버튼 텍스트 색상 */
+}
+.page-item.active .page-link {
+    background-color: #999;
+    border: 1px solid #000;
 }
