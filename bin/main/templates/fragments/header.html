@@ -1,36 +1,58 @@
 <header xmlns:th="http://www.thymeleaf.org">
     <div class="header-content">
         <div class="logo-icon">
-            <img th:src="@{/img/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
+            <img th:src="@{/img/icon/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
         </div>
         <div class="name">수 다 면</div>
+
         <div class="header-controls">
             <div class="search-box">
                 <input type="text" placeholder="검색" class="searchplace">
                 <i class="fas fa-magnifying-glass search-icon"></i> <!-- FontAwesome 아이콘 추가 -->
             </div>
-           <!-- 스프링 시큐리티를 통해 로그인한 사용자에게만 보이는 내용 -->
-    <div th:if="${#request.isUserInRole('USER')}">
-        Welcome, <span th:text="${#authentication.principal.nickname}"></span>!</p>
-        <p><a href="/logout">Logout</a></p>
-    </div>
-    
-    <!-- 로그인하지 않은 사용자에게 보이는 내용 -->
-    <div th:unless="${#request.isUserInRole('USER')}">
-        <a href="/members/login">로그인</a>
-    </div>
-            <div>|</div>
-            <div class="signup-button">
-                <a th:href="@{/members/signup}" style="text-decoration: none; color: black;">회원가입</a>
+            <!-- 스프링 시큐리티를 통해 로그인한 사용자에게만 보이는 내용 -->
+            <div th:if="${#request.isUserInRole('USER')}" class="horizontal-content">
+                <div class="welcome_logout">
+                    Welcome, <span th:text="${#authentication.principal.nickname}"></span>!
+                    <span style="padding-left: 10px;">|</span>
+                    <a th:href="@{/logout}" style="padding-left: 10px;">Logout</a>
+                </div>
+            </div> 
+            <!-- 스프링 시큐리티를 통해 로그인을 하지 않은 사용자에게만 보이는 내용 -->
+            <div th:unless="${#request.isUserInRole('USER')}" class="horizontal-content">
+                <a th:href="@{/members/login}">로그인</a>
+                <span>|</span>
+                <a th:href="@{/members/signup}" class="signup-button">회원가입</a>
             </div>
-        </div>
+        </div>    
+        
+
+        
     </div>
     <main class="mainimg">
-        <!-- main 태그 내에 사진이 들어갈 영역 -->
-        <div class="image-placeholder">
-            <img src="이미지URL" alt="사진 설명">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- 캐러셀 내부의 이미지 슬라이드 -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img th:src="@{/img/header/slide1.png}" alt="slide1">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/img/header/slide2.png}" alt="slide2">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/img/header/slide3.png}" alt="slide3">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/img/header/slide4.png}" alt="slide4">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/img/header/slide5.png}" alt="slide5">
+                </div>
+                <!-- 추가 이미지 슬라이드를 필요에 따라 반복합니다 -->
+            </div>
         </div>
     </main>
+    
     <div class="container" id="box_item">
         <div class="boxes">
             <div class="box" style="padding-top:30px; border-right: none;">라면 정보 & 리뷰
