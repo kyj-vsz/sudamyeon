@@ -26,6 +26,10 @@ public interface RamyeonService {
     void remove_image(Long inum);
     
     RamyeonDTO get_img();
+
+    RamyeonDTO get_img2();
+
+    RamyeonDTO get_img3();
     
     default RamyeonDTO to_dto(Ramyeon ramyeon, List<Image> images, Double avg, Long review_count){
         RamyeonDTO ramyeonDTO = RamyeonDTO.builder()
