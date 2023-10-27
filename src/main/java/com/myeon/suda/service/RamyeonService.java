@@ -64,6 +64,7 @@ public interface RamyeonService {
         List<ImageDTO> imageDTO_list = images.stream().map(image -> {
             return ImageDTO.builder()
                         .inum(image.getInum())
+                        .mno(image.getRamyeon().getMno())
                         .img_name(image.getImgName())
                         .path(image.getPath())
                         .uuid(image.getUuid())
