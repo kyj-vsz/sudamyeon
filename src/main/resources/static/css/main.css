@@ -176,11 +176,11 @@ a {
     padding-left: 100px;
 }
 .number {
-position: absolute;
-top: -40px;
-left: -40px;
-background-color: white;
-padding: 5px 10px;
-border-radius: 19px;
-font-size:20px;
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 19px;
+    font-size:20px;
 }
