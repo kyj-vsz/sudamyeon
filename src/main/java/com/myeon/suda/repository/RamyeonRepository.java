@@ -27,4 +27,17 @@ public interface RamyeonRepository extends JpaRepository<Ramyeon, Long>{
     " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
     " LEFT OUTER JOIN Review rv ON rv.ramyeon = r GROUP BY r ")
     Page<Object[]> get_list(Pageable pageable);
+
+    @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno) " +
+    " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
+    " LEFT OUTER JOIN Review rv ON rv.ramyeon = r " +
+    " GROUP BY i order by COUNT(rv.rno) desc")
+    List<Object[]> get_ramyeon_img2();
+
+    @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno) " +
+    " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
+    " LEFT OUTER JOIN Review rv ON rv.ramyeon = r " +
+    " GROUP BY i order by r.regDate desc")
+    List<Object[]> get_ramyeon_img3();
+
 }

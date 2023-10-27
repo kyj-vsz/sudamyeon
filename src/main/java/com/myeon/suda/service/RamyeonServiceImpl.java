@@ -112,5 +112,34 @@ public class RamyeonServiceImpl implements RamyeonService {
         Long review_count = (Long) result.get(0)[3];
         return to_dto(ramyeon, image_list, avg, review_count);
     }
+
+    @Override
+    public RamyeonDTO get_img2() {
+      List<Object[]> result = ramyeon_repository.get_ramyeon_img2();
+        Ramyeon ramyeon =(Ramyeon) result.get(0)[0]; //<-문제
+        List<Image> image_list = new ArrayList<>();
+        result.forEach(arr -> {
+            Image image = (Image)arr[1];
+            image_list.add(image);
+        });
+        Double avg = (Double) result.get(0)[2];
+        Long review_count = (Long) result.get(0)[3];
+        return to_dto(ramyeon, image_list, avg, review_count);
+    }
+
+    @Override
+    public RamyeonDTO get_img3() {
+      List<Object[]> result = ramyeon_repository.get_ramyeon_img3();
+        Ramyeon ramyeon =(Ramyeon) result.get(0)[0]; //<-문제
+        List<Image> image_list = new ArrayList<>();
+        result.forEach(arr -> {
+            Image image = (Image)arr[1];
+            image_list.add(image);
+        });
+        Double avg = (Double) result.get(0)[2];
+        Long review_count = (Long) result.get(0)[3];
+        return to_dto(ramyeon, image_list, avg, review_count);
+    }
+
     
 }
