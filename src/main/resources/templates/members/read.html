@@ -20,6 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     
+    <!-- Styles CSS -->
     <link th:href="@{/css/styles.css}" rel="stylesheet">
     <!-- Read CSS -->
     <link th:href="@{/css/read.css}" rel="stylesheet">
@@ -76,9 +77,8 @@
                 if(msg == null){
                     return;
                 }
-                /**************************************************************************
                 // 글 작성 후 작성한 글의 상세보기로 이동하는 방식일 경우 이 주석을 해제하여 사용
-
+                /**************************************************************************
                 if(msg > 0){
                     $(".modal-body").html("게시글 "+msg+"번이 등록되었습니다.");
                 }
@@ -512,7 +512,7 @@
                                                 <div class="row main_ramyeon_read_menu_table2">
                                                     <div class="col-12">                                            
                                                         <div class="main_ramyeon_read_menu_table_img">
-                                                            <img th:src="@{/img/snack.png}" alt="분류">
+                                                            <img th:src="@{/img/icon/snack.png}" alt="분류">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">분류</div>
                                                         <div class="main_ramyeon_read_menu_table_dto" name="category">[[${dto.category}]]</div>
@@ -523,7 +523,7 @@
                                                 <div class="row main_ramyeon_read_menu_table3">
                                                     <div class="col-12">                                            
                                                         <div class="main_ramyeon_read_menu_table_img">
-                                                            <img th:src="@{/img/cost.png}" alt="가격">
+                                                            <img th:src="@{/img/icon/cost.png}" alt="가격">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">가격</div>
                                                         <div class="main_ramyeon_read_menu_table_dto" name="price">[[${dto.price}]]</div>
@@ -532,7 +532,7 @@
                                                 <div class="row main_ramyeon_read_menu_table4">
                                                     <div class="col-12">                                            
                                                         <div class="main_ramyeon_read_menu_table_img">
-                                                            <img th:src="@{/img/cooking2.png}" alt="조리방법">
+                                                            <img th:src="@{/img/icon/cooking2.png}" alt="조리방법">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">조리방법</div>
                                                         <div class="main_ramyeon_read_menu_table_dto" name="cooking">[[${dto.cooking}]]</div>
@@ -543,7 +543,7 @@
                                                 <div class="row main_ramyeon_read_menu_table5">
                                                     <div class="col-12">                                            
                                                         <div class="main_ramyeon_read_menu_table_img">
-                                                            <img th:src="@{/img/weight.png}" alt="무게">
+                                                            <img th:src="@{/img/icon/weight.png}" alt="무게">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">무게</div>
                                                         <div class="main_ramyeon_read_menu_table_dto" name="weight">[[${dto.weight}]]</div>
@@ -552,7 +552,7 @@
                                                 <div class="row main_ramyeon_read_menu_table6">
                                                     <div class="col-12">                                            
                                                         <div class="main_ramyeon_read_menu_table_img">
-                                                            <img th:src="@{/img/time.png}" alt="소비기한">
+                                                            <img th:src="@{/img/icon/time.png}" alt="소비기한">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">소비기한</div>
                                                         <div class="main_ramyeon_read_menu_table_dto" name="expiry">[[${dto.expiry}]]</div>
@@ -563,7 +563,7 @@
                                                 <div class="row main_ramyeon_read_menu_table7">
                                                     <div class="col-12">                                            
                                                         <div class="main_ramyeon_read_menu_table_img">
-                                                            <img th:src="@{/img/lamen.png}" alt="칼로리">
+                                                            <img th:src="@{/img/icon/lamen.png}" alt="칼로리">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">칼로리</div>
                                                         <div class="main_ramyeon_read_menu_table_dto" name="calorie">[[${dto.calorie}]]</div>
@@ -572,7 +572,7 @@
                                                 <div class="row main_ramyeon_read_menu_table8">
                                                     <div class="col-12">                                            
                                                         <div class="main_ramyeon_read_menu_table_img">
-                                                            <img th:src="@{/img/calender.png}" alt="출시년도">
+                                                            <img th:src="@{/img/icon/calender.png}" alt="출시년도">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">출시년도</div>
                                                         <div class="main_ramyeon_read_menu_table_dto" name="birth">[[${dto.birth}]]</div>
@@ -679,13 +679,13 @@
                     <!-- read menu 4 -->
                     <div class="main_ramyeon_read_menu4_btn">
                         <div class="main_ramyeon_read_menu4">
-                                <a class="btn btn-danger" th:href="@{/members/remove}">
+                                <a class="btn btn-danger" th:href="@{/members/remove(mno=${dto.mno})}">
                                     Remove
                                 </a>
-                                <a class="btn btn-primary" th:href="@{/members/modify}">    
+                                <a class="btn btn-primary" th:href="@{/members/modify(mno=${dto.mno})}">    
                                     Modify  
                                 </a>                                
-                                <a class="btn btn-info" th:href="@{/members/list}">
+                                <a class="btn btn-info" th:href="@{/members/list(page=${page_requestDTO.page})}">
                                     List
                                 </a>
                         </div>            

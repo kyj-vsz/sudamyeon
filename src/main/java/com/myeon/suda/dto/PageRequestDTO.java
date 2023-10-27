@@ -22,7 +22,7 @@ public class PageRequestDTO {
 
     public PageRequestDTO(){
         this.page = 1;
-        this.size = 10;
+        this.size = 16;
     }
 
     public Pageable get_pageable(Sort sort){
