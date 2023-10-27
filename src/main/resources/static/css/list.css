@@ -24,11 +24,14 @@ a {
     padding-bottom: 7px;
 }
 .banner_review {
-    margin-left: 10px;
+    margin-left: 13px;
+    margin-top: 0px;
+    position: absolute;
 }
 .banner_community {
-    margin-left: 10px;
-    margin-top: -280px;
+    margin-left: 13px;
+    margin-top: 570px;
+    position: absolute;
 }
 /* banner_sub */
 .banner_sub {
@@ -107,8 +110,6 @@ a {
     margin-top: 5px;
     margin-left: 2px;
 }
-/* main_ramyeon_review */
-
 /* main_ramyeon_review */   
 .main_ramyeon_review_title {
     font-size: 15px;
@@ -189,7 +190,8 @@ a {
 }
 /* main ramyeon review list */
 .main_ramyeon_review_list {
-    width: 840px;     
+    width: 840px;
+    height: 790px;
     border-top: 1px solid #000;
 }
 .main_ramyeon_review_list_column1 {
