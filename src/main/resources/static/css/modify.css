@@ -247,11 +247,14 @@ ul li{
     padding-bottom: 7px;
 }
 .banner_review {
-    margin-left: 10px;
+    margin-left: 13px;
+    margin-top: 0px;
+    position: absolute;
 }
 .banner_community {
-    margin-left: 10px;
-    margin-top: 30px;
+    margin-left: 13px;
+    margin-top: 570px;
+    position: absolute;
 }
 /* banner_sub */
 .banner_sub {
@@ -311,7 +314,7 @@ ul li{
     margin-top: -2px;
     margin-bottom: -0px;
 }
- /* community */
+/* community */
 .banner_sub_community {
     display: inline-block;
     width: 100px;
