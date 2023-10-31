@@ -107,7 +107,7 @@ a{
     width: 65px;
     height: 65px;
     margin-left: 5px;
-    margin-top: 5px;
+    margin-top: 7px;
 }
 .main_ramyeon_read_menu_table_column {
     font-size: 11px;
@@ -243,7 +243,7 @@ th {
 }
 .main_ramyeon_read_menu5 {
     width: 840px;
-    height: 385px;
+    height: 438px;
     border: 1px solid #000;
     background-color: #ddd;
     margin-left: 0px;
@@ -427,4 +427,24 @@ img {
     height:220px;
     margin-top: 5px;
     margin-left: 2px;
+}
+.review_list {
+    height: 336px;
+}
+.pagination {
+    align-items: center;
+    justify-content: center;
+}
+/* 페이징 버튼 스타일 수정 */
+.page-link {
+    border: none;
+    background: none;
+    color: #000; /* 버튼 텍스트 색상 */
+}
+.page-item.active .page-link {
+    background-color: #999;
+    border: 1px solid #000;
+}
+.footer_head {
+    margin-left: 375.5px;
 }
