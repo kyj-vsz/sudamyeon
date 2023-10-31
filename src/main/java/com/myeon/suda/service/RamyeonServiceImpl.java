@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import com.myeon.suda.dto.PageResultDTO;
 import com.myeon.suda.dto.RamyeonDTO;
 import com.myeon.suda.entity.Image;
 import com.myeon.suda.entity.Ramyeon;
+import com.myeon.suda.entity.Review;
 import com.myeon.suda.repository.ImageRepository;
 import com.myeon.suda.repository.RamyeonRepository;
 
@@ -100,45 +102,43 @@ public class RamyeonServiceImpl implements RamyeonService {
     }
 
     @Override
-    public RamyeonDTO get_img() {
-      List<Object[]> result = ramyeon_repository.get_ramyeon_img();
-        Ramyeon ramyeon =(Ramyeon) result.get(0)[0]; //<-문제
-        List<Image> image_list = new ArrayList<>();
-        result.forEach(arr -> {
-            Image image = (Image)arr[1];
-            image_list.add(image);
-        });
-        Double avg = (Double) result.get(0)[2];
-        Long review_count = (Long) result.get(0)[3];
-        return to_dto(ramyeon, image_list, avg, review_count);
+    public PageResultDTO<RamyeonDTO, Object[]> get_main_page(PageRequestDTO requestDTO) {
+        Pageable pageable = requestDTO.get_pageable();
+        Page<Object[]> result = ramyeon_repository.get_main_page(pageable);
+        Function<Object[], RamyeonDTO> fn = (arr -> to_dto(
+            (Ramyeon)arr[0], 
+            (List<Image>)(Arrays.asList((Image)arr[1])),
+            (Double)arr[2],
+            (Long)arr[3]
+            ));
+        return new PageResultDTO<>(result, fn);
     }
 
     @Override
-    public RamyeonDTO get_img2() {
-      List<Object[]> result = ramyeon_repository.get_ramyeon_img2();
-        Ramyeon ramyeon =(Ramyeon) result.get(0)[0]; //<-문제
-        List<Image> image_list = new ArrayList<>();
-        result.forEach(arr -> {
-            Image image = (Image)arr[1];
-            image_list.add(image);
-        });
-        Double avg = (Double) result.get(0)[2];
-        Long review_count = (Long) result.get(0)[3];
-        return to_dto(ramyeon, image_list, avg, review_count);
+    public PageResultDTO<RamyeonDTO, Object[]> get_main_page_best(PageRequestDTO requestDTO) {
+        Pageable pageable = requestDTO.get_pageable();
+        Page<Object[]> result = ramyeon_repository.get_main_page_best(pageable);
+        Function<Object[], RamyeonDTO> fn = (arr -> to_dto(
+            (Ramyeon)arr[0], 
+            (List<Image>)(Arrays.asList((Image)arr[1])),
+            (Double)arr[2],
+            (Long)arr[3]
+            ));
+        return new PageResultDTO<>(result, fn);
     }
 
     @Override
-    public RamyeonDTO get_img3() {
-      List<Object[]> result = ramyeon_repository.get_ramyeon_img3();
-        Ramyeon ramyeon =(Ramyeon) result.get(0)[0]; //<-문제
-        List<Image> image_list = new ArrayList<>();
-        result.forEach(arr -> {
-            Image image = (Image)arr[1];
-            image_list.add(image);
-        });
-        Double avg = (Double) result.get(0)[2];
-        Long review_count = (Long) result.get(0)[3];
-        return to_dto(ramyeon, image_list, avg, review_count);
+    public PageResultDTO<RamyeonDTO, Object[]> get_main_page_hot(PageRequestDTO requestDTO) {
+        Pageable pageable = requestDTO.get_pageable();
+        Page<Object[]> result = ramyeon_repository.get_main_page_hot(pageable);
+        Function<Object[], RamyeonDTO> fn = (arr -> to_dto(
+            (Ramyeon)arr[0], 
+            (List<Image>)(Arrays.asList((Image)arr[1])),
+            (Double)arr[2],
+            (Long)arr[3],
+            (List<Review>)(Arrays.asList((Review)arr[4]))
+            ));
+        return new PageResultDTO<>(result, fn);
     }
 
     

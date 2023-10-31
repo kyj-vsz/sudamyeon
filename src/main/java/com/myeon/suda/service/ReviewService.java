@@ -2,13 +2,17 @@ package com.myeon.suda.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
+import com.myeon.suda.dto.ReviewPageDTO;
 import com.myeon.suda.dto.ReviewDTO;
 import com.myeon.suda.entity.Member;
 import com.myeon.suda.entity.Ramyeon;
 import com.myeon.suda.entity.Review;
 
 public interface ReviewService {
-    // PageResultDTO<ReviewDTO, Object[]> get_review_list_page(PageRequestDTO requestDTO);
+    ReviewPageDTO get_review_list_page(Long mno, Pageable pageable);
+    
     List<ReviewDTO> get_list(Long mno);
 
     Long register(ReviewDTO reviewDTO);
