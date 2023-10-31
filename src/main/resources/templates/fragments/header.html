@@ -1,9 +1,11 @@
 <header xmlns:th="http://www.thymeleaf.org">
     <div class="header-content">
         <div class="logo-icon">
+            <a th:href="@{/}">
             <img th:src="@{/img/icon/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
+            </a>
         </div>
-        <div class="name">수 다 면</div>
+        <a th:href="@{/}"><div class="name">수 다 면</div></a>
 
         <div class="header-controls">
             <div class="search-box">
@@ -55,16 +57,50 @@
     
     <div class="container" id="box_item">
         <div class="boxes">
-            <div class="box" style="padding-top:30px; border-right: none;">라면 정보 & 리뷰
-                <i class="fa-solid fa-caret-down"></i>
+          <a th:href="@{/members/list}"><div class="box" style="padding-top: 30px; border-right: none;">라면 정보 & 리뷰
+            <div class="list-container"></div>
+          </div></a>
+          <div class="box" style="padding-top: 30px; border-right: none;">의견 나누기
+            <i class="fa-solid fa-caret-down"></i>
+            <div class="list-container">
+              <ul>
+                <li style="padding-top: 5px;">나만의 레시피</li>
+                <li style="padding-top: 5px;">제품 추천하기</li>
+                <li style="padding-top: 5px;">마켓 구경하기</li>
+              </ul>
             </div>
-            <div class="box" style="padding-top:30px; border-right: none;">레시피 공유
-                <i class="fa-solid fa-caret-down"></i>
+          </div>
+          <div class="box" style="padding-top: 30px; border-right: none;">라면 NEWS
+            <i class="fa-solid fa-caret-down"></i>
+            <div class="list-container">
+              <ul>
+                <li><a th:href="'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=라면'" target="_blank">국내 기사 검색하기</a></li>
+                <li><a th:href="'https://www.google.com/search?q=ramyeon+news&tbm=nws'" target="_blank">해외 기사 검색하기</a></li>
+              </ul>
             </div>
-            <div class="box" style="padding-top:30px; border-right: none;">라면 NEWS
-                <i class="fa-solid fa-caret-down"></i>
-            </div>
-            <div class="box" style="padding-top:30px;">커뮤니티</div>
+          </div>
+          <a th:href="@{/members/list}"><div class="box" style="padding-top: 30px;">Q&A</div></a>
         </div>
     </div>
+    
+    <script>
+    const boxes = document.querySelectorAll('.box');
+
+    boxes.forEach((box) => {
+      const listContainer = box.querySelector('.list-container');
+      
+      box.addEventListener('click', () => {
+        // 클릭 시 리스트를 토글
+        listContainer.style.display = (listContainer.style.display === 'block') ? 'none' : 'block';
+      });
+
+      box.addEventListener('mouseleave', () => {
+        // 박스 영역을 벗어나면 리스트를 숨김
+        listContainer.style.display = 'none';
+      });
+      
+      // 초기 페이지 로드 시 모든 리스트를 숨김
+      listContainer.style.display = 'none';
+    });
+    </script>
 </header>
