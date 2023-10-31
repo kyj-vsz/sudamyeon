@@ -17,27 +17,30 @@ public interface RamyeonRepository extends JpaRepository<Ramyeon, Long>{
             " WHERE r.mno = :mno GROUP BY i ")        
     List<Object[]> get_ramyeon_with_all(@Param("mno") Long mno);
 
-    @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno) " +
-    " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
-    " LEFT OUTER JOIN Review rv ON rv.ramyeon = r " +
-    " GROUP BY i order by AVG(COALESCE(rv.grade,0)) desc")
-    List<Object[]> get_ramyeon_img();
+
 
     @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno) "+
     " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
     " LEFT OUTER JOIN Review rv ON rv.ramyeon = r GROUP BY r ")
     Page<Object[]> get_list(Pageable pageable);
 
-    @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno) " +
+    @Query("SELECT r,  i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno)"+
     " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
-    " LEFT OUTER JOIN Review rv ON rv.ramyeon = r " +
-    " GROUP BY i order by COUNT(rv.rno) desc")
-    List<Object[]> get_ramyeon_img2();
+    " LEFT OUTER JOIN Review rv ON rv.ramyeon = r GROUP BY r " +
+    " ORDER BY r.regDate DESC")
+    Page<Object[]> get_main_page(Pageable pageable);
 
     @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno) " +
     " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
+    " LEFT OUTER JOIN Review rv ON rv.ramyeon = r " + 
+    " GROUP BY r order by (AVG(COALESCE(rv.grade,0))) desc")
+    Page<Object[]> get_main_page_best(Pageable pageable);
+
+    @Query("SELECT r, i, AVG(COALESCE(rv.grade,0)), COUNT(rv.rno), rv" +
+    " FROM Ramyeon r LEFT OUTER JOIN Image i ON i.ramyeon = r " +
     " LEFT OUTER JOIN Review rv ON rv.ramyeon = r " +
-    " GROUP BY i order by r.regDate desc")
-    List<Object[]> get_ramyeon_img3();
+    " GROUP BY r order by COUNT(rv.rno) desc")
+    Page<Object[]> get_main_page_hot(Pageable pageable);
+
 
 }

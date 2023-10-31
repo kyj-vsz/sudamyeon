@@ -3,84 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    
-    <style>
-        .center-horizontal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .center-text {
-            text-align: center; /* 텍스트를 가운데 정렬 */
-        }
-        /* 레이아웃 틀 */
-        html {
-            height: 100%;
-        }
 
-        body {
-            margin: 10px;
-            height: 100%;
-            background: #f5f6f7;
-            font-family: Dotum,'돋움',Helvetica,sans-serif;
-        }
-        #content {
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%);
-            width: 460px;
-        }
-        /* 입력폼 */
-        h3 {
-            margin: 19px 0 8px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-        .int {
-            display: block;
-            position: relative;
-            border: solid 1px #dadada;
-            padding: 10px 14px 10px 14px;
-            box-sizing: border-box;
-            width: 100%;
-            height: 30px;
-            border: none;
-            background: #fff;
-            font-size: 15px;
-        }
-        #btnLogin {
-            width: 100%;
-            padding: 8px 0 8px;
-            border: 0;
-            cursor: pointer;
-            color: #fff;
-            background-color: black;
-            font-size: 20px;
-            font-weight: 400;
-            font-family: Dotum,'돋움',Helvetica,sans-serif;
-            margin-top: 20px;
-        }
-    </style>
+    <!-- Fontawesome -->    
+    <script src="https://kit.fontawesome.com/ac43b59d41.js" crossorigin="anonymous"></script>
+    
+    <!-- signup CSS -->
+    <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
+
 </head>
 <body>
     <div class="center-horizontal">
-        <img th:src="@{/img/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
-        <h2 class="center-text">수   다   면</h2>
+        <a th:href="@{/}">
+            <img th:src="@{/img/icon/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
+        </a>
+        <a th:href="@{/}">
+            <h2 class="center-text">수다면</h2>
+        </a>
     </div>
     <form th:action="@{/members/login}" method="post" id="content">
         <div>
-            <h3><label for="username">이메일</label></h3>
-            <input class="int" type="text" id="username" name="username" required="required" />
+            <h3>이메일 로그인</h3>
+            <div class="icon_box_1">
+                <i class="fa-regular fa-envelope"></i>
+            </div>  
+            <input class="int" type="text" id="username" name="username" required="required" style="border: 1px solid #000;"/>
         </div>
         <div>
-            <h3><label for="password">비밀번호</label></h3>
-            <input class="int" type="password" id="password" name="password" required="required" />
+            <div class="icon_box_1">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <input class="int" type="password" id="password" name="password" required="required" style="border: 1px solid #000;"/>
         </div>
         <div>
-            <button type="submit" id="btnLogin">로그인</button>
+            <button type="submit" id="btn_login">로그인</button>
         </div>
-        <div style="padding-top: 20px; font-size: 20px;">
-        <a th:href="@{/members/signup}">회원가입하기</a>
+        <div>
+            <button type="submit" id="btn_enter_join">
+                <a th:href="@{/members/signup}">회원가입하기</a>
+            </button>
         </div>
     </form>
 </body>
