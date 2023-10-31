@@ -38,9 +38,8 @@
             var noodle_size = [[${dto.noodle_size}]];
             var soupnum = [[${dto.soupnum}]];
             var cooktime = [[${dto.cooktime}]];
-
             console.log(avg);
-
+            
             new Chart(ctx, {
                 type: 'radar',
                 data: {
@@ -67,23 +66,24 @@
         });
         $(document).ready(function(){
             var msg = [[${msg}]];               
+            var page_number = 1;
 
             console.log(msg);
 
             checkModal(msg);
             // showList(dto);
-
+            
             function checkModal(msg){
                 if(msg == null){
                     return;
                 }
                 // 글 작성 후 작성한 글의 상세보기로 이동하는 방식일 경우 이 주석을 해제하여 사용
                 /**************************************************************************
-                if(msg > 0){
-                    $(".modal-body").html("게시글 "+msg+"번이 등록되었습니다.");
+                 if(msg > 0){
+                     $(".modal-body").html("게시글 "+msg+"번이 등록되었습니다.");
                 }
                 ***************************************************************************/
-                else if(msg == "modify"){
+               else if(msg == "modify"){
                     $("#alert-body").html("수정이 완료되었습니다.");
                 }
                 $("#alertModal").modal();               
@@ -109,6 +109,7 @@
             var input_review_text = $("textarea[name='review_content']");
             var input_replyer = $("input[name='replyer']");
             var input_reply_text = $("textarea[name='reply_content']");
+            var review_space = $("#review_space");
 
             $(".add_review_btn").click(function(){
                 grade=0;
@@ -145,15 +146,28 @@
                     success:function(result){
                         console.log("r ="+result);
                         // self.location.reload();
-                        get_reviews();
+                        get_reviews(page_number);
                     }
                 });
                 reviewModal.modal("hide");
             });
+
+            function get_list(param, callback, error){
+                var page = param.page || 1;
+                $.getJSON("/reviews/pages/"+mno+"/"+page+"",function(data){
+                    if(callback){
+                        callback(data.reply_count, data.list);
+                    }
+                }).fail(function(xhr, status, err){
+                    if(error){
+                        error();
+                    }
+                });
+            }
             
 
             //페이지가 열리면 바로 리뷰 데이터들을 가져와서 사용한다.
-            function get_reviews(){
+            function get_reviews(page){
                 function formatTime(str){
                     var date = new Date(str);
                     return date.getFullYear() + "/" +
@@ -162,17 +176,39 @@
                         date.getHours() + ":" +
                         date.getMinutes();
                 }
-                $.getJSON("/reviews/"+mno+"/all", function(arr){
+                get_list({mno : mno, page : page || 1}, function(reply_count, list){
+                    if(page == -1){
+                        page_number = Math.ceil(reply_count/4.0);
+                        get_reviews(page_number);
+                        return;
+                    }
                     var str = "";
-                    $.each(arr, function(idx, review){
-                        console.log(review);
-                        str += ' <div class="card-body-box"><div style="cursor:pointer;" class="card-body review_tag" data-rno='+review.rno+' data-email_id='+review.email_id+'>';
-                        str += ' <div class="reviewgrade-text-box"><span class="reviewgrade_text">평점 :</span><span class="reviewgrade" data-grade2='+review.grade+'></span></div>';
-                        str += ' <div class="card-body-text-box"><span class="card-subtitle mb-2 text-muted">'+review.nickname+'<span class="card-text">'+ formatTime(review.moddate) +'</span></span></div>';
-                        str += ' <h5 class="card-title">'+review.review_content+'</h5>';
-                        str += ' </div></div>';
-                    });
-                    $(".review_list").html(str);
+                    if(list == null || list.length ==0 ){
+                        review_space.html("");
+                        return;
+                    }
+                    for(var i = 0, len = list.length || 0; i< len; i++){
+                        str +=  ' <div class="card-body-box">';
+                        str +=      ' <div style="cursor:pointer;" id="review_tag' + i + '" class="card-body" data-rno='+list[i].rno+' data-email_id='+list[i].email_id+'>';
+                        str +=          ' <div class="reviewgrade-text-box">';
+                        str +=              '<span class="reviewgrade_text">평점 :</span>';
+                        str +=              '<span class="reviewgrade" data-grade2='+list[i].grade+'></span>';
+                        str +=          '</div>';
+                        str +=          ' <div class="card-body-text-box">';
+                        str +=              '<span class="card-subtitle mb-2 text-muted">'
+                            +                   list[i].nickname
+                            +                   '<span class="card-text">'
+                            +                       formatTime(list[i].moddate) 
+                            +                   '</span>';
+                        str +=              '</span>';
+                        str +=          '</div>';
+                        str +=          ' <h5 class="card-title">'+list[i].review_content+'</h5>';
+                        str +=      ' </div>';
+                        str +=  '</div>';
+                    }
+                    review_space.html(str);
+
+                    makePagination(reply_count);
 
                     $(".reviewgrade").each(function(idx,o){
                         console.log(o);
@@ -181,22 +217,49 @@
                             readOnly: true
                         });
                     });
-                    $(".main_ramyeon_read_menu5_font").html("댓글수"+" "+"("+arr.length+")");
-                });
-
-                $.getJSON("/replies/"+rno+"/all", function(arr){
-                    var str = "";
-                    $.each(arr, function(idx, reply){
-                        str += ' <div style="cursr:pointer;" class="card-body reply_tag" data-reply_no='+reply.reply_no+'>';
-                        str += ' <h5 class="card-title">'+reply.reply_content+'</span>';
-                        str += ' <h6 class="card-subtitle mb-2 text-muted">'+reply.replyer+'</h6>';
-                        str += ' <p class="card-text">'+ formatTime(reply.moddate) +'</p>';
-                        str += ' </div>'    
-                    });
-                    $(".review_tag").html(str);
-                });
+                    $(".main_ramyeon_read_menu5_font").html("댓글수"+" "+"("+reply_count+")");
+                });              
             }
-            get_reviews();
+            get_reviews(page_number);
+            
+            let pagination = $("#pagination");
+            // 댓글 페이징 출력
+            function makePagination(reply_count) {
+                var end_number = Math.ceil(page_number / 4.0) * 10;
+                var start_number =end_number - 9;
+                var prev = start_number != 1;
+                var next = false;
+
+                if(end_number * 10 >= reply_count){
+                    end_number = Math.ceil(reply_count /4.0);
+                }
+
+                if(end_number * 10 < reply_count){
+                    next = true;
+                }
+                var str="<ul class='pagination'>";
+	      		   
+                if(prev){
+                    str+="<li class='page-item'><a class='page-link' href='"+(start_number-1)+"'>Previous</a></li>";
+                }
+                for(var i = start_number; i <= end_number; i++){
+                    var active = page_number == i? "active":"";
+                    str+="<li class='page-item "+active+"'><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+                }
+                if(next){
+                    str+="<li class='page-item'><a class='page-link' href='"+(end_number+1)+"'>Next</a></li>";	      			   
+                }
+                str +="</ul></div>";
+                pagination.html(str);
+            }
+
+            //댓글 페이지 버튼 액션
+            pagination.on("click","li a", function(e){
+                e.preventDefault();
+                var target_page_number = $(this).attr("href");
+                page_number = target_page_number;
+                get_reviews(page_number);
+            });
 
             //modify review
             var rno;
@@ -224,7 +287,7 @@
                     }
                 });
                 // $(".starrr a:nth-child("+grade+")").trigger("click");
-                $(".reviewModal").modal("show");
+                $(".reviewModal").modal("show");   
             });
 
             $(".modifyBtn").on("click", function(){
@@ -239,7 +302,7 @@
                     success: function(result){
                         console.log("result=====" +result);
                         // self.location.reload();
-                        get_reviews();
+                        get_reviews(page_number);
                     }
                 });
                 reviewModal.modal("hide");
@@ -256,7 +319,7 @@
                         console.log("==result==");
                         console.log(result);
                         // self.location.reload();
-                        get_reviews();
+                        get_reviews(page_number);
                     }
                 });
                 reviewModal.modal("hide");
@@ -282,12 +345,12 @@
                     success:function(result){
                         console.log("r ="+result);
                         // self.location.reload();
-                        get_reviews();
+                        get_reviews(page_number);
                     }
                 });
                 reply_modal.modal("hide");
             });
-
+            
         });
     </script>   
 </head>
@@ -658,7 +721,7 @@
                         <div class="main_ramyeon_read_menu3">
                             <div class="container form-group">
                                 <label class="content_box_font">Content</label>
-                                <textarea name="content" class="form-control main_ramyeon_read_menu3_content" rows="8">[[${dto.content}]]</textarea>
+                                <textarea name="content" class="form-control main_ramyeon_read_menu3_content" rows="8" readonly="true">[[${dto.content}]]</textarea>
                             </div>
                         </div>        
                     </div>
@@ -671,7 +734,12 @@
                                     <button class="btn btn-primary btn-sm float-right add_review_btn main_ramyeon_read_menu5_btn" type="button">
                                         ReviewAdd
                                     </button>                            
-                                    <div class="list-group review_list"></div>
+                                    <div id="accordion" class="list-group review_list">
+                                        <ul id="review_space">
+
+                                        </ul>
+                                    </div>
+                                    <div id="pagination"></div>
                             </div>
                         </div>
                     </div>

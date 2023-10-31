@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myeon.suda.dto.PageRequestDTO;
 import com.myeon.suda.dto.ReviewDTO;
 import com.myeon.suda.service.ReviewService;
 
@@ -25,10 +26,11 @@ public class ReviewController {
     
     private final ReviewService review_service;
 
-    @GetMapping("/{mno}/all")
-    public ResponseEntity<List<ReviewDTO>> get_list(@PathVariable("mno") Long mno){
-        List<ReviewDTO> reviewDTO_list = review_service.get_list(mno);
-        return new ResponseEntity<>(reviewDTO_list, HttpStatus.OK);
+   @GetMapping("/pages/{mno}/{page}")
+    public ResponseEntity<ReviewPageDTO> get_list_page(@PathVariable("page")int page, @PathVariable("mno") Long mno){
+        PageRequestDTO requestDTO = new PageRequestDTO(page, 4);
+        Pageable pageable = requestDTO.get_pageable();
+        return new ResponseEntity<ReviewPageDTO>(review_service.get_review_list_page(mno, pageable), HttpStatus.OK);
     }
 
     @PostMapping("/{mno}")

@@ -27,7 +27,7 @@ public class RamyeonController {
 
     private final RamyeonService ramyeon_service;
 
-    @GetMapping("/signup")
+    @GetMapping({"/signup","/login","/register","/intro"})
     public void signup(){}
 
     @PostMapping("/signup")
@@ -35,16 +35,6 @@ public class RamyeonController {
         // 사용자 입력 데이터가 userDTO 객체로 자동 바인딩됨
         member_service.join(memberDTO); // 회원 가입 로직 호출
         return "redirect:/members/login"; // 가입 후 로그인 페이지로 리다이렉트
-    }
-
-    @GetMapping("/login")
-    public void login(){
-
-    }
-
-    @GetMapping("/register")
-    public void register(){
-
     }
 
     @PostMapping("/register")

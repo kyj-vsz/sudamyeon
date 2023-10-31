@@ -25,7 +25,16 @@ public class PageRequestDTO {
         this.size = 12;
     }
 
+    public PageRequestDTO(int page, int size){
+        this.page = page;
+        this.size = size;
+    }
+
     public Pageable get_pageable(Sort sort){
         return PageRequest.of(page-1,size,sort);
+    }
+
+       public Pageable get_pageable(){
+        return PageRequest.of(page-1,size);
     }
 }
