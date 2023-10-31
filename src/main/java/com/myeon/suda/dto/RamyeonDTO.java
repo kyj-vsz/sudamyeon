@@ -64,6 +64,9 @@ public class RamyeonDTO {
     
     @Builder.Default
     private List<ImageDTO> imageDTO_list = new ArrayList<ImageDTO>();
+
+    @Builder.Default
+    private List<ReviewDTO> reviewDTO_list = new ArrayList<ReviewDTO>();
     
     private double avg;
 
