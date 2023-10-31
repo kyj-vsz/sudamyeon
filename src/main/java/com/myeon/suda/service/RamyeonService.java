@@ -9,13 +9,21 @@ import com.myeon.suda.dto.ImageDTO;
 import com.myeon.suda.dto.PageRequestDTO;
 import com.myeon.suda.dto.PageResultDTO;
 import com.myeon.suda.dto.RamyeonDTO;
+import com.myeon.suda.dto.ReviewDTO;
 import com.myeon.suda.entity.Image;
 import com.myeon.suda.entity.Ramyeon;
+import com.myeon.suda.entity.Review;
 
 public interface RamyeonService {
     Long register(RamyeonDTO ramyeonDTO);
 
     PageResultDTO<RamyeonDTO, Object[]> get_list_page(PageRequestDTO requestDTO);
+    
+    PageResultDTO<RamyeonDTO, Object[]> get_main_page(PageRequestDTO requestDTO);
+
+    PageResultDTO<RamyeonDTO, Object[]> get_main_page_best(PageRequestDTO requestDTO);  
+
+    PageResultDTO<RamyeonDTO, Object[]> get_main_page_hot(PageRequestDTO requestDTO);    
 
     RamyeonDTO get_ramyeon(Long mno);
 
@@ -24,12 +32,6 @@ public interface RamyeonService {
     void modify(RamyeonDTO ramyeonDTO);
     
     void remove_image(Long inum);
-    
-    RamyeonDTO get_img();
-
-    RamyeonDTO get_img2();
-
-    RamyeonDTO get_img3();
     
     default RamyeonDTO to_dto(Ramyeon ramyeon, List<Image> images, Double avg, Long review_count){
         RamyeonDTO ramyeonDTO = RamyeonDTO.builder()
@@ -69,9 +71,9 @@ public interface RamyeonService {
                         .path(image.getPath())
                         .uuid(image.getUuid())
                         .build();
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList());      
 
-        ramyeonDTO.setImageDTO_list(imageDTO_list);
+        ramyeonDTO.setImageDTO_list(imageDTO_list);        
         ramyeonDTO.setAvg(avg);
         ramyeonDTO.setReview_count(review_count.intValue());
 
@@ -126,5 +128,64 @@ public interface RamyeonService {
         entity_map.put("img_list", image_list);
 
         return entity_map;
+    }
+
+    default RamyeonDTO to_dto(Ramyeon ramyeon, List<Image> images, Double avg, Long review_count, List<Review> reviews){
+        RamyeonDTO ramyeonDTO = RamyeonDTO.builder()
+                    .mno(ramyeon.getMno())
+                    .gname(ramyeon.getGname())
+                    .content(ramyeon.getContent())
+                    .brand(ramyeon.getBrand())
+                    .price(ramyeon.getPrice())
+                    .weight(ramyeon.getWeight())
+                    .calorie(ramyeon.getCalorie())
+                    .category(ramyeon.getCategory())
+                    .cooking(ramyeon.getCooking())
+                    .expiry(ramyeon.getExpiry())
+                    .birth(ramyeon.getBirth())
+                    .spicy(ramyeon.getSpicy())
+                    .cooktime(ramyeon.getCooktime())
+                    .soupnum(ramyeon.getSoupnum())
+                    .noodle_size(ramyeon.getNoodleSize())
+                    .sodum(ramyeon.getSodum())
+                    .carbohydrate(ramyeon.getCarbohydrate())
+                    .protein(ramyeon.getProtein())
+                    .sugar(ramyeon.getSugar())
+                    .fat(ramyeon.getFat())
+                    .saturated_fat(ramyeon.getSaturatedFat())
+                    .trans_fat(ramyeon.getTransFat())
+                    .cholesterol(ramyeon.getCholesterol())
+                    .etc(ramyeon.getEtc())
+                    .regdate(ramyeon.getRegDate())
+                    .moddate(ramyeon.getModDate())
+                    .build();
+        
+        List<ImageDTO> imageDTO_list = images.stream().map(image -> {
+            return ImageDTO.builder()
+                        .inum(image.getInum())
+                        .mno(image.getRamyeon().getMno())
+                        .img_name(image.getImgName())
+                        .path(image.getPath())
+                        .uuid(image.getUuid())
+                        .build();
+        }).collect(Collectors.toList());
+
+        List<ReviewDTO> reviewDTO_list = reviews.stream().map(review -> {
+            return ReviewDTO.builder()
+            .rno(review.getRno())
+            .mno(review.getRamyeon().getMno())
+            .email_id(review.getMember().getEmailId())
+            .nickname(review.getMember().getNickname())
+            .review_content(review.getReviewContent())
+            .grade(review.getGrade())
+            .build();
+        }).collect(Collectors.toList());
+
+        ramyeonDTO.setImageDTO_list(imageDTO_list);        
+        ramyeonDTO.setAvg(avg);
+        ramyeonDTO.setReview_count(review_count.intValue());
+        ramyeonDTO.setReviewDTO_list(reviewDTO_list);
+
+        return ramyeonDTO;
     }
 }
