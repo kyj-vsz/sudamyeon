@@ -47,6 +47,9 @@ public class RamyeonController {
     
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
+        if(pageRequestDTO.getKeyword() == null){
+            pageRequestDTO.setKeyword("");
+        }
         model.addAttribute("result", ramyeon_service.get_list_page(pageRequestDTO));
     }
 

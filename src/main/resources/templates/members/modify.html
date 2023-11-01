@@ -30,7 +30,6 @@
         var file_upload = $("input[type='file']");
         var label = $(".custom-file-label");
         var mno = [[${dto.mno}]];
-        console.log($("li").length);
         $("button[type='submit']").on("click",function(e){
             e.preventDefault();
             if(!gname.val()){
@@ -38,16 +37,11 @@
                 gname.focus();
                 return;
             }
-            if(!file_upload.val() && (file_upload.val()=="" && $("li").length < 19)){
+            if(!file_upload.val() && file_upload.val()==""){
                 alert("파일 업로드는 필수입니다!");
                 file_upload.focus();
                 return;
-            }            
-            if($("li").length > 19){
-                alert("한개만 업로드 할 수 있습니다.");
-                return;
-            }
-                            
+            }                           
             var str = "";
             $(".image_space li").each(function(i,obj){
                 var target = $(obj);
