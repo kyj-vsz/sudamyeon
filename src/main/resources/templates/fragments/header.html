@@ -1,106 +1,107 @@
 <header xmlns:th="http://www.thymeleaf.org">
-    <div class="header-content">
-        <div class="logo-icon">
-            <a th:href="@{/}">
-            <img th:src="@{/img/icon/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
-            </a>
-        </div>
-        <a th:href="@{/}"><div class="name">수 다 면</div></a>
+  <div class="header-content">
+      <div class="logo_icon">
+          <a th:href="@{/}">
+          <img th:src="@{/img/icon/sudamyeon.png}" alt="수다면 로고">
+          </a>
+      </div>
+      <div class="name"><a th:href="@{/}">수다면</a></div>
 
-        <div class="header-controls">
-            <div class="search-box">
-                <input type="text" placeholder="검색" class="searchplace">
-                <i class="fas fa-magnifying-glass search-icon"></i> <!-- FontAwesome 아이콘 추가 -->
-            </div>
-            <!-- 스프링 시큐리티를 통해 로그인한 사용자에게만 보이는 내용 -->
-            <div th:if="${#request.isUserInRole('USER')}" class="horizontal-content">
-                <div class="welcome_logout">
-                    Welcome, <span th:text="${#authentication.principal.nickname}"></span>!
-                    <span style="padding-left: 10px;">|</span>
-                    <a th:href="@{/logout}" style="padding-left: 10px;">Logout</a>
-                </div>
-            </div> 
-            <!-- 스프링 시큐리티를 통해 로그인을 하지 않은 사용자에게만 보이는 내용 -->
-            <div th:unless="${#request.isUserInRole('USER')}" class="horizontal-content">
-                <a th:href="@{/members/login}">로그인</a>
-                <span>|</span>
-                <a th:href="@{/members/signup}" class="signup-button">회원가입</a>
-            </div>
-        </div>    
-        
-
-        
-    </div>
-    <main class="mainimg">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- 캐러셀 내부의 이미지 슬라이드 -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img th:src="@{/img/header/slide1.png}" alt="slide1">
-                </div>
-                <div class="carousel-item">
-                    <img th:src="@{/img/header/slide2.png}" alt="slide2">
-                </div>
-                <div class="carousel-item">
-                    <img th:src="@{/img/header/slide3.png}" alt="slide3">
-                </div>
-                <div class="carousel-item">
-                    <img th:src="@{/img/header/slide4.png}" alt="slide4">
-                </div>
-                <div class="carousel-item">
-                    <img th:src="@{/img/header/slide5.png}" alt="slide5">
-                </div>
-                <!-- 추가 이미지 슬라이드를 필요에 따라 반복합니다 -->
-            </div>
-        </div>
-    </main>
-    
-    <div class="container" id="box_item">
-        <div class="boxes">
-          <a th:href="@{/members/list}"><div class="box" style="padding-top: 30px; border-right: none;">라면 정보 & 리뷰
-            <div class="list-container"></div>
-          </div></a>
-          <div class="box" style="padding-top: 30px; border-right: none;">의견 나누기
-            <i class="fa-solid fa-caret-down"></i>
-            <div class="list-container">
-              <ul>
-                <li style="padding-top: 5px;">나만의 레시피</li>
-                <li style="padding-top: 5px;">제품 추천하기</li>
-                <li style="padding-top: 5px;">마켓 구경하기</li>
-              </ul>
-            </div>
+      <div class="header-controls">
+          <div class="search-box">
+              <input type="text" placeholder="검색" class="searchplace">
+              <!-- FontAwesome 아이콘 추가 -->
+              <i class="fas fa-magnifying-glass search-icon"></i>
           </div>
-          <div class="box" style="padding-top: 30px; border-right: none;">라면 NEWS
-            <i class="fa-solid fa-caret-down"></i>
-            <div class="list-container">
-              <ul>
-                <li><a th:href="'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=라면'" target="_blank">국내 기사 검색하기</a></li>
-                <li><a th:href="'https://www.google.com/search?q=ramyeon+news&tbm=nws'" target="_blank">해외 기사 검색하기</a></li>
-              </ul>
-            </div>
-          </div>
-          <a th:href="@{/members/list}"><div class="box" style="padding-top: 30px;">Q&A</div></a>
         </div>
+        <!-- 스프링 시큐리티를 통해 로그인한 사용자에게만 보이는 내용 -->
+        <div th:if="${#request.isUserInRole('USER')}" class="horizontal-content1">
+            <div class="welcome_logout login_view_font1">
+                Welcome, <span class="login_view_font2" th:text="${#authentication.principal.nickname}"></span> !
+                <span class="login_view_font3">|</span>
+                <a th:href="@{/logout}" class="login_view_font4">로그아웃</a>
+            </div>
+        </div> 
+        <!-- 스프링 시큐리티를 통해 로그인을 하지 않은 사용자에게만 보이는 내용 -->
+        <div th:unless="${#request.isUserInRole('USER')}" class="horizontal-content2">
+            <a th:href="@{/members/login}" class="login_font">로그인</a>
+            <span class="login_logout_middle">|</span>
+            <a th:href="@{/members/signup}" class="signup-button logout_font">회원가입</a>
+        </div>
+  </div>
+  <main class="mainimg">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- 캐러셀 내부의 이미지 슬라이드 -->
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <img th:src="@{/img/header/slide1.png}" alt="slide1">
+              </div>
+              <div class="carousel-item">
+                  <img th:src="@{/img/header/slide2.png}" alt="slide2">
+              </div>
+              <div class="carousel-item">
+                  <img th:src="@{/img/header/slide3.png}" alt="slide3">
+              </div>
+              <div class="carousel-item">
+                  <img th:src="@{/img/header/slide4.png}" alt="slide4">
+              </div>
+              <div class="carousel-item">
+                  <img th:src="@{/img/header/slide5.png}" alt="slide5">
+              </div>
+              <!-- 추가 이미지 슬라이드를 필요에 따라 반복합니다 -->
+          </div>
+      </div>
+  </main>
+  
+  <div class="container" id="box_item">
+    <div class="boxes">
+      <div class="box" style="padding-top: 30px; border-right: none;">
+        <a th:href="@{/members/list}">라면 정보 & 리뷰
+          <div class="list-container"></div>
+        </a>
+      </div>
+      <div class="box" style="padding-top: 30px; border-right: none;">의견 나누기
+        <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        <div class="list-container">
+          <ul>
+            <li class="list-container-num1"><a>나만의 레시피</a></li>
+            <li class="list-container-num2"><a>제품 추천하기</a></li>
+            <li class="list-container-num3"><a>마켓 구경하기</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box" style="padding-top: 30px; border-right: none;">라면 NEWS
+        <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        <div class="list-container">
+          <ul>
+            <li class="list-container-num4"><a th:href="'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=라면'" target="_blank">국내 기사 검색하기</a></li>
+            <li class="list-container-num5"><a th:href="'https://www.google.com/search?q=ramyeon+news&tbm=nws'" target="_blank">해외 기사 검색하기</a></li>
+          </ul>
+        </div>
+      </div>        
+      <div class="box" style="padding-top: 30px;">
+          <a th:href="@{/sudamyeon}">사이트 소개</a>
+      </div>        
     </div>
+</div>
+<script>
+  const boxes = document.querySelectorAll('.box');
+
+  boxes.forEach((box) => {
+    const listContainer = box.querySelector('.list-container');
     
-    <script>
-    const boxes = document.querySelectorAll('.box');
+    box.addEventListener('click', () => {
+      // 클릭 시 리스트를 토글
+      listContainer.style.display = (listContainer.style.display === 'block') ? 'none' : 'block';
+    });
 
-    boxes.forEach((box) => {
-      const listContainer = box.querySelector('.list-container');
-      
-      box.addEventListener('click', () => {
-        // 클릭 시 리스트를 토글
-        listContainer.style.display = (listContainer.style.display === 'block') ? 'none' : 'block';
-      });
-
-      box.addEventListener('mouseleave', () => {
-        // 박스 영역을 벗어나면 리스트를 숨김
-        listContainer.style.display = 'none';
-      });
-      
-      // 초기 페이지 로드 시 모든 리스트를 숨김
+    box.addEventListener('mouseleave', () => {
+      // 박스 영역을 벗어나면 리스트를 숨김
       listContainer.style.display = 'none';
     });
-    </script>
+    
+    // 초기 페이지 로드 시 모든 리스트를 숨김
+    listContainer.style.display = 'none';
+  });
+  </script>
 </header>
