@@ -16,65 +16,15 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Fontawesome -->    
+    <script src="https://kit.fontawesome.com/ac43b59d41.js" crossorigin="anonymous"></script>
+
     <!-- header, footer css -->
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 
     <!-- MAIN CSS -->
     <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
     
-    <style>
-    a {
-        text-decoration-line: none !important;
-        color: #000;
-    }
-    .bordered {
-        border: 1px solid #000;
-        padding: 10px;
-    }
-    @font-face {
-        font-family: 'yg-jalnan';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-
-    /* main_page */
-    .main_page {
-        margin: 25px 0px 25px 0px;
-    }
-    .intro_site {
-        width: 1068px;
-        height: 800px;
-        border: 1px solid #000;
-        margin-left: 35px;        
-    }
-    .intro_site_main {
-        width: 1068px;
-        height: 200px;        
-        margin-top: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .intro_site_main_column1 {
-        width: 1068px;      
-        text-align: center;
-    }
-    .intro_site_main_column1_font1 {
-        font-size: 45px;
-        font-family: 'yg-jalnan';        
-        margin-bottom: 35px;
-    }
-    .intro_site_main_column1_font2 {
-        font-size: 18px;
-        font-weight: 800;
-    }
-    .intro_site_main_column1_font3 {
-        font-size: 18px;
-        margin-top: -10px;
-        font-weight: 800;
-    }
-    </style>
 </head>
 
 <body>
@@ -85,15 +35,125 @@
             <div class="col-12">
                 <div class="row intro_site">
                     <!-- intro_site -->
+                        <!-- intro_site_title -->
                         <div class="col-12">
                             <div class="row intro_site_main">
                                 <div class="intro_site_main_column1">
-                                    <h1 class="intro_site_main_column1_font1">수다면 소개</h1>
+                                    <h1 class="intro_site_main_column1_font1"><img th:src="@{/img/icon/sudamyeon.png}">수다면</h1>
                                     <p class="intro_site_main_column1_font2">수다면은 다양한 고객님들의</p>
                                     <p class="intro_site_main_column1_font3">이야기들을 담아 제공하는 정보 플랫폼입니다</p>
+                                    <p class="intro_site_main_column1_font4">수다면은 언제 어디서나 손쉽게 즐길 수 있는 라면을 통하여</p>
+                                    <p class="intro_site_main_column1_font4_1">라면을 좋아하는 사람들과 함께</p>
+                                    <p class="intro_site_main_column1_font4_2">다양한 라면 종류에 대해 공유할 수 있습니다</p>                                    
                                 </div>
                             </div>
                         </div>
+                        <!-- intro_site_title.END -->
+                        <!-- intro_site_image1 -->
+                        <div class="col-12">
+                            <div class="row intro_site_main_column2">
+                                <div class="col-6">
+                                    <div class="intro_site_main_column2_1">
+                                        <img th:src="@{/img/intro/intro_img4.png}" alt="intro_img2">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="intro_site_main_column2_2">
+                                        <p class="intro_site_main_column2_2_font1">라면 리뷰<i class="fa-regular fa-pen-to-square"></i></p>                                        
+                                        <p class="intro_site_main_column2_2_font2">다양한 라면 종류에 대한 리뷰와 평가를 공유하세요</p>
+                                        <p class="intro_site_main_column2_2_font3">각양각색의 입맛 만큼이나 다양한 종류에 라면들을 통해</p>
+                                        <p class="intro_site_main_column2_2_font4">접했던 경험들을 이야기 해주세요</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- intro_site_image1.END -->
+                        <!-- intro_site_image2 -->
+                        <div class="col-12">
+                            <div class="row intro_site_main_column3">
+                                <div class="col-6">
+                                    <div class="intro_site_main_column3_1">
+                                        <p class="intro_site_main_column3_1_font1">라면을 더 즐겁게<i class="fa-regular fa-face-smile"></i></p>                                        
+                                        <p class="intro_site_main_column3_1_font2">간편하면서도 손쉽게 접할 수 있는 라면</p>
+                                        <p class="intro_site_main_column3_1_font3">라면을 먹으면서 있었던 다양한 경험을 공유하며</p>
+                                        <p class="intro_site_main_column3_1_font4">또 다른 추억을 만들 수 있습니다</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="intro_site_main_column3_2">
+                                        <img th:src="@{/img/intro/intro_img1.png}" alt="intro_img1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- intro_site_image2.END -->
+                        <!-- intro_site_image3 -->
+                        <div class="col-12">
+                            <div class="row intro_site_main_column4">
+                                <div class="col-6">
+                                    <div class="intro_site_main_column4_1">
+                                        <img th:src="@{/img/intro/intro_img5.png}" alt="intro_img1">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="intro_site_main_column4_2">
+                                        <p class="intro_site_main_column4_2_font1">새로운 추억<i class="fa-regular fa-comment"></i></p>                                        
+                                        <p class="intro_site_main_column4_2_font2">간편하면서도 손쉽게 접할 수 있는 라면</p>
+                                        <p class="intro_site_main_column4_2_font3">라면을 먹으면서 있었던 다양한 경험을 공유하며</p>
+                                        <p class="intro_site_main_column4_2_font4">또 다른 추억을 만들어 보세요</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- intro_site_image3.END -->
+                        <!-- intro_site_image4 -->
+                        <div class="col-12">
+                            <div class="row intro_site_main_column5">
+                                <div class="col-6">
+                                    <div class="intro_site_main_column5_1">
+                                        <p class="intro_site_main_column5_1_font1">나만의 레시피<i class="fa-solid fa-book"></i></p>                                        
+                                        <p class="intro_site_main_column5_1_font2">내가 좋아하는 라면의 다양한 레시피들</p>
+                                        <p class="intro_site_main_column5_1_font3">나만의 레시피들을 공유하며</p>
+                                        <p class="intro_site_main_column5_1_font4">색다른 조합으로 라면을 즐겨보세요</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="intro_site_main_column5_2">
+                                        <img th:src="@{/img/intro/intro_img2.png}" alt="intro_img1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- intro_site_image4.END -->
+                        <!-- intro_site_image5 -->
+                        <div class="col-12">
+                            <div class="row intro_site_main_column6">
+                                <div class="col-6">
+                                    <div class="intro_site_main_column6_1">
+                                        <img th:src="@{/img/intro/intro_img3.png}" alt="intro_img1">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="intro_site_main_column6_2">
+                                        <p class="intro_site_main_column6_2_font1">라면을 사랑한다면<i class="fa-regular fa-heart"></i></p>                                        
+                                        <p class="intro_site_main_column6_2_font2">라면을 누구보다 사랑하는 사람들과</p>
+                                        <p class="intro_site_main_column6_2_font3">교류하며 나만의 정보를 공유하며</p>
+                                        <p class="intro_site_main_column6_2_font4">더 넓은 라면의 세계를 탐험해보세요</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- intro_site_image5.END -->
+                        <!-- intro_site_final -->
+                        <div class="col-12">
+                            <div class="row intro_site_final">
+                                <div class="col-12">
+                                    <p class="intro_site_final_font1">2023년 처음 청립한 수다면은 다양한 고객 서비스를 통하여</p>
+                                    <p class="intro_site_final_font2">다양한 즐거움을 드릴 수 있도록 노력하겠습니다</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- intro_site_final.END -->
                     <!-- intro_site.END -->
                 </div>
             </div>
