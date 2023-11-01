@@ -180,7 +180,7 @@ a {
 /* ramyeon review main column2 */
 .ramyeon_review_main_column2 {
     width: 615px;
-    height: 430px;
+    height: 435px;
     border: 1px solid #000;
     margin-left: -2px;
     margin-bottom: 30px;
@@ -252,7 +252,7 @@ a {
 }
 .ramyeon_review_main_column2_hot_topic_column1 {
     width: 563px;
-    height: 186px;
+    height: 190px;
     border-bottom: 1px dashed #aaa;
 }
 .ramyeon_review_main_column2_hot_topic_column1_list {
@@ -283,7 +283,7 @@ a {
 .ramyeon_review_main_column2_hot_topic_column1_content {
     width: 360px;
     height: 140px;
-    margin-top: 10px;
+    margin-top: 25px;
     margin-left: 20px;    
 }
 .ramyeon_review_main_column2_hot_topic_column1_content_font1,
@@ -342,3 +342,13 @@ a {
     font-size: 14px;
     margin-bottom: 7px;
 }
+.card-title {
+    font-size: 13px;   
+    margin-top: -24px;
+    margin-left: -19px;
+    margin-bottom: 8px;        
+}
+.card-title-review-box {        
+    width: 350px;
+    height: 25px;
+} 

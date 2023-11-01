@@ -22,6 +22,59 @@
     <!-- MAIN CSS -->
     <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
     
+    <style>
+    a {
+        text-decoration-line: none !important;
+        color: #000;
+    }
+    .bordered {
+        border: 1px solid #000;
+        padding: 10px;
+    }
+    @font-face {
+        font-family: 'yg-jalnan';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    /* main_page */
+    .main_page {
+        margin: 25px 0px 25px 0px;
+    }
+    .intro_site {
+        width: 1068px;
+        height: 800px;
+        border: 1px solid #000;
+        margin-left: 35px;        
+    }
+    .intro_site_main {
+        width: 1068px;
+        height: 200px;        
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .intro_site_main_column1 {
+        width: 1068px;      
+        text-align: center;
+    }
+    .intro_site_main_column1_font1 {
+        font-size: 45px;
+        font-family: 'yg-jalnan';        
+        margin-bottom: 35px;
+    }
+    .intro_site_main_column1_font2 {
+        font-size: 18px;
+        font-weight: 800;
+    }
+    .intro_site_main_column1_font3 {
+        font-size: 18px;
+        margin-top: -10px;
+        font-weight: 800;
+    }
+    </style>
 </head>
 
 <body>
@@ -29,263 +82,19 @@
     <div th:replace="fragments/header :: header"></div> 
     <div class="container">        
         <div class="row main_page">
-            <div class="col-3">                
-                <div class="row banner">
-                    <!-- 라면 리뷰 배너 시작 -->
-                    <div class="banner_review">
-                        <div class="col-12 bordered">
-                            <div class="banner_main">
-                                <a href="#" class="banner_main_font">New Review</a>
-                            </div>
-                            <div class="row banner_sub">
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[짜파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">일요일은 내가 요리사!</a><br/>
-                                                <p class="banner_sub_review_main_date">15분 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[너구리]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">오동통한 면발 너구리..</a><br/>
-                                                <p class="banner_sub_review_main_date">1시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[스파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">최고의 가성비 인정</a><br/>
-                                                <p class="banner_sub_review_main_date">3시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[진라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">역시 매운맛이 진리다</a><br/>
-                                                <p class="banner_sub_review_main_date">4시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[신라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">농심을 먹여살림</a><br/>
-                                                <p class="banner_sub_review_main_date">6시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img_final">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main_final">
-                                                <a href="#" class="banner_sub_review_main_title">[안성탕면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">우리 아빠가 좋아하는 맛</a><br/>
-                                                <p class="banner_sub_review_main_date">10시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="col-12">
+                <div class="row intro_site">
+                    <!-- intro_site -->
+                        <div class="col-12">
+                            <div class="row intro_site_main">
+                                <div class="intro_site_main_column1">
+                                    <h1 class="intro_site_main_column1_font1">수다면 소개</h1>
+                                    <p class="intro_site_main_column1_font2">수다면은 다양한 고객님들의</p>
+                                    <p class="intro_site_main_column1_font3">이야기들을 담아 제공하는 정보 플랫폼입니다</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- 라면 리뷰 배너 끝 -->
-                    
-                    <!-- 라면 커뮤니티 배너 시작-->
-                    <div class="banner_community">
-                        <div class="col-12 bordered">
-                            <div class="banner_main">
-                                <a href="#" class="banner_main_font">Community</a>
-                            </div>
-                            <div class="row banner_sub">
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">라면에 대한 진실..</a>
-                                                <p class="banner_sub_community_main_date">30분 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">매운라면 잘 먹는 법</a>
-                                                <p class="banner_sub_community_main_date">45분 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">짜파게티에 관한 견해</a>
-                                                <p class="banner_sub_community_main_date">1시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">신라면 개인적인 생각</a>
-                                                <p class="banner_sub_community_main_date">2시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">라면과 계란의 조화</a>
-                                                <p class="banner_sub_community_main_date">5시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community_final">
-                                                <a href="#" class="banner_sub_community_main_title">라면 공장 방문 후기</a>
-                                                <p class="banner_sub_community_main_date">5시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 라면 커뮤니티 배너 끝 -->
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="row sudamyeon_community">
-                    <!-- 라면 메인 화면 -->
-                    <div class="col-12">
-                        <div>
-                            
-                        </div>
-                    </div>
-                    <!-- 라면 메인 화면 끝 -->
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="row banner2">
-                    <!-- 라면 뉴스 베너 -->
-                    <div class="banner_news">
-                        <div class="col-12 bordered">
-                            <div class="banner_main">
-                                <a href="#" class="banner_main_font">News</a>
-                            </div>
-                            <div class="row banner_sub">
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">한글</a>
-                                            <p class="banner_sub_news_main_date">테스트</p>
-                                            </div>             
-                                        </div>                           
-                                    </div>
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">라면에 대한 진실..</a>
-                                            <p class="banner_sub_news_main_date">30분 전</p>
-                                            </div>             
-                                        </div>                           
-                                    </div>
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">한글</a>
-                                            <p class="banner_sub_news_main_date">두글</p>
-                                            </div>             
-                                        </div>                           
-                                    </div>
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">영어는</a>
-                                            <p class="banner_sub_news_main_date">같은 폰트인데도</p>
-                                            </div>             
-                                        </div>                           
-                                    </div>
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">글자 크기가</a>
-                                            <p class="banner_sub_news_main_date">다르게 나옴</p>
-                                            </div>             
-                                        </div>                           
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_news_final">
-                                            <a href="#" class="banner_sub_news_main_title">news.content</a>
-                                            <p class="banner_sub_news_main_date">date.time</p>
-                                            </div>         
-                                        </div>                               
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 라면 뉴스 베너 끝 -->
+                    <!-- intro_site.END -->
                 </div>
             </div>
         </div>
