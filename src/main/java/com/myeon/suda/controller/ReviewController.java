@@ -1,6 +1,7 @@
 package com.myeon.suda.controller;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +30,7 @@ public class ReviewController {
    @GetMapping("/pages/{mno}/{page}")
     public ResponseEntity<ReviewPageDTO> get_list_page(@PathVariable("page")int page, @PathVariable("mno") Long mno){
         PageRequestDTO requestDTO = new PageRequestDTO(page, 4);
-        Pageable pageable = requestDTO.get_pageable();
+        Pageable pageable = requestDTO.get_pageable(Sort.by("rno").descending());
         return new ResponseEntity<ReviewPageDTO>(review_service.get_review_list_page(mno, pageable), HttpStatus.OK);
     }
 
