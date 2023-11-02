@@ -246,198 +246,200 @@
                 <div class="row main_ramyeon_review">
                     <div class="col-12">
                         <!-- 카테고리 시작 -->
-                        <div class="row main_ramyeon_review_category">
-                            <div class="col-12">
-                                <div class="main_ramyeon_review_category_title">
-                                    <p>카테고리</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row main_ramyeon_review_brand">
-                            <div class="col-12">
-                                <div class="row main_ramyeon_review_brand_column">
-                                    <div class="col-2">
-                                        <div class="main_ramyeon_review_category_title">
-                                            <p>제조사</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="nongshim">
-                                                <span class="filter_text">농심</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="harim">
-                                                <span class="filter_text">하림</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="ottogi">
-                                                <span class="filter_text">오뚜기</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="emart">
-                                                <span class="filter_text">이마트</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="samyang">
-                                                <span class="filter_text">삼양식품</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="vipon">
-                                                <span class="filter_text">비폰</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="paldo">
-                                                <span class="filter_text">팔도</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="homeplus">
-                                                <span class="filter_text">홈플러스</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="pulmuone">
-                                                <span class="filter_text">풀무원</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="thebornkorea">
-                                                <span class="filter_text">더본코리아</span>
-                                            </label>
-                                        </div>
+                        <form th:action="@{/members/list}">
+                            <div class="row main_ramyeon_review_category">
+                                <div class="col-12">
+                                    <div class="main_ramyeon_review_category_title">
+                                        <p>카테고리</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row main_ramyeon_review_cooking">
-                            <div class="col-12">
-                                <div class="row main_ramyeon_review_brand_column">
-                                    <div class="col-2">
-                                        <div class="main_ramyeon_review_category_title">
-                                            <p>조리 방법</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="regular_ramen">
-                                                <span class="filter_text">일반라면</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="udon">
-                                                <span class="filter_text">우동</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="stir_fried_ramen">
-                                                <span class="filter_text">볶음라면</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="korean_hot_noodle">
-                                                <span class="filter_text">국수</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="jjajang_ramen">
-                                                <span class="filter_text">짜장라면</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="cold_noodle">
-                                                <span class="filter_text">냉면</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="bibim_ramen">
-                                                <span class="filter_text">비빔라면</span>
-                                            </label>
-                                        </div>
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="beef_bone_ramen">
-                                                <span class="filter_text">사골라면</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="rice_noodles">
-                                                <span class="filter_text">쌀국수</span>
-                                            </label>
-                                        </div>
+                            <div class="row main_ramyeon_review_brand">
+                                <div class="col-12">
+                                        <div class="row main_ramyeon_review_brand_column">
+                                            <div class="col-2">
+                                                <div class="main_ramyeon_review_category_title">
+                                                    <p>제조사</p>
+                                                    <button type="submit" >검?색</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="nongshim" name="brand" value="농심">
+                                                        <span class="filter_text">농심</span>
+                                                    </label>
+                                                </div>
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="harim" name="brand" value="하림">
+                                                        <span class="filter_text">하림</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="ottogi" name="brand" value="오뚜기">
+                                                        <span class="filter_text">오뚜기</span>
+                                                    </label>
+                                                </div>
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="emart" name="brand" value="이마트">
+                                                        <span class="filter_text">이마트</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="samyang" name="brand" value="삼양">
+                                                        <span class="filter_text">삼양</span>
+                                                    </label>
+                                                </div>
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="vipon" name="brand" value="비폰">
+                                                        <span class="filter_text">비폰</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="paldo" name="brand" value="팔도">
+                                                        <span class="filter_text">팔도</span>
+                                                    </label>
+                                                </div>
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="homeplus" name="brand" value="홈플러스">
+                                                        <span class="filter_text">홈플러스</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="pulmuone" name="brand" value="풀무원">
+                                                        <span class="filter_text">풀무원</span>
+                                                    </label>
+                                                </div>
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="thebornkorea" name="brand" value="더본코리아">
+                                                        <span class="filter_text">더본코리아</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>                                    
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row main_ramyeon_review_ramyeon_category">
-                            <div class="col-12">
-                                <div class="row main_ramyeon_review_brand_column">
-                                    <div class="col-2">
-                                        <div class="main_ramyeon_review_category_title">
-                                            <p>분류</p>
+                                <div class="row main_ramyeon_review_cooking">
+                                    <div class="col-12">
+                                        <div class="row main_ramyeon_review_brand_column">
+                                            <div class="col-2">
+                                                <div class="main_ramyeon_review_category_title">
+                                                    <p>조리 방법</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="filter_label">
+                                                    <label class="filter_font">
+                                                        <input type="checkbox" class="filter" data-filter="regular_ramen" name="cooking" value="일반라면">
+                                                    <span class="filter_text">일반라면</span>
+                                                </label>
+                                            </div>
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="udon" name="cooking" value="우동">
+                                                    <span class="filter_text">우동</span>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label_final">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="pack_of_ramen">
-                                                <span class="filter_text_final">봉지라면</span>
-                                            </label>
+                                        <div class="col-2">
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="stir_fried_ramen" name="cooking" value="볶음라면">
+                                                    <span class="filter_text">볶음라면</span>
+                                                </label>
+                                            </div>
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="korean_hot_noodle" name="cooking" value="국수">
+                                                    <span class="filter_text">국수</span>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="filter_label_final">
-                                            <label class="filter_font">
-                                                <input type="checkbox" class="filter" data-filter="cup_ramen">
-                                                <span class="filter_text_final">컵라면</span>
-                                            </label>
+                                        <div class="col-2">
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="jjajang_ramen" name="cooking" value="짜장라면">
+                                                    <span class="filter_text">짜장라면</span>
+                                                </label>
+                                            </div>
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="cold_noodle" name="cooking" value="냉면">
+                                                    <span class="filter_text">냉면</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="bibim_ramen" name="cooking" value="비빔라면">
+                                                    <span class="filter_text">비빔라면</span>
+                                                </label>
+                                            </div>
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="beef_bone_ramen" name="cooking" value="사골라면">
+                                                    <span class="filter_text">사골라면</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="filter_label">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="rice_noodles" name="cooking" value="쌀국수">
+                                                    <span class="filter_text">쌀국수</span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- 카테고리 끝 -->
-                        
+                            <div class="row main_ramyeon_review_ramyeon_category">
+                                <div class="col-12">
+                                    <div class="row main_ramyeon_review_brand_column">
+                                        <div class="col-2">
+                                            <div class="main_ramyeon_review_category_title">
+                                                <p>분류</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="filter_label_final">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="pack_of_ramen" name="category" value="봉지라면">
+                                                    <span class="filter_text_final">봉지라면</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="filter_label_final">
+                                                <label class="filter_font">
+                                                    <input type="checkbox" class="filter" data-filter="cup_ramen" name="category" value="컵라면">
+                                                    <span class="filter_text_final">컵라면</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- 카테고리 끝 -->                        
                     </div>
                 </div>
 
@@ -470,15 +472,15 @@
                 <!-- 페이징 -->
                 <ul class="pagination justify-content-center align-items-center">
                     <li class="page-item" th:if="${result.prev}">
-                        <a class="page-link" th:href="@{/members/list(page= ${result.start -1},size = ${result.size})}" tabindex="-1">Previous</a>
+                        <a class="page-link" th:href="@{/members/list(page= ${result.start -1},size = ${result.size}, keyword = ${pageRequestDTO.keyword}, brand = ${pageRequestDTO.brand}, cooking = ${pageRequestDTO.cooking}, category = ${pageRequestDTO.category})}" tabindex="-1">Previous</a>
                     </li>
                     <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.page_list}">
-                        <a class="page-link main_ramyeon_review_list_paging_btn" th:href="@{/members/list(page = ${page}, size = ${result.size})}">
+                        <a class="page-link main_ramyeon_review_list_paging_btn" th:href="@{/members/list(page = ${page}, size = ${result.size}, keyword = ${pageRequestDTO.keyword}, brand = ${pageRequestDTO.brand}, cooking = ${pageRequestDTO.cooking}, category = ${pageRequestDTO.category})}">
                             [[${page}]]
                         </a>
                     </li>
                     <li class="page-item" th:if="${result.next}">
-                        <a class="page-link" th:href="@{/members/list(page= ${result.end + 1}, size = ${result.size})}">Next</a>
+                        <a class="page-link" th:href="@{/members/list(page= ${result.end + 1}, size = ${result.size}, keyword = ${pageRequestDTO.keyword}, brand = ${pageRequestDTO.brand}, cooking = ${pageRequestDTO.cooking}, category = ${pageRequestDTO.category})}">Next</a>
                     </li>
                 </ul>
                 <!-- 페이징 end -->

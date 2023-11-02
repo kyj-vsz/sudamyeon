@@ -6,6 +6,10 @@ a {
     border: 1px solid #000;
     padding: 10px;
 }
+.bordered1 {
+    border: 1px solid #000;
+    padding: 10px 10px 0px 10px;
+}
 /* main_page */
 .main_page {
     margin: 25px 0px 25px 0px;
@@ -24,8 +28,7 @@ a {
 /* banner_main */
 .banner_main {
     text-align: center;
-    border-bottom: 0.5px dashed #999;
-    margin: -2px 0px 10px 0px;
+    margin: -2px 0px 0px 0px;
     padding-bottom: 7px;
 }
 .banner_review {
@@ -38,7 +41,7 @@ a {
     margin-top: 570px;
     position: absolute;
 }
-.banner_news {
+.banner_brand {
     margin-left: 0px;
     margin-top: 0px;
     position: absolute;
@@ -49,35 +52,55 @@ a {
     height: 100%;
     margin-left: -6px;
 }
-.banner_sub_line {
+.banner_sub_line1 {
     width: 160px;
-    border-bottom: 0.5px dashed #999;
-    padding-bottom: 10px;
+    height: 100px;
+    border-top: 0.5px dashed #999;
     margin-left: -10px;
-    margin-bottom: 10px;
+    padding-top: 15px;
+}
+.banner_sub_line3 {
+    width: 160px;
+    height: 80px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    padding-top: 12px;
 }
 .banner_sub_review_img {
-    width: 70px;
+    width: 71px;
     height: 62px;
     border: 0.5px solid #000;
     border-radius: 5px;
-    margin-left: -10px;
+    margin-left: -11px;
+    margin-top: 5px;
 }
-.banner_sub_review_main {
+.banner_sub_review_img a img {
+    width: 65px;
+    height: 100%;
+    margin-left: 2px;
+}
+.banner_sub_review_main {    
     margin-top: -7px;
+    margin-left: -4px;
 }
 .banner_sub_review_main a {
     display: inline-block;
     font-size: 10px;
     line-height: -5px;
 }
-.banner_sub_review_main p {
-    font-size: 10px;
-    margin-top: -2px;
-    margin-bottom: -0px;
+.data-wrapper1 {
+    position: relative;
+    top: 1px;
 }
-.banner_sub_review_main_content {
-    letter-spacing: -0.5px;
+.data-wrapper2 {
+    width: 65px;
+    height: 30px;
+    margin-top: 3px;    
+}
+.data-wrapper4 {
+    width: 65px;
+    font-size: 10px;
+    margin-top: 3px;
 }
 .banner_sub_review_img_final {
     width: 70px;
@@ -86,20 +109,6 @@ a {
     border-radius: 5px;
     margin-left: -10px;
     margin-left: -5px;
-}
-.banner_sub_review_main_final {
-    margin-top: -7px;
-    margin-left: -6.5px;
-}
-.banner_sub_review_main_final a {
-    display: inline-block;
-    font-size: 10px;
-    line-height: -5px;
-}
-.banner_sub_review_main_final p {
-    font-size: 10px;
-    margin-top: -2px;
-    margin-bottom: -0px;
 }
 /* community */
 .banner_sub_community {
@@ -123,21 +132,19 @@ a {
 /* banner news */
 .banner_sub_news {
     display: inline-block;
-    width: 100px;
-    font-size: 10px;
-    margin-top: 5px;
-    margin-left: -2px;
-}
-.banner_sub_news_main_date {
+    text-align: center;
+    width: 160px;
+    height: 60px;
+    font-size: 12px;
     margin-top: 2px;
-    margin-bottom: 5px;
+    margin-left: -14px;    
 }
-.banner_sub_news_final {
-    display: inline-block;
-    width: 100px;
-    font-size: 10px;
-    margin-top: 5px;
-    margin-left: 2px;
+.banner_sub_news_main_icon {
+    font-size: 22px;
+    margin-top: 4px;    
+}
+.banner_sub_news_main_icon a i {
+    margin-right: 2px;
 }
 /* ramyeon review main */
 .ramyeon_review_main {
@@ -264,7 +271,7 @@ a {
     width: 120px;
     height: 120px;
     margin-top: 32px;
-    margin-left: 32px;
+    margin-left: 25px;
 }
 .ramyeon_review_main_column2_hot_topic_column1_title {
     width: 35px;
@@ -273,7 +280,7 @@ a {
     color: #fff;
     margin-top: 25px;
     margin-bottom: 22px;
-    margin-left: 20px;
+    margin-left: 6px;
     text-align: center;
 }
 .ramyeon_review_main_column2_hot_topic_column1_title_font {
@@ -284,7 +291,7 @@ a {
     width: 360px;
     height: 140px;
     margin-top: 25px;
-    margin-left: 20px;    
+    margin-left: 6px;    
 }
 .ramyeon_review_main_column2_hot_topic_column1_content_font1,
 .ramyeon_review_main_column2_hot_topic_column1_content_font2,
@@ -314,7 +321,7 @@ a {
     width: 120px;
     height: 120px;
     margin-top: 32px;
-    margin-left: 32px;
+    margin-left: 25px;
 }
 .ramyeon_review_main_column3_new_ramyeon_column1_title {
     width: 40px;
@@ -323,7 +330,7 @@ a {
     color: #fff;
     margin-top: 25px;
     margin-bottom: 22px;
-    margin-left: 20px;
+    margin-left: 6px;
     text-align: center;
 }
 .ramyeon_review_main_column3_new_ramyeon_column1_title_font {
@@ -334,7 +341,7 @@ a {
     width: 360px;
     height: 140px;
     margin-top: 20px;
-    margin-left: 20px;    
+    margin-left: 6px;    
 }
 .ramyeon_review_main_column3_new_ramyeon_column1_content_font1,
 .ramyeon_review_main_column3_new_ramyeon_column1_content_font2,
@@ -349,6 +356,6 @@ a {
     margin-bottom: 8px;        
 }
 .card-title-review-box {        
-    width: 350px;
+    width: 420px;
     height: 25px;
 } 
