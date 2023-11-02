@@ -18,12 +18,16 @@ public interface RamyeonService {
     Long register(RamyeonDTO ramyeonDTO);
 
     PageResultDTO<RamyeonDTO, Object[]> get_list_page(PageRequestDTO requestDTO);
+
+    PageResultDTO<RamyeonDTO, Object[]> get_list_check(PageRequestDTO requestDTO);
     
     PageResultDTO<RamyeonDTO, Object[]> get_main_page(PageRequestDTO requestDTO);
 
     PageResultDTO<RamyeonDTO, Object[]> get_main_page_best(PageRequestDTO requestDTO);  
 
-    PageResultDTO<RamyeonDTO, Object[]> get_main_page_hot(PageRequestDTO requestDTO);    
+    PageResultDTO<RamyeonDTO, Object[]> get_main_page_hot(PageRequestDTO requestDTO);
+    
+    PageResultDTO<RamyeonDTO, Object[]> get_main_page_new_review(PageRequestDTO requestDTO);
 
     RamyeonDTO get_ramyeon(Long mno);
 

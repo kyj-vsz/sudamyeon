@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +48,7 @@ public class RamyeonServiceImpl implements RamyeonService {
     @Override
     public PageResultDTO<RamyeonDTO, Object[]> get_list_page(PageRequestDTO requestDTO){
         Pageable pageable = requestDTO.get_pageable(Sort.by("mno").descending());
-        Page<Object[]> result = ramyeon_repository.get_list(pageable);
+        Page<Object[]> result = ramyeon_repository.get_list(pageable, requestDTO.getKeyword());
         Function<Object[], RamyeonDTO> fn = (arr -> to_dto(
             (Ramyeon)arr[0], 
             (List<Image>)(Arrays.asList((Image)arr[1])),
@@ -58,7 +57,25 @@ public class RamyeonServiceImpl implements RamyeonService {
             ));
         return new PageResultDTO<>(result, fn);
     }
-    
+
+    @Override
+    public PageResultDTO<RamyeonDTO, Object[]> get_list_check(PageRequestDTO requestDTO){
+        log.info("!service");
+        Pageable pageable = requestDTO.get_pageable(Sort.by("mno").descending());
+        Page<Object[]> result = ramyeon_repository.search_page(
+                requestDTO,
+                pageable
+            );
+        log.info("brand value : " + requestDTO.getBrand());
+        Function<Object[], RamyeonDTO> fn = (arr -> to_dto(
+            (Ramyeon)arr[0], 
+            (List<Image>)(Arrays.asList((Image)arr[1])),
+            (Double)arr[2],
+            (Long)arr[3]
+            ));
+        return new PageResultDTO<>(result, fn);
+    }
+
     @Override
     public RamyeonDTO get_ramyeon(Long mno) {
         List<Object[]> result = ramyeon_repository.get_ramyeon_with_all(mno);
@@ -140,6 +157,22 @@ public class RamyeonServiceImpl implements RamyeonService {
             ));
         return new PageResultDTO<>(result, fn);
     }
+
+    @Override
+    public PageResultDTO<RamyeonDTO, Object[]> get_main_page_new_review(PageRequestDTO requestDTO) {
+        Pageable pageable = requestDTO.get_pageable();
+        Page<Object[]> result = ramyeon_repository.get_main_page_new_review(pageable);
+        Function<Object[], RamyeonDTO> fn = (arr -> to_dto(
+            (Ramyeon)arr[0], 
+            (List<Image>)(Arrays.asList((Image)arr[1])),
+            (Double)arr[2],
+            (Long)arr[3],
+            (List<Review>)(Arrays.asList((Review)arr[4]))
+            ));
+        return new PageResultDTO<>(result, fn);
+    }
+
+
 
     
 }
