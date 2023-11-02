@@ -1,5 +1,7 @@
 package com.myeon.suda.dto;
 
+import java.util.List;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,6 +21,12 @@ public class PageRequestDTO {
     private String type;
 
     private String keyword;
+
+    private List<String> brand;
+
+    private List<String> cooking;
+    
+    private List<String> category;
 
     public PageRequestDTO(){
         this.page = 1;

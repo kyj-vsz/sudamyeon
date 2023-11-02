@@ -36,11 +36,12 @@
                     gname.focus();
                     return;
                 }
+
                 if(!file_upload.val() && file_upload.val()==""){
                     alert("파일 업로드는 필수입니다!");
                     file_upload.focus();
                     return;
-                }            
+                }
                                 
                 var str = "";
                 $(".image_space li").each(function(i,obj){
