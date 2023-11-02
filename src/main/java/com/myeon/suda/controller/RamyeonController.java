@@ -27,8 +27,13 @@ public class RamyeonController {
 
     private final RamyeonService ramyeon_service;
 
-    @GetMapping({"/signup","/login","/register","/intro"})
+    @GetMapping({"/signup","/login"})
     public void signup(){}
+
+    @GetMapping("/register")
+    public void register(Model model){
+        model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));
+    }
 
     @PostMapping("/signup")
     public String processSignup(MemberDTO memberDTO) {
@@ -38,7 +43,7 @@ public class RamyeonController {
     }
 
     @PostMapping("/register")
-    public String register(RamyeonDTO ramyeonDTO, RedirectAttributes redirectAttributes){
+    public String register(RamyeonDTO ramyeonDTO, RedirectAttributes redirectAttributes, PageRequestDTO pageRequestDTO, Model model){
         log.info("ramyeon-data :"+ ramyeonDTO);
         Long mno = ramyeon_service.register(ramyeonDTO);
         redirectAttributes.addFlashAttribute("msg", mno);
@@ -47,16 +52,27 @@ public class RamyeonController {
     
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
-        if(pageRequestDTO.getKeyword() == null){
+        log.info("ddddddd");
+        model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));    
+        
+        if(pageRequestDTO.getKeyword() == null) {
             pageRequestDTO.setKeyword("");
+            log.info("kkk :"+pageRequestDTO.getKeyword());
         }
-        model.addAttribute("result", ramyeon_service.get_list_page(pageRequestDTO));
+        
+        if(pageRequestDTO.getKeyword() != ""){
+            model.addAttribute("result", ramyeon_service.get_list_page(pageRequestDTO));
+        }
+        else{
+            model.addAttribute("result", ramyeon_service.get_list_check(pageRequestDTO));
+        }     
     }
 
     @GetMapping({"/read","/modify"})
     public void read(long mno, @ModelAttribute("page_requestDTO")PageRequestDTO page_requestDTO, Model model){
         RamyeonDTO ramyeonDTO = ramyeon_service.get_ramyeon(mno);
         model.addAttribute("dto", ramyeonDTO);
+        model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));
     }
 
     @PostMapping("/modify")

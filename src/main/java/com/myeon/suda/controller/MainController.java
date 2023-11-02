@@ -25,6 +25,8 @@ public class MainController {
         model.addAttribute("dto2", ramyeon_service.get_main_page_hot(new PageRequestDTO(1,2)));
 
         model.addAttribute("dto3", ramyeon_service.get_main_page(new PageRequestDTO(1,2)));
+
+        model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));
         
         return "main";
 

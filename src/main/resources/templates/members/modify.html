@@ -32,16 +32,19 @@
         var mno = [[${dto.mno}]];
         $("button[type='submit']").on("click",function(e){
             e.preventDefault();
+
             if(!gname.val()){
                 alert("제목은 필수입니다!");
                 gname.focus();
                 return;
             }
-            if(!file_upload.val() && file_upload.val()==""){
+
+            if(!file_upload.val() && file_upload.val()=="" ){
                 alert("파일 업로드는 필수입니다!");
                 file_upload.focus();
                 return;
-            }                           
+            }
+
             var str = "";
             $(".image_space li").each(function(i,obj){
                 var target = $(obj);
@@ -174,6 +177,43 @@
     function reset(){
         document.getElementById("form").reset();
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+            // 페이지의 DOM이 로드된 후에 실행할 코드
+
+            // 데이터가 올라온 시간을 가져와서 현재 시간과 비교하여 시간 차이 표시
+            function calculateTimeDifference() {
+                const dataTimeSpans = document.querySelectorAll(".data-wrapper3");
+
+                dataTimeSpans.forEach(function(dataTimeSpan) {
+                    const dataTimeText = dataTimeSpan.innerText;
+                    const dataTime = new Date(dataTimeText); // 데이터가 올라온 시간을 JavaScript Date 객체로 변환
+                    const currentTime = new Date();
+                    const timeDifference = Math.floor((currentTime - dataTime) / 1000); // 시간 차이를 초 단위로 변환
+
+                    // 시간 차이를 시간, 분, 초로 변환하여 출력
+                    const hours = Math.floor(timeDifference / 3600);
+                    const minutes = Math.floor((timeDifference % 3600) / 60);
+                    const seconds = timeDifference % 60;
+
+                    let timeDifferenceText = "";
+                    if (hours > 0) {
+                        timeDifferenceText = `${hours}시간 전`;
+                    } else if (minutes > 0) {
+                        timeDifferenceText = `${minutes}분 전`;
+                    } else {
+                        timeDifferenceText = `${seconds}초 전`;
+                    }
+
+                    // 시간 차이를 출력
+                    dataTimeSpan.innerText = timeDifferenceText;
+                });
+            }
+
+            // 시간 차이 계산 함수 호출
+            calculateTimeDifference();
+        });
+
   </script>
 </head>
 <body>
@@ -182,113 +222,43 @@
       <div class="row main_page">
           <div class="col-3">                
               <div class="row banner">
-                  <!-- 라면 리뷰 배너 시작 -->
-                  <div class="banner_review">
-                      <div class="col-12 bordered">
-                          <div class="banner_main">
-                              <a href="#" class="banner_main_font">New Review</a>
-                          </div>
-                          <div class="row banner_sub">
-                              <div class="col-12">
-                                  <div class="row banner_sub_line">
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_img">
-                                              <a href="#">img</a>
-                                          </div>
-                                      </div>
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_main">
-                                              <a href="#" class="banner_sub_review_main_title">[짜파게티]</a><br/>
-                                              <a href="#" class="banner_sub_review_main_content">일요일은 내가 요리사!</a><br/>
-                                              <p class="banner_sub_review_main_date">15분 전</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-12">
-                                  <div class="row banner_sub_line">
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_img">
-                                              <a href="#">img</a>
-                                          </div>
-                                      </div>
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_main">
-                                              <a href="#" class="banner_sub_review_main_title">[너구리]</a><br/>
-                                              <a href="#" class="banner_sub_review_main_content">오동통한 면발 너구리..</a><br/>
-                                              <p class="banner_sub_review_main_date">1시간 전</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-12">
-                                  <div class="row banner_sub_line">
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_img">
-                                              <a href="#">img</a>
-                                          </div>
-                                      </div>
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_main">
-                                              <a href="#" class="banner_sub_review_main_title">[스파게티]</a><br/>
-                                              <a href="#" class="banner_sub_review_main_content">최고의 가설비 인정</a><br/>
-                                              <p class="banner_sub_review_main_date">3시간 전</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-12">
-                                  <div class="row banner_sub_line">
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_img">
-                                              <a href="#">img</a>
-                                          </div>
-                                      </div>
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_main">
-                                              <a href="#" class="banner_sub_review_main_title">[진라면]</a><br/>
-                                              <a href="#" class="banner_sub_review_main_content">역시 매운맛이 진리다</a><br/>
-                                              <p class="banner_sub_review_main_date">4시간 전</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-12">
-                                  <div class="row banner_sub_line">
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_img">
-                                              <a href="#">img</a>
-                                          </div>
-                                      </div>
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_main">
-                                              <a href="#" class="banner_sub_review_main_title">[신라면]</a><br/>
-                                              <a href="#" class="banner_sub_review_main_content">농심을 먹여살림</a><br/>
-                                              <p class="banner_sub_review_main_date">6시간 전</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-12">
-                                  <div class="row">
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_img_final">
-                                              <a href="#">img</a>
-                                          </div>
-                                      </div>
-                                      <div class="col-6">
-                                          <div class="banner_sub_review_main_final">
-                                              <a href="#" class="banner_sub_review_main_title">[안성탕면]</a><br/>
-                                              <a href="#" class="banner_sub_review_main_content">우리 아빠가 좋아하는 맛</a><br/>
-                                              <p class="banner_sub_review_main_date">10시간 전</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- 라면 리뷰 배너 끝 -->
+                <!-- 라면 리뷰 배너 시작 -->
+                <div class="banner_review">
+                    <div class="col-12 bordered1">
+                        <div class="banner_main">
+                            <a href="#" class="banner_main_font">New Review</a>
+                        </div>
+                        <div class="row banner_sub">
+                            <div class="col-12">
+                                <div class="row banner_sub_line1"  th:each="dto5 : ${dto5.dto_list}">
+                                    <div class="col-6">
+                                        <div class="banner_sub_review_img">
+                                            <a th:href="@{/members/read(mno=${dto5.mno})}">
+                                                <img th:src="|/display?file_name=${dto5.imageDTO_list[0].get_image_url()}|">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="banner_sub_review_main">
+                                            <div>
+                                                <a th:href="@{/members/read(mno=${dto5.mno})}">                                                        
+                                                    [ <span class="data-wrapper1" th:text="${dto5.gname}"></span> ]                                                        
+                                                </a>
+                                                <a class="data-wrapper2" th:href="@{/members/read(mno=${dto5.mno})}">
+                                                    <span th:text="${dto5.reviewDTO_list[0].review_content.length() > 10 ? dto5.reviewDTO_list[0].review_content.substring(0, 10) + '...' : dto5.reviewDTO_list[0].review_content}"></span>
+                                                </a>
+                                                <p class="data-wrapper4">
+                                                    [ <span class="data-wrapper3" th:text="${dto5.reviewDTO_list[0].moddate}"></span> ]
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                                
+                        </div>
+                    </div>
+                </div>
+                <!-- 라면 리뷰 배너 끝 -->
                   <!-- 커뮤니티 배너 시작-->
                   <div class="banner_community">
                       <div class="col-12 bordered">
