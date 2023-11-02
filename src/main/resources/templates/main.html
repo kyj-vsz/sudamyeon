@@ -16,6 +16,9 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Fontawesome -->    
+    <script src="https://kit.fontawesome.com/ac43b59d41.js" crossorigin="anonymous"></script>
+    
     <!-- header, footer css -->
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 
@@ -113,6 +116,41 @@
             }
                 get_reviews(page_number);            
         });
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지의 DOM이 로드된 후에 실행할 코드
+
+            // 데이터가 올라온 시간을 가져와서 현재 시간과 비교하여 시간 차이 표시
+            function calculateTimeDifference() {
+                const dataTimeSpans = document.querySelectorAll(".data-wrapper3");
+
+                dataTimeSpans.forEach(function(dataTimeSpan) {
+                    const dataTimeText = dataTimeSpan.innerText;
+                    const dataTime = new Date(dataTimeText); // 데이터가 올라온 시간을 JavaScript Date 객체로 변환
+                    const currentTime = new Date();
+                    const timeDifference = Math.floor((currentTime - dataTime) / 1000); // 시간 차이를 초 단위로 변환
+
+                    // 시간 차이를 시간, 분, 초로 변환하여 출력
+                    const hours = Math.floor(timeDifference / 3600);
+                    const minutes = Math.floor((timeDifference % 3600) / 60);
+                    const seconds = timeDifference % 60;
+
+                    let timeDifferenceText = "";
+                    if (hours > 0) {
+                        timeDifferenceText = `${hours}시간 전`;
+                    } else if (minutes > 0) {
+                        timeDifferenceText = `${minutes}분 전`;
+                    } else {
+                        timeDifferenceText = `${seconds}초 전`;
+                    }
+
+                    // 시간 차이를 출력
+                    dataTimeSpan.innerText = timeDifferenceText;
+                });
+            }
+
+            // 시간 차이 계산 함수 호출
+            calculateTimeDifference();
+        });
     </script>
 
 </head>
@@ -126,107 +164,37 @@
                 <div class="row banner">
                     <!-- 라면 리뷰 배너 시작 -->
                     <div class="banner_review">
-                        <div class="col-12 bordered">
+                        <div class="col-12 bordered1">
                             <div class="banner_main">
                                 <a href="#" class="banner_main_font">New Review</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1"  th:each="dto5 : ${dto5.dto_list}">
                                         <div class="col-6">
                                             <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
+                                                <a th:href="@{/members/read(mno=${dto5.mno})}">
+                                                    <img th:src="|/display?file_name=${dto5.imageDTO_list[0].get_image_url()}|">
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[짜파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">일요일은 내가 요리사!</a><br/>
-                                                <p class="banner_sub_review_main_date">15분 전</p>
+                                                <div>
+                                                    <a th:href="@{/members/read(mno=${dto5.mno})}">                                                        
+                                                        [ <span class="data-wrapper1" th:text="${dto5.gname}"></span> ]                                                        
+                                                    </a>
+                                                    <a class="data-wrapper2" th:href="@{/members/read(mno=${dto5.mno})}">
+                                                        <span th:text="${dto5.reviewDTO_list[0].review_content.length() > 10 ? dto5.reviewDTO_list[0].review_content.substring(0, 10) + '...' : dto5.reviewDTO_list[0].review_content}"></span>
+                                                    </a>
+                                                    <p class="data-wrapper4">
+                                                        [ <span class="data-wrapper3" th:text="${dto5.reviewDTO_list[0].moddate}"></span> ]
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[너구리]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">오동통한 면발 너구리..</a><br/>
-                                                <p class="banner_sub_review_main_date">1시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[스파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">최고의 가성비 인정</a><br/>
-                                                <p class="banner_sub_review_main_date">3시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[진라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">역시 매운맛이 진리다</a><br/>
-                                                <p class="banner_sub_review_main_date">4시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[신라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">농심을 먹여살림</a><br/>
-                                                <p class="banner_sub_review_main_date">6시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img_final">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main_final">
-                                                <a href="#" class="banner_sub_review_main_title">[안성탕면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">우리 아빠가 좋아하는 맛</a><br/>
-                                                <p class="banner_sub_review_main_date">10시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -240,7 +208,7 @@
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">라면에 대한 진실..</a>
@@ -250,7 +218,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">매운라면 잘 먹는 법</a>
@@ -260,7 +228,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">짜파게티에 관한 견해</a>
@@ -270,7 +238,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">신라면 개인적인 생각</a>
@@ -280,7 +248,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">라면과 계란의 조화</a>
@@ -290,7 +258,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community_final">
                                                 <a href="#" class="banner_sub_community_main_title">라면 공장 방문 후기</a>
@@ -405,66 +373,93 @@
             <div class="col-3">
                 <div class="row banner2">
                     <!-- 라면 브랜드 베너 -->
-                    <div class="banner_news">
-                        <div class="col-12 bordered">
+                    <div class="banner_brand">
+                        <div class="col-12 bordered1">
                             <div class="banner_main">
                                 <a href="#" class="banner_main_font">Brand</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
+                                    <div class="row banner_sub_line3">
+                                        <div class="col-12">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">한글</a>
-                                            <p class="banner_sub_news_main_date">테스트</p>
+                                                <a href="https://brand.nongshim.com/main/index" target="_blank" class="banner_sub_news_main_title">[ 농심 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/nongshim" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/nongshim/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/nongshimPR" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
+                                    <div class="row banner_sub_line3">
+                                        <div class="col-12">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">라면에 대한 진실..</a>
-                                            <p class="banner_sub_news_main_date">30분 전</p>
+                                                <a href="https://www.samyangfoods.com/kor/index.do" target="_blank" class="banner_sub_news_main_title">[ 삼양 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/samyangfoods" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/samyangfoods/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/@samyangfoods/" target="_blank"><i class="fa-brands fa-youtube"></i></a>                                                    
+                                                    <a href="https://twitter.com/samyangfoods" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">한글</a>
-                                            <p class="banner_sub_news_main_date">두글</p>
+                                                <a href="https://ottogi.co.kr/main/main.asp/" target="_blank" class="banner_sub_news_main_title">[ 오뚜기 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/Ottogitoday/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/ottogi_daily/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/Ottogimkt" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">영어는</a>
-                                            <p class="banner_sub_news_main_date">같은 폰트인데도</p>
+                                                <a href="https://store.emart.com/main/main.do" target="_blank" class="banner_sub_news_main_title">[ 이마트 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/ssgcom/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/ssg.com_official/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/@emartcompany/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">글자 크기가</a>
-                                            <p class="banner_sub_news_main_date">다르게 나옴</p>
+                                                <a href="https://www.paldofood.co.kr/" target="_blank" class="banner_sub_news_main_title">[ 팔도 ]</a>
+                                                <div class="banner_sub_news_main_icon">                                                    
+                                                    <a href="https://m.facebook.com/paldofood" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/paldofood/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/paldofood6295" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                    <a href="https://www.tiktok.com/@paldo_official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>                                                    
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
-                                            <div class="banner_sub_news_final">
-                                            <a href="#" class="banner_sub_news_main_title">news.content</a>
-                                            <p class="banner_sub_news_main_date">date.time</p>
-                                            </div>         
+                                            <div class="banner_sub_news">
+                                                <a href="https://www.pulmuone.co.kr/pulmuone/main/Index.do/" target="_blank" class="banner_sub_news_main_title">[ 풀무원 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/pulmuonelove/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/pulmuone/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/pulmuonelove/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                    <a href="https://twitter.com/yalp_mandu/" target="_blank"><i class="fa-brands fa-twitter"></i></a>                                                    
+                                                </div>
+                                            </div>
                                         </div>                               
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- 라면 뉴스 베너 끝 -->
+                    <!-- 라면 브랜드 베너 끝 -->
                 </div>
             </div>
         </div>

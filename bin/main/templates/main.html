@@ -16,579 +16,14 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Fontawesome -->    
+    <script src="https://kit.fontawesome.com/ac43b59d41.js" crossorigin="anonymous"></script>
+    
     <!-- header, footer css -->
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 
     <!-- MAIN CSS -->
     <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{/css/read.css}" rel="stylesheet" type="text/css">
-
-    <style>
-    a {
-    text-decoration-line: none !important;
-    color: #000;
-    }
-    .bordered {
-        border: 1px solid #000;
-        padding: 10px;
-    }
-    /* main_page */
-    .main_page {
-        margin: 25px 0px 25px 0px;
-    }
-    /* banner */
-    .banner {
-        width: 180px;
-        height: 100%;
-        margin-left: 25px;
-    }
-    .banner2 {
-        width: 180px;
-        height: 100%;
-        margin-left: 88px;
-    }
-    /* banner_main */
-    .banner_main {
-        text-align: center;
-        border-bottom: 0.5px dashed #999;
-        margin: -2px 0px 10px 0px;
-        padding-bottom: 7px;
-    }
-    .banner_review {
-        margin-left: 13px;
-        margin-top: 0px;
-        position: absolute;
-    }
-    .banner_community {
-        margin-left: 13px;
-        margin-top: 570px;
-        position: absolute;
-    }
-    .banner_news {
-        margin-left: 0px;
-        margin-top: 0px;
-        position: absolute;
-    }
-    /* banner_sub */
-    .banner_sub {
-        width: 180px;
-        height: 100%;
-        margin-left: -6px;
-    }
-    .banner_sub_line {
-        width: 160px;
-        border-bottom: 0.5px dashed #999;
-        padding-bottom: 10px;
-        margin-left: -10px;
-        margin-bottom: 10px;
-    }
-    .banner_sub_review_img {
-        width: 70px;
-        height: 62px;
-        border: 0.5px solid #000;
-        border-radius: 5px;
-        margin-left: -10px;
-    }
-    .banner_sub_review_main {
-        margin-top: -7px;
-    }
-    .banner_sub_review_main a {
-        display: inline-block;
-        font-size: 10px;
-        line-height: -5px;
-    }
-    .banner_sub_review_main p {
-        font-size: 10px;
-        margin-top: -2px;
-        margin-bottom: -0px;
-    }
-    .banner_sub_review_main_content {
-        letter-spacing: -0.5px;
-    }
-    .banner_sub_review_img_final {
-        width: 70px;
-        height: 62px;
-        border: 0.5px solid #000;
-        border-radius: 5px;
-        margin-left: -10px;
-        margin-left: -5px;
-    }
-    .banner_sub_review_main_final {
-        margin-top: -7px;
-        margin-left: -6.5px;
-    }
-    .banner_sub_review_main_final a {
-        display: inline-block;
-        font-size: 10px;
-        line-height: -5px;
-    }
-    .banner_sub_review_main_final p {
-        font-size: 10px;
-        margin-top: -2px;
-        margin-bottom: -0px;
-    }
-    /* community */
-    .banner_sub_community {
-        display: inline-block;
-        width: 100px;
-        font-size: 10px;
-        margin-top: 5px;
-        margin-left: -2px;
-    }
-    .banner_sub_community_main_date {
-        margin-top: 2px;
-        margin-bottom: 5px;
-    }
-    .banner_sub_community_final {
-        display: inline-block;
-        width: 100px;
-        font-size: 10px;
-        margin-top: 5px;
-        margin-left: 2px;
-    }
-    /* banner news */
-    .banner_sub_news {
-        display: inline-block;
-        width: 100px;
-        font-size: 10px;
-        margin-top: 5px;
-        margin-left: -2px;
-    }
-    .banner_sub_news_main_date {
-        margin-top: 2px;
-        margin-bottom: 5px;
-    }
-    .banner_sub_news_final {
-        display: inline-block;
-        width: 100px;
-        font-size: 10px;
-        margin-top: 5px;
-        margin-left: 2px;
-    }
-    /* ramyeon review main */
-    .ramyeon_review_main {
-        width: 615px;
-        height: 100%
-    }
-    /* img */
-    .laurel_img {
-        width: 30px;
-        height: 100%;
-        margin-top: 7px;
-        margin-left: -148px;
-    }
-    /* laurel img num */
-    .laurel_img_num {
-        font-size: 14px;
-        margin-top: -30px;
-        margin-left: -148px;
-    }
-    /* ramyeon review main column1 */
-    .ramyeon_review_main_column1 {
-        width: 615px;
-        height: 470px;
-        border: 1px solid #000;
-        margin-left: -2px;
-        margin-bottom: 30px;
-    }
-    .ramyeon_review_main_column1_title {
-        width: 595px;
-        height: 35px;
-        text-align: center;
-        background-color: #ddd;
-        margin-top: 10px;
-        margin-left: -6px;
-    }
-    .ramyeon_review_main_column1_title_font {
-        font-size: 15px;
-        padding-top: 7px;
-    }
-    /* ramyeon review main column2 */
-    .ramyeon_review_main_column2 {
-        width: 615px;
-        height: 430px;
-        border: 1px solid #000;
-        margin-left: -2px;
-        margin-bottom: 30px;
-    }
-    .ramyeon_review_main_column2_title {
-        width: 595px;
-        height: 35px;
-        text-align: center;
-        background-color: #ddd;
-        margin-top: 10px;
-        margin-left: -6px;
-    }
-    .ramyeon_review_main_column2_title_font {
-        font-size: 15px;
-        padding-top: 7px;
-    }
-    /* ramyeon review main column3 */
-    .ramyeon_review_main_column3 {
-        width: 615px;
-        height: 430px;
-        border: 1px solid #000;
-        margin-left: -2px;
-    }
-    .ramyeon_review_main_column3_title {
-        width: 595px;
-        height: 35px;
-        text-align: center;
-        background-color: #ddd;
-        margin-top: 10px;
-        margin-left: -6px;
-    }
-    .ramyeon_review_main_column3_title_font {
-        font-size: 15px;
-        padding-top: 7px;
-    }
-    /* ramyeon review main column1 best review */
-    .ramyeon_review_main_column1_best_review {
-        width: 595px;
-        height: 406px;
-        background-color: #ddd;    
-        margin-top: 9px;
-        margin-left: -5px;
-    }
-    .ramyeon_review_main_column1_best_review_column1 {
-        width: 595px;
-        height: 400px;
-        margin: 7px 0px 5px -10px;    
-    }
-    /* ramyeon review main column1 best review column1 */
-    .ramyeon_review_main_column1_best_review_column1_first {
-        width: 188px;
-        height: 125px;
-        background-color: #fff;
-        margin-left: 3px;
-        margin-right: 5px;
-        text-align: center;    
-    }
-    .ramyeon_review_main_column1_best_review_column1_first a img {
-        width: 100px;
-        height: 100px;    
-        margin-top: -29px;    
-    }
-    /* ramyeon review main column2 Hot Topic */
-    .ramyeon_review_main_column2_hot_topic {
-        width: 595px;
-        height: 370px;
-        margin-top: 0px;
-        margin-left: -5px;
-    }
-    .ramyeon_review_main_column2_hot_topic_column1 {
-        width: 563px;
-        height: 186px;
-        border-bottom: 1px dashed #aaa;
-    }
-    .ramyeon_review_main_column2_hot_topic_column1_list {
-        width: 563px;
-        height: 187.5px;
-        margin-top: 5px;
-    }
-    .ramyeon_review_main_column2_hot_topic_column1 a img {
-        width: 120px;
-        height: 120px;
-        margin-top: 32px;
-        margin-left: 32px;
-    }
-    .ramyeon_review_main_column2_hot_topic_column1_title {
-        width: 35px;
-        height: 20px;
-        background-color: #333;
-        color: #fff;
-        margin-top: 25px;
-        margin-bottom: 22px;
-        margin-left: 20px;
-        text-align: center;
-    }
-    .ramyeon_review_main_column2_hot_topic_column1_title_font {
-        font-size: 14px;
-        margin-top: 1px;  
-    }
-    .ramyeon_review_main_column2_hot_topic_column1_content {
-        width: 360px;
-        height: 140px;
-        margin-top: 10px;
-        margin-left: 20px;    
-    }
-    .ramyeon_review_main_column2_hot_topic_column1_content_font1,
-    .ramyeon_review_main_column2_hot_topic_column1_content_font2,
-    .ramyeon_review_main_column2_hot_topic_column1_content_font3 {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-    /* ramyeon review main column3 New Ramyeon */
-    .ramyeon_review_main_column3_new_ramyeon {
-        width: 595px;
-        height: 370px;
-        margin-top: 0px;
-        margin-left: -5px;
-    }
-    .ramyeon_review_main_column3_new_ramyeon_column1 {
-        width: 563px;
-        height: 186px;
-        border-bottom: 1px dashed #aaa;
-    }
-    .ramyeon_review_main_column3_new_ramyeon_column1_list {
-        width: 563px;
-        height: 187.5px;
-        margin-top: 5px;
-    }
-    .ramyeon_review_main_column3_new_ramyeon_column1 a img {
-        width: 120px;
-        height: 120px;
-        margin-top: 32px;
-        margin-left: 32px;
-    }
-    .ramyeon_review_main_column3_new_ramyeon_column1_title {
-        width: 40px;
-        height: 20px;
-        background-color: #333;
-        color: #fff;
-        margin-top: 25px;
-        margin-bottom: 22px;
-        margin-left: 20px;
-        text-align: center;
-    }
-    .ramyeon_review_main_column3_new_ramyeon_column1_title_font {
-        font-size: 14px;
-        margin-top: 1px;  
-    }
-    .ramyeon_review_main_column3_new_ramyeon_column1_content {
-        width: 360px;
-        height: 140px;
-        margin-top: 10px;
-        margin-left: 20px;    
-    }
-    .ramyeon_review_main_column3_new_ramyeon_column1_content_font1,
-    .ramyeon_review_main_column3_new_ramyeon_column1_content_font2,
-    .ramyeon_review_main_column3_new_ramyeon_column1_content_font3 {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-
-    /* header footer */
-    .horizontal-content {
-        display: flex;
-        align-items: center; /* 수직 가운데 정렬 */
-    }
-
-    .welcome_logout {
-        margin-left: 20px; /* 좌우 여백 추가 (선택사항) */
-    }
-
-    .horizontal-content > * {
-        margin: 0 10px; /* 좌우 여백 추가 (선택사항) */
-    }
-    body {
-        font-family: Arial, sans-serif;
-        overflow-x: hidden;
-        margin: 0;
-        padding: 0;
-    }
-    header {
-        text-align: center;
-        color:black;
-        padding: 10px 0;
-    }
-    .header-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .name {
-        font-weight: bold;
-    }
-    /* 돋보기 아이콘 스타일 */
-    .search-box {
-        position: relative;
-    }
-    .search-box input[type="text"] {
-        padding-left: 30px; /* 왼쪽에 아이콘을 감싸기 위한 여분의 패딩 */
-    }
-    .search-icon {
-        position: absolute;
-        top: 50%;
-        left: 20px; /* 아이콘 위치 조정 */
-        transform: translateY(-50%); /* 수직 가운데 정렬 */
-    }
-    .search-icon img {
-        width: 20px; /* 아이콘 이미지 크기 조정 */
-        height: 20px;
-        background-color: transparent;
-    }  
-    .searchplace {
-        border: 1px solid white;
-        border-radius: 20px;
-        background-color: gainsboro; 
-    }
-    .header-controls {
-        display: flex;
-        align-items: center;
-    }
-    .search-box {
-        padding: 10px;
-    }
-    .search-box input {
-        width: 500px;
-        padding: 5px;
-    }
-    .login-button, .signup-button {
-        margin: 0 10px;
-    }
-    .main {
-        text-align: center;
-    }
-    .mainimg {
-        height: 365px;
-        overflow: hidden; /* 이미지가 부모 요소를 넘어가지 못하도록 함 */
-        display: flex;
-        justify-content: center; /* 수평 가운데 정렬 */
-        align-items: center; /* 수직 가운데 정렬 */
-    }
-    .mainimg .carousel-item img {
-        max-height: 365px; /* 이미지의 최대 높이를 400px로 설정 */
-        width: 1950px; /* 너비를 자동으로 조정하여 비율 유지 */
-    }
-    footer{
-        background: #666;
-    }
-    li {
-        list-style: none;
-    }
-    .footer_copyright {
-        width: auto;
-        height: 40px;
-        font-size: 15px;
-        text-align: center;
-        margin-bottom: -30px;
-        background-color: #888;
-    }
-    .footer_copyright_font {
-        padding-top: 10px;
-        color: #fff;
-    }
-    .footer_column1 {
-        width: 750px;
-        text-align: left;
-        margin-left: 30px;
-    }
-    .footer_head {
-        border: 1px solid #666;
-        padding-top: 40px;
-        margin-bottom: 25px;
-    }
-    .footer_column_wrapper {
-        display: flex;
-        justify-content: center;
-    }
-    .footer_column1_text1 {
-        font-size: 20px;
-        color: #eee;
-    }
-    .footer_column1_text2 {
-        font-size: 11px;
-        color: #eee;
-        padding-top: 5px;
-        padding-bottom: 2px;
-    }
-    .footer_column1_text3 {
-        font-size: 11px;
-        color: #eee;
-        padding-bottom: 2px;
-    }
-    .footer_column2 {
-        width: 200px;
-        margin-left: 40px;
-        padding-left: 80px;
-    }
-    .footer_column2 ul {
-        width: 200px;
-    }
-    .footer_column2_text1 {
-        font-size: 12px;
-        color: #eee;
-        padding-bottom: 2px;
-    }
-    .footer_column3 {
-        width: 200px;
-        padding-left: 80px;
-    }
-    .footer_column3 ul {
-        width: 200px;
-    }
-    .footer_column3_text1 {
-        font-size: 12px;
-        color: #eee;
-        padding-bottom: 2px;
-    }
-
-    /* .boxes {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0px; 
-        padding-left: 60px;
-    }
-    .box {
-        width: 266px;
-        height: 80px;
-        padding: 10px;
-        border: 1px solid #000;
-        border-top: none;
-        text-align: center;
-        background-color: white;
-        box-sizing: border-box;
-    }
-    #box_item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-    }   */
-
-
-    .boxes {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0px;
-        padding-left: 50px;
-    }
-
-    .box {
-        width: 267px;
-        height: 80px;
-        padding: 10px;
-        border: 1px solid #000;
-        border-top: none;
-        text-align: center;
-        background-color: white;
-        box-sizing: border-box;
-        cursor: pointer;
-    }
-
-    .list-container {
-        display: none;
-        padding: 1px;
-        position: absolute;
-        z-index: 1; /* 리스트를 다른 요소들 위에 표시 */
-    }
-
-    .list-container ul {
-        list-style: none;
-        width: 243px;
-        padding: 0;
-        margin: 0;
-        background-color: rgba(223, 219, 219, 0.8); /* 알파 채널 값은 0.5로 설정 */
-    }
-
-    .list-container ul li {
-        margin-bottom: 15px; /* 아래쪽 여백 설정 */
-        cursor: pointer;
-    }
-
-    
-    </style>
     
     <script th:inline="javascript">
         var page_number = 1;
@@ -633,16 +68,25 @@
                             console.log("#@$#@$#@$");
                             console.log(list[j].review_content);
                             
-                            str1 +=  ' <div>';
-                            str1 +=      ' <div style="cursor:pointer;" id="review_tag' + j + '" class="card-body" data-rno='+list[j].rno+' data-email_id='+list[j].email_id+'>';
-                            str1 +=          ' <h5 class="card-title">'+list[j].review_content+'</h5>';
+                            str1 +=  ' <div class="card-title-review-box">';
+                            str1 +=      ' <div id="review_tag' + j + '" class="card-body" data-rno='+list[j].rno+' data-email_id='+list[j].email_id+'>';
+
+                            // 'regdate' 값을 Date 객체로 변환
+                            var date = new Date(list[j].regdate);
+
+                            // 날짜를 'yyyy-MM-dd' 형식으로 변환
+                            var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+
+                            var reviewContent = list[j].review_content.length > 20 ? list[j].review_content.substring(0, 20) + '...' : list[j].review_content;
+
+                            str1 +=          ' <h5 class="card-title">[ ' + formattedDate + ' ]&nbsp;&nbsp;' + reviewContent + '</h5>';
                             str1 +=      ' </div>';
                             str1 +=  '</div>';
                                                          
                         }
                         console.log(str1);
                         
-                         console.log('length'+review_space.length);
+                        console.log('length'+review_space.length);
                         review_space.eq(i).html(str1);
                         str1 = '';
                        
@@ -672,6 +116,41 @@
             }
                 get_reviews(page_number);            
         });
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지의 DOM이 로드된 후에 실행할 코드
+
+            // 데이터가 올라온 시간을 가져와서 현재 시간과 비교하여 시간 차이 표시
+            function calculateTimeDifference() {
+                const dataTimeSpans = document.querySelectorAll(".data-wrapper3");
+
+                dataTimeSpans.forEach(function(dataTimeSpan) {
+                    const dataTimeText = dataTimeSpan.innerText;
+                    const dataTime = new Date(dataTimeText); // 데이터가 올라온 시간을 JavaScript Date 객체로 변환
+                    const currentTime = new Date();
+                    const timeDifference = Math.floor((currentTime - dataTime) / 1000); // 시간 차이를 초 단위로 변환
+
+                    // 시간 차이를 시간, 분, 초로 변환하여 출력
+                    const hours = Math.floor(timeDifference / 3600);
+                    const minutes = Math.floor((timeDifference % 3600) / 60);
+                    const seconds = timeDifference % 60;
+
+                    let timeDifferenceText = "";
+                    if (hours > 0) {
+                        timeDifferenceText = `${hours}시간 전`;
+                    } else if (minutes > 0) {
+                        timeDifferenceText = `${minutes}분 전`;
+                    } else {
+                        timeDifferenceText = `${seconds}초 전`;
+                    }
+
+                    // 시간 차이를 출력
+                    dataTimeSpan.innerText = timeDifferenceText;
+                });
+            }
+
+            // 시간 차이 계산 함수 호출
+            calculateTimeDifference();
+        });
     </script>
 
 </head>
@@ -685,107 +164,37 @@
                 <div class="row banner">
                     <!-- 라면 리뷰 배너 시작 -->
                     <div class="banner_review">
-                        <div class="col-12 bordered">
+                        <div class="col-12 bordered1">
                             <div class="banner_main">
                                 <a href="#" class="banner_main_font">New Review</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1"  th:each="dto5 : ${dto5.dto_list}">
                                         <div class="col-6">
                                             <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
+                                                <a th:href="@{/members/read(mno=${dto5.mno})}">
+                                                    <img th:src="|/display?file_name=${dto5.imageDTO_list[0].get_image_url()}|">
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[짜파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">일요일은 내가 요리사!</a><br/>
-                                                <p class="banner_sub_review_main_date">15분 전</p>
+                                                <div>
+                                                    <a th:href="@{/members/read(mno=${dto5.mno})}">                                                        
+                                                        [ <span class="data-wrapper1" th:text="${dto5.gname}"></span> ]                                                        
+                                                    </a>
+                                                    <a class="data-wrapper2" th:href="@{/members/read(mno=${dto5.mno})}">
+                                                        <span th:text="${dto5.reviewDTO_list[0].review_content.length() > 10 ? dto5.reviewDTO_list[0].review_content.substring(0, 10) + '...' : dto5.reviewDTO_list[0].review_content}"></span>
+                                                    </a>
+                                                    <p class="data-wrapper4">
+                                                        [ <span class="data-wrapper3" th:text="${dto5.reviewDTO_list[0].moddate}"></span> ]
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[너구리]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">오동통한 면발 너구리..</a><br/>
-                                                <p class="banner_sub_review_main_date">1시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[스파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">최고의 가성비 인정</a><br/>
-                                                <p class="banner_sub_review_main_date">3시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[진라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">역시 매운맛이 진리다</a><br/>
-                                                <p class="banner_sub_review_main_date">4시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[신라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">농심을 먹여살림</a><br/>
-                                                <p class="banner_sub_review_main_date">6시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img_final">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main_final">
-                                                <a href="#" class="banner_sub_review_main_title">[안성탕면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">우리 아빠가 좋아하는 맛</a><br/>
-                                                <p class="banner_sub_review_main_date">10시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -799,7 +208,7 @@
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">라면에 대한 진실..</a>
@@ -809,7 +218,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">매운라면 잘 먹는 법</a>
@@ -819,7 +228,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">짜파게티에 관한 견해</a>
@@ -829,7 +238,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">신라면 개인적인 생각</a>
@@ -839,7 +248,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community">
                                                 <a href="#" class="banner_sub_community_main_title">라면과 계란의 조화</a>
@@ -849,7 +258,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row">
+                                    <div class="row banner_sub_line1">
                                         <div class="col-6">
                                             <div class="banner_sub_community_final">
                                                 <a href="#" class="banner_sub_community_main_title">라면 공장 방문 후기</a>
@@ -946,7 +355,9 @@
                                                 <div class="ramyeon_review_main_column3_new_ramyeon_column1_content">                                                    
                                                     <p class="ramyeon_review_main_column3_new_ramyeon_column1_content_font1">제품 : [[${dto3.gname}]]</p>
                                                     <p class="ramyeon_review_main_column3_new_ramyeon_column1_content_font2">출시일 : [[${dto3.birth}]]</p>
-                                                    <p class="ramyeon_review_main_column3_new_ramyeon_column1_content_font3">특징 : [[${dto3.content}]]</p>
+                                                    <p class="ramyeon_review_main_column3_new_ramyeon_column1_content_font3">특징 : 
+                                                        <span class="ramyeon_review_main_column3_new_ramyeon_column1_content_font3" th:text="${dto3.content.length() > 50 ? dto3.content.substring(0, 50) + '...' : dto3.content}"></span>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -962,66 +373,93 @@
             <div class="col-3">
                 <div class="row banner2">
                     <!-- 라면 브랜드 베너 -->
-                    <div class="banner_news">
-                        <div class="col-12 bordered">
+                    <div class="banner_brand">
+                        <div class="col-12 bordered1">
                             <div class="banner_main">
                                 <a href="#" class="banner_main_font">Brand</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
+                                    <div class="row banner_sub_line3">
+                                        <div class="col-12">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">한글</a>
-                                            <p class="banner_sub_news_main_date">테스트</p>
+                                                <a href="https://brand.nongshim.com/main/index" target="_blank" class="banner_sub_news_main_title">[ 농심 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/nongshim" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/nongshim/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/nongshimPR" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
+                                    <div class="row banner_sub_line3">
+                                        <div class="col-12">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">라면에 대한 진실..</a>
-                                            <p class="banner_sub_news_main_date">30분 전</p>
+                                                <a href="https://www.samyangfoods.com/kor/index.do" target="_blank" class="banner_sub_news_main_title">[ 삼양 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/samyangfoods" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/samyangfoods/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/@samyangfoods/" target="_blank"><i class="fa-brands fa-youtube"></i></a>                                                    
+                                                    <a href="https://twitter.com/samyangfoods" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">한글</a>
-                                            <p class="banner_sub_news_main_date">두글</p>
+                                                <a href="https://ottogi.co.kr/main/main.asp/" target="_blank" class="banner_sub_news_main_title">[ 오뚜기 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/Ottogitoday/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/ottogi_daily/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/Ottogimkt" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">영어는</a>
-                                            <p class="banner_sub_news_main_date">같은 폰트인데도</p>
+                                                <a href="https://store.emart.com/main/main.do" target="_blank" class="banner_sub_news_main_title">[ 이마트 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/ssgcom/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/ssg.com_official/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/@emartcompany/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
                                             <div class="banner_sub_news">
-                                            <a href="#" class="banner_sub_news_main_title">글자 크기가</a>
-                                            <p class="banner_sub_news_main_date">다르게 나옴</p>
+                                                <a href="https://www.paldofood.co.kr/" target="_blank" class="banner_sub_news_main_title">[ 팔도 ]</a>
+                                                <div class="banner_sub_news_main_icon">                                                    
+                                                    <a href="https://m.facebook.com/paldofood" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/paldofood/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/paldofood6295" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                    <a href="https://www.tiktok.com/@paldo_official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>                                                    
+                                                </div>
                                             </div>             
                                         </div>                           
                                     </div>
-                                    <div class="row">
+                                    <div class="row banner_sub_line3">
                                         <div class="col-6">
-                                            <div class="banner_sub_news_final">
-                                            <a href="#" class="banner_sub_news_main_title">news.content</a>
-                                            <p class="banner_sub_news_main_date">date.time</p>
-                                            </div>         
+                                            <div class="banner_sub_news">
+                                                <a href="https://www.pulmuone.co.kr/pulmuone/main/Index.do/" target="_blank" class="banner_sub_news_main_title">[ 풀무원 ]</a>
+                                                <div class="banner_sub_news_main_icon">
+                                                    <a href="https://www.facebook.com/pulmuonelove/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                    <a href="https://www.instagram.com/pulmuone/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                    <a href="https://www.youtube.com/user/pulmuonelove/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                    <a href="https://twitter.com/yalp_mandu/" target="_blank"><i class="fa-brands fa-twitter"></i></a>                                                    
+                                                </div>
+                                            </div>
                                         </div>                               
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- 라면 뉴스 베너 끝 -->
+                    <!-- 라면 브랜드 베너 끝 -->
                 </div>
             </div>
         </div>
