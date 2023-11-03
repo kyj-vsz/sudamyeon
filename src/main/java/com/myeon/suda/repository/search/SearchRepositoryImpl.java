@@ -44,13 +44,13 @@ public class SearchRepositoryImpl extends QuerydslRepositorySupport implements S
         
         BooleanBuilder condition_builder = new BooleanBuilder();
         if(pageRequestDTO.getBrand() != null && pageRequestDTO.getBrand().size() != 0){
-            condition_builder.or(ramyeon.brand.in(pageRequestDTO.getBrand()));
+            condition_builder.and(ramyeon.brand.in(pageRequestDTO.getBrand()));
         }
         if(pageRequestDTO.getCooking() != null && pageRequestDTO.getCooking().size() != 0){
-            condition_builder.or(ramyeon.cooking.in(pageRequestDTO.getCooking()));
+            condition_builder.and(ramyeon.cooking.in(pageRequestDTO.getCooking()));
         }
         if(pageRequestDTO.getCategory() != null && pageRequestDTO.getCategory().size() != 0){
-            condition_builder.or(ramyeon.category.in(pageRequestDTO.getCategory()));
+            condition_builder.and(ramyeon.category.in(pageRequestDTO.getCategory()));
         }
         
         boolean_builder.and(condition_builder);        
