@@ -146,7 +146,10 @@ a {
 .banner_sub_news_main_icon a i {
     margin-right: 2px;
 }
-/* main_ramyeon_review */   
+/* main_ramyeon_review */
+.main_ramyeon_review {
+    margin-bottom: 30px;
+}
 .main_ramyeon_review_title {
     font-size: 15px;
     margin-left: -6px;
@@ -156,7 +159,8 @@ a {
     width: 840px;
     height: 35px;
     border: 1px solid #000;
-    background-color: #d8d8d8;
+    color: #fff;
+    background-color: #ff6f3a;
 }
 .main_ramyeon_review_brand {
     width: 840px;
@@ -181,9 +185,22 @@ a {
     margin-bottom: 30px;
 }
 /* main_ramyeon_review_category */
-.main_ramyeon_review_category_title {
-    font-size: 12px;
+.main_ramyeon_review_category_title {    
     margin-top: 8px;
+}
+.main_ramyeon_review_category_title1 {
+    font-size: 12px;
+    margin-left: 15px;    
+}
+.main_ramyeon_review_category_search_btn {
+    width: 150px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 700px;
+    border-radius: 8px;
+    color: #fff;
+    border: 1px solid #555;
+    background-color: #ff6f3a;
 }
 .main_ramyeon_review_brand_column {
     margin-top: 2px;
@@ -298,6 +315,9 @@ a {
     color: #000; /* 버튼 텍스트 색상 */
 }
 .page-item.active .page-link {
-    background-color: #999;
-    border: 1px solid #000;
+    background-color: #ff6f3a;
+    border: none;
+}
+.fa-face-smile {
+    color: #ff6f3a;
 }
