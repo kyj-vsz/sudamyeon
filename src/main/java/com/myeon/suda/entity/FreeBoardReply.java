@@ -19,26 +19,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "writer")
-public class Board extends BaseEntity {
+@ToString
+public class FreeBoardReply extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bno;
+    private Long free_board_rno;
 
-    @Column(length = 50, nullable = false)
-    private String board_title;
+    @Column(nullable = false)
+    private String free_board_replyer;
 
-    @Column(length = 2000, nullable = false)
-    private String board_content;
+    @Column(length = 200, nullable = false)
+    private String free_board_reply_content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member writer;
-
-    public void change_board_title(String board_title){
-        this.board_title = board_title;
-    }
-
-    public void change_board_content(String board_content){
-        this.board_content = board_content;
-    }
+    private FreeBoard free_board;
 }
