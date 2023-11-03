@@ -43,7 +43,7 @@ public class RamyeonController {
     }
 
     @PostMapping("/register")
-    public String register(RamyeonDTO ramyeonDTO, RedirectAttributes redirectAttributes, PageRequestDTO pageRequestDTO, Model model){
+    public String register(RamyeonDTO ramyeonDTO, RedirectAttributes redirectAttributes){
         log.info("ramyeon-data :"+ ramyeonDTO);
         Long mno = ramyeon_service.register(ramyeonDTO);
         redirectAttributes.addFlashAttribute("msg", mno);
