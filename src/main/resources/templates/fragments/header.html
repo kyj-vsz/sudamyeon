@@ -8,12 +8,14 @@
       <div class="name"><a th:href="@{/}">수다면</a></div>
 
       <div class="header-controls">
+        <form th:action="@{/members/list}" method="get">
           <div class="search-box">
-              <input type="text" placeholder="검색" class="searchplace">
+              <input type="text" placeholder="검색" class="searchplace" name="keyword">
               <!-- FontAwesome 아이콘 추가 -->
               <i class="fas fa-magnifying-glass search-icon"></i>
           </div>
-        </div>
+        </form>
+      </div>
         <!-- 스프링 시큐리티를 통해 로그인한 사용자에게만 보이는 내용 -->
         <div th:if="${#request.isUserInRole('USER')}" class="horizontal-content1">
             <div class="welcome_logout login_view_font1">
