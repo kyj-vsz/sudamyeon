@@ -181,7 +181,9 @@ public interface RamyeonService {
             .email_id(review.getMember().getEmailId())
             .nickname(review.getMember().getNickname())
             .review_content(review.getReviewContent())
-            .grade(review.getGrade())
+            .grade(review.getGrade()) 
+            .regdate(review.getRegDate())
+            .moddate(review.getModDate())
             .build();
         }).collect(Collectors.toList());
 
