@@ -353,69 +353,67 @@
             
         });
         document.addEventListener("DOMContentLoaded", function() {
-    // 브랜드 이름과 이미지 매핑
-    const brandImages = {
-        "이마트": "/img/logo_brand/logo_emart.png",
-        "하림": "/img/logo_brand/logo_harim.png",
-        "홈플러스": "/img/logo_brand/logo_homeplus.png",
-        "농심": "/img/logo_brand/logo_nongshim.png",
-        "오뚜기": "/img/logo_brand/logo_ottogi.png",
-        "팔도": "/img/logo_brand/logo_paldo.png",
-        "풀무원": "/img/logo_brand/logo_pulmuone.png",
-        "삼양": "/img/logo_brand/logo_samyang.png",
-        "더본": "/img/logo_brand/logo_theborn.png",
-        "비폰": "/img/logo_brand/logo_vifon.png",
-        // 다른 브랜드 이미지 URL들...
-    };
+            // 브랜드 이름과 이미지 매핑
+            const brandImages = {
+                "이마트": "/img/logo_brand/logo_emart.png",
+                "하림": "/img/logo_brand/logo_harim.png",
+                "홈플러스": "/img/logo_brand/logo_homeplus.png",
+                "농심": "/img/logo_brand/logo_nongshim.png",
+                "오뚜기": "/img/logo_brand/logo_ottogi.png",
+                "팔도": "/img/logo_brand/logo_paldo.png",
+                "풀무원": "/img/logo_brand/logo_pulmuone.png",
+                "삼양": "/img/logo_brand/logo_samyang.png",
+                "더본": "/img/logo_brand/logo_theborn.png",
+                "비폰": "/img/logo_brand/logo_vifon.png",
+                // 다른 브랜드 이미지 URL들...
+            };
 
-    // 브랜드 이름 요소와 이미지 요소 가져오기
-    const brandNameElement = document.querySelector(".main_ramyeon_read_menu_table_dto");
-    const brandImageElement = document.getElementById("brandImage");
+            // 브랜드 이름 요소와 이미지 요소 가져오기
+            const brandNameElement = document.querySelector(".main_ramyeon_read_menu_table_dto");
+            const brandImageElement = document.getElementById("brandImage");
 
-    if (brandNameElement && brandImageElement) {
-        // 요소를 찾았을 때 실행할 코드
-        const brandName = brandNameElement.innerText;
-        const imageURL = brandImages[brandName];
+            if (brandNameElement && brandImageElement) {
+                // 요소를 찾았을 때 실행할 코드
+                const brandName = brandNameElement.innerText;
+                const imageURL = brandImages[brandName];
 
-        // 이미지 설정
-        brandImageElement.src = imageURL;
-        brandImageElement.alt = `${brandName} 이미지`;
+                // 이미지 설정
+                brandImageElement.src = imageURL;
+                brandImageElement.alt = `${brandName} 이미지`;
 
-        // 데이터가 올라온 시간을 가져와서 현재 시간과 비교하여 시간 차이 표시
-        function calculateTimeDifference() {
-            const dataTimeSpans = document.querySelectorAll(".data-wrapper3");
+                // 데이터가 올라온 시간을 가져와서 현재 시간과 비교하여 시간 차이 표시
+                function calculateTimeDifference() {
+                    const dataTimeSpans = document.querySelectorAll(".data-wrapper3");
 
-            dataTimeSpans.forEach(function(dataTimeSpan) {
-                const dataTimeText = dataTimeSpan.innerText;
-                const dataTime = new Date(dataTimeText);
-                const currentTime = new Date();
-                const timeDifference = Math.floor((currentTime - dataTime) / 1000);
+                    dataTimeSpans.forEach(function(dataTimeSpan) {
+                        const dataTimeText = dataTimeSpan.innerText;
+                        const dataTime = new Date(dataTimeText);
+                        const currentTime = new Date();
+                        const timeDifference = Math.floor((currentTime - dataTime) / 1000);
 
-                const hours = Math.floor(timeDifference / 3600);
-                const minutes = Math.floor((timeDifference % 3600) / 60);
-                const seconds = timeDifference % 60;
+                        const hours = Math.floor(timeDifference / 3600);
+                        const minutes = Math.floor((timeDifference % 3600) / 60);
+                        const seconds = timeDifference % 60;
 
-                let timeDifferenceText = "";
-                if (hours > 0) {
-                    timeDifferenceText = `${hours}시간 전`;
-                } else if (minutes > 0) {
-                    timeDifferenceText = `${minutes}분 전`;
-                } else {
-                    timeDifferenceText = `${seconds}초 전`;
+                        let timeDifferenceText = "";
+                        if (hours > 0) {
+                            timeDifferenceText = `${hours}시간 전`;
+                        } else if (minutes > 0) {
+                            timeDifferenceText = `${minutes}분 전`;
+                        } else {
+                            timeDifferenceText = `${seconds}초 전`;
+                        }
+
+                        dataTimeSpan.innerText = timeDifferenceText;
+                    });
                 }
 
-                dataTimeSpan.innerText = timeDifferenceText;
-            });
-        }
-
-        // 시간 차이 계산 함수 호출
-        calculateTimeDifference();
-    } else {
-        console.error("요소를 찾을 수 없습니다.");
-    }
-});
-
-
+                // 시간 차이 계산 함수 호출
+                calculateTimeDifference();
+            } else {
+                console.error("요소를 찾을 수 없습니다.");
+            }
+        });
         
     </script>   
 </head>
@@ -544,6 +542,9 @@
                             <div class="main_ramyeon_read_menu_img">
                                 <div>
                                     <ul>
+                                        <p class="main_ramyeon_read_menu1_img_font">
+                                            <span th:text="'[ ' + ${dto.gname} + ' ]'" th:remove="tag"></span>
+                                        </p>                                        
                                         <li style="cursor:pointer;" th:each="image: ${dto.imageDTO_list}" th:data-file="${image.get_image_url()}" class="img_border_box">
                                             <img th:if="${image.path != null}" th:src="|/display?file_name=${image.get_image_url()}|" class="img_box">
                                         </li>
@@ -552,8 +553,7 @@
                             </div>
                             <div class="main_ramyeon_read_menu_table">
                                 <div class="col-8">
-                                    <div class="main_ramyeon_read_menu_table_font">
-                                        <p>[[${dto.gname}]]</p>
+                                    <div class="main_ramyeon_read_menu_table_font">                                        
                                     </div>
                                     <div>                            
                                         <div class="row" style="margin-left: 3.7px;">
@@ -569,7 +569,7 @@
                                                 </div>
                                                 <div class="row main_ramyeon_read_menu_table2">
                                                     <div class="col-12">                                            
-                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                        <div class="main_ramyeon_read_menu_table_img1">
                                                             <img th:src="@{/img/icon/snack.png}" alt="분류">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">분류</div>
@@ -580,7 +580,7 @@
                                             <div class="col-3">
                                                 <div class="row main_ramyeon_read_menu_table3">
                                                     <div class="col-12">                                            
-                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                        <div class="main_ramyeon_read_menu_table_img2">
                                                             <img th:src="@{/img/icon/cost.png}" alt="가격">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">가격</div>
@@ -589,7 +589,7 @@
                                                 </div>
                                                 <div class="row main_ramyeon_read_menu_table4">
                                                     <div class="col-12">                                            
-                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                        <div class="main_ramyeon_read_menu_table_img3">
                                                             <img th:src="@{/img/icon/cooking2.png}" alt="조리방법">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">조리방법</div>
@@ -600,7 +600,7 @@
                                             <div class="col-3">
                                                 <div class="row main_ramyeon_read_menu_table5">
                                                     <div class="col-12">                                            
-                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                        <div class="main_ramyeon_read_menu_table_img4">
                                                             <img th:src="@{/img/icon/weight.png}" alt="무게">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">무게</div>
@@ -609,7 +609,7 @@
                                                 </div>
                                                 <div class="row main_ramyeon_read_menu_table6">
                                                     <div class="col-12">                                            
-                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                        <div class="main_ramyeon_read_menu_table_img5">
                                                             <img th:src="@{/img/icon/time.png}" alt="소비기한">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">소비기한</div>
@@ -620,7 +620,7 @@
                                             <div class="col-3">
                                                 <div class="row main_ramyeon_read_menu_table7">
                                                     <div class="col-12">                                            
-                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                        <div class="main_ramyeon_read_menu_table_img6">
                                                             <img th:src="@{/img/icon/lamen.png}" alt="칼로리">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">칼로리</div>
@@ -629,7 +629,7 @@
                                                 </div>
                                                 <div class="row main_ramyeon_read_menu_table8">
                                                     <div class="col-12">                                            
-                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                        <div class="main_ramyeon_read_menu_table_img7">
                                                             <img th:src="@{/img/icon/calender.png}" alt="출시년도">
                                                         </div>
                                                         <div class="main_ramyeon_read_menu_table_column">출시년도</div>

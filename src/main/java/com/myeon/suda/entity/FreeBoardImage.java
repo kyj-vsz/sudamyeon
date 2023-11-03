@@ -20,19 +20,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @Embeddable
 @Getter
-@ToString(exclude = "board")
-public class BoardImage extends BaseEntity {
+@ToString(exclude = "free_board")
+public class FreeBoardImage extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long board_inum;
+    private Long free_board_inum;
 
-    private String board_img_name;
+    private String free_board_img_name;
 
-    private String board_path;
+    private String free_board_path;
 
-    private String board_uuid;
+    private String free_board_uuid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Board board;
+    private FreeBoard free_board;
 
 }
