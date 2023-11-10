@@ -2,6 +2,9 @@ a {
     text-decoration-line: none !important;
     color: #000;
 }
+a:hover {
+    color: #000;
+}
 .bordered {
     border: 1px solid #000;
     padding: 10px;
@@ -31,6 +34,14 @@ a {
     margin: -2px 0px 0px 0px;
     padding-bottom: 7px;
 }
+.banner_main_font {
+    font-weight: 600;
+    color: #555;
+}
+.banner_sub_brand_main_title {
+    font-weight: 600;
+    color: #555;
+}
 .banner_review {
     margin-left: 13px;
     margin-top: 0px;
@@ -58,6 +69,14 @@ a {
     border-top: 0.5px dashed #999;
     margin-left: -10px;
     padding-top: 15px;
+}
+.banner_sub_line2 {
+    width: 160px;
+    height: 60px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    margin-bottom: 5px;
+    padding-top: 10px;
 }
 .banner_sub_line3 {
     width: 160px;
@@ -91,6 +110,8 @@ a {
 .data-wrapper1 {
     position: relative;
     top: 1px;
+    font-weight: 600;
+    color: #555;
 }
 .data-wrapper2 {
     width: 65px;
@@ -113,23 +134,19 @@ a {
 /* community */
 .banner_sub_community {
     display: inline-block;
-    width: 100px;
+    width: 120px;
+    height: 50px;
     font-size: 10px;
     margin-top: 5px;
     margin-left: -2px;
 }
-.banner_sub_community_main_date {
-    margin-top: 2px;
-    margin-bottom: 5px;
-}
-.banner_sub_community_final {
-    display: inline-block;
+.banner_sub_community_main_title {
     width: 100px;
-    font-size: 10px;
-    margin-top: 5px;
-    margin-left: 2px;
 }
-/* banner news */
+.banner_sub_community_main_date {
+    margin-top: 6px;    
+}
+/* banner brand */
 .banner_sub_brand {
     display: inline-block;
     text-align: center;
@@ -184,6 +201,7 @@ a {
     font-size: 15px;
     padding-top: 7px;
     color: #fff;
+    font-weight: 600;
 }
 /* ramyeon review main column2 */
 .ramyeon_review_main_column2 {
@@ -205,6 +223,7 @@ a {
     font-size: 15px;
     padding-top: 7px;
     color: #fff;
+    font-weight: 600;
 }
 /* ramyeon review main column3 */
 .ramyeon_review_main_column3 {
@@ -225,6 +244,7 @@ a {
     font-size: 15px;
     padding-top: 7px;
     color: #fff;
+    font-weight: 600;
 }
 /* ramyeon review main column1 best review */
 .ramyeon_review_main_column1_best_review {

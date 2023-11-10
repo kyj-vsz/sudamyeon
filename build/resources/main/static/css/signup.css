@@ -1,37 +1,51 @@
+a {
+    text-decoration-line: none !important;
+    color: #000;
+}
+a:hover {
+    color: #000;
+}
 .center-horizontal {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 25px;
+}
+.center-horizontal a img {
+    width: 40px; 
+    height: 100%;
+    margin-top: 3px;
 }
 .center-text {
-    text-align: center; /* 텍스트를 가운데 정렬 */
+    font-size: 20px;
+    letter-spacing: 5px;
+    text-align: center;
+    margin-left: 7px;
 }
 /* 레이아웃 틀 */
 html {
     height: 100%;
 }
 body {
-    margin: 0;
+    margin: 10px;
     height: 100%;
-    background: #f5f6f7;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
-}
-#wrapper {
-    position: relative;
-    height: 100%;
+    background: #fff;
+    font-family: Dotum,'돋움',Helvetica,sans-serif; 
 }
 #content {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    width: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 45px;
+
 }
 /* 입력폼 */
 h3 {
-    margin: 19px 0 8px;
-    font-size: 14px;
-    font-weight: 700;
+    margin-left: -45px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 15px;
 }
 .int {
     display: block;
@@ -39,27 +53,44 @@ h3 {
     border: solid 1px #dadada;
     padding: 10px 14px 10px 14px;
     box-sizing: border-box;
-    width: 100%;
-    height: 29px;
+    width: 375px;
+    height: 45px;
     border: none;
     background: #fff;
+    border: 1px solid #000;
     font-size: 15px;
+    margin-bottom: 15px;
+}
+.int:focus {
+    outline: none; /* 포커스된 상태에서 기본 아웃라인 스타일을 제거 */
+    border-bottom: 2px solid #ff622a; /* 클릭되었을 때 border-bottom 스타일 변경 */
+}
+.icon_box_1 {
+    width: 45px;
+    height: 43px;
+    border: 1px solid #000;
+    margin-left: -45px;
+    margin-bottom: -45px;
+}
+.icon_box_1 i {
+    font-size: 18px;
+    margin-top: 12px;
 }
 input {
     font-family: Dotum,'돋움',Helvetica,sans-serif;    
 }
 /* 버튼 */
-.btn_area {
-    margin: 20px 0 91px;
-}
-#btnJoin {
-    width: 100%;
-    padding: 8px 0 17px;
+#btn_join {
+    width: 420px;
+    height: 45px;
+    padding: 8px 0 10px;
     border: 0;
     cursor: pointer;
     color: #fff;
-    background-color: black;
-    font-size: 20px;
+    background-color: #888;
+    font-size: 18px;
     font-weight: 400;
     font-family: Dotum,'돋움',Helvetica,sans-serif;
-}
+    margin-top: 5px;
+    margin-left: -45px;
+}        

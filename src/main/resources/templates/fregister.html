@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 등록 ㅣ 수다면</title>
+  <link rel="shortcut icon" type="image/icon" th:href="@{/img/icon/sudamyeon.png}">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  
+  <!-- jQuery library -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+  
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Styles CSS -->
+  <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+  <!-- FREGISTER CSS -->
+  <link th:href="@{/css/fregister.css}" rel="stylesheet">
+
+    <style>
+        .ck-editor__editable { 
+            width: 585px;
+            height: 800px;    
+        }
+        .editor_box {
+            margin-left: -16px;
+        }
+        .main_sudamyeon_community_fregister_box1 {
+            width: 587px;
+            height: 35px;
+            border: 1px solid #ccc;
+            margin-top: 15px;
+            margin-left: -2px;            
+            border-radius: 3px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            var title = $("input[name='freeBoardTitle']");
+            var file_upload = $("input[type='file']");
+            var label = $(".custom-file-ladbel");
+            $("button[type='submit']").on("click",function(e){
+                e.preventDefault();
+                if(!title.val()){
+                    alert("제목은 필수입니다!");
+                    title.focus();
+                    return;
+                }
+            
+                $("#form")
+                    .attr("action", "/fregister")
+                    .submit();
+            });
+        });
+        function reset(){
+            document.getElementById("form").reset();
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지의 DOM이 로드된 후에 실행할 코드
+
+            // 데이터가 올라온 시간을 가져와서 현재 시간과 비교하여 시간 차이 표시
+            function calculateTimeDifference() {
+                const dataTimeSpans = document.querySelectorAll(".data-wrapper3");
+
+                dataTimeSpans.forEach(function(dataTimeSpan) {
+                    const dataTimeText = dataTimeSpan.innerText;
+                    const dataTime = new Date(dataTimeText); // 데이터가 올라온 시간을 JavaScript Date 객체로 변환
+                    const currentTime = new Date();
+                    const timeDifferenceInSeconds = Math.floor((currentTime - dataTime) / 1000); // 시간 차이를 초 단위로 변환
+
+                    let timeDifferenceText;
+
+                    if (timeDifferenceInSeconds >= 86400) {
+                        const days = Math.floor(timeDifferenceInSeconds / 86400);
+                        timeDifferenceText = `${days}일 전`;
+                    } else if (timeDifferenceInSeconds >= 3600) {
+                        const hours = Math.floor(timeDifferenceInSeconds / 3600);
+                        timeDifferenceText = `${hours}시간 전`;
+                    } else if (timeDifferenceInSeconds >= 60) {
+                        const minutes = Math.floor(timeDifferenceInSeconds / 60);
+                        timeDifferenceText = `${minutes}분 전`;
+                    } else {
+                        timeDifferenceText = `${timeDifferenceInSeconds}초 전`;
+                    }
+
+                    // 시간 차이를 출력
+                    dataTimeSpan.innerText = timeDifferenceText;
+                });
+            }
+
+            // 시간 차이 계산 함수 호출
+            calculateTimeDifference();
+        });
+    </script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row main_page">
+        <div class="col-3">
+            <div class="row banner">
+                <!-- 라면 리뷰 배너 시작 -->
+                <div class="banner_review">
+                    <div class="col-12 bordered1">
+                        <div class="banner_main">
+                            <a th:href="@{/members/list}" class="banner_main_font">New Review</a>
+                        </div>
+                        <div class="row banner_sub">
+                            <div class="col-12">
+                                <div class="row banner_sub_line1"  th:each="dto5 : ${dto5.dto_list}">
+                                    <div class="col-6">
+                                        <div class="banner_sub_review_img">
+                                            <a th:href="@{/members/read(mno=${dto5.mno})}">
+                                                <img th:src="|/display?file_name=${dto5.imageDTO_list[0].get_image_url()}|">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="banner_sub_review_main">
+                                            <div>
+                                                <a th:href="@{/members/read(mno=${dto5.mno})}" style="width: 70px;">
+                                                    [ <span class="data-wrapper1" th:text="${#strings.length(dto5.gname) > 4 ? #strings.substring(dto5.gname, 0, 4) + '...' : dto5.gname}"></span> ]
+                                                </a>
+                                                <a class="data-wrapper2" th:href="@{/members/read(mno=${dto5.mno})}">
+                                                    <span th:text="${dto5.reviewDTO_list[0].review_content.length() > 10 ? dto5.reviewDTO_list[0].review_content.substring(0, 10) + '...' : dto5.reviewDTO_list[0].review_content}"
+                                                          th:attr="title=${dto5.reviewDTO_list[0].review_content}"></span>
+                                                </a>
+                                                <p class="data-wrapper4">
+                                                    [ <span class="data-wrapper3" th:text="${dto5.reviewDTO_list[0].moddate}"></span> ]
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 라면 리뷰 배너 끝 -->
+                <!-- 라면 커뮤니티 배너 시작-->
+                <div class="banner_community">
+                    <div class="col-12 bordered1">
+                        <div class="banner_main">
+                            <a th:href="@{/flist}" class="banner_main_font">Community</a>
+                        </div>
+                        <div class="row banner_sub">
+                            <div class="col-12">
+                                <div class="row banner_sub_line2" th:each="dto6 : ${dto6.dto_list}">
+                                    <div class="col-12">
+                                        <div class="banner_sub_community">
+                                            <a th:href="@{/fread(freeBoardNo = ${dto6.freeBoardNo})}" class="banner_sub_community_main_title">
+                                                <span th:text="${dto6.freeBoardTitle.length() > 12 ? dto6.freeBoardTitle.substring(0, 12) + '...' : dto6.freeBoardTitle}"
+                                                      th:attr="title=${dto6.freeBoardTitle}"></span>
+                                            </a>
+                                            <p class="banner_sub_community_main_date">
+                                                [ <span class="data-wrapper3" th:text="${#temporals.format(dto6.regdate,'yyyy/MM/dd HH:mm:ss')}"></span> ]
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 라면 커뮤니티 배너 끝 -->
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row main_sudamyeon_community_fregister">
+                <!-- free board register -->
+                <form id="form" th:action="@{/fregister}" th:method="post">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row main_sudamyeon_community_fregister_box1">
+                                    <div class="col-2">
+                                        <p class="main_sudamyeon_community_fregister_box1_font1">카테고리 선택</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <input type="radio" class="filter" data-filter="sudamyeonCategory0" name="boardCategory" value="0">
+                                        <span class="filter_text main_sudamyeon_community_fregister_box1_font2">수다면 커뮤니티</span>
+                                    </div>
+                                    <div class="col-3" id="box_detail">
+                                        <input type="radio" class="filter" data-filter="sudamyeonCategory1" name="boardCategory" value="1">
+                                        <span class="filter_text main_sudamyeon_community_fregister_box1_font3">나만의 레시피</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="form-group">
+                                    <label class="main_sudamyeon_community_fregister_title">글 제목</label>
+                                    <input class="form-control main_sudamyeon_community_fregister_title_input" name="freeBoardTitle" placeholder="제목을 입력해주세요">
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <label class="main_sudamyeon_community_fregister_email_id">작성자</label>
+                                <div sec:authorize="isAuthenticated()">
+                                    <input class="form-control main_sudamyeon_community_fregister_email_id_input" type="email" name="writerEmailId" th:value="${#authentication.principal.username}" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row editor_box">
+                            <div class="col-12">
+                                <label class="main_sudamyeon_community_fregister_content">내용</label>
+                                <textarea id="editor" class="form-control" rows="5" name="freeBoardContent" placeholder="내용을 입력해주세요"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row sudamyeon_fregister_btn_box">
+                    <div class="col-12">
+                        <button class="btn btn-primary sudamyeon_fregister_btn_box_btn1" type="submit">등록</button>
+                        <button class="btn btn-danger sudamyeon_fregister_btn_box_btn2" onclick="reset()">리셋</button>
+                        <button class="btn btn-secondary sudamyeon_fregister_btn_box_btn3" onclick="history.back()">뒤로가기</button>
+                    </div>
+                </div>
+                <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+                <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+                <script src="/js/uploadAdapter.js"></script>
+                <script>
+                    function MyCustomUploadAdapterPlugin(editor) {
+                        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                            return new UploadAdapter(loader)
+                        }
+                    }
+                    ClassicEditor.create( document.querySelector( '#editor' ), {
+                        language: "ko",
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        removePlugins: ['Table', 'MediaEmbed']
+                    } );
+                </script>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row banner2">
+                <!-- 라면 브랜드 베너 -->
+                <div class="banner_brand">
+                    <div class="col-12 bordered1">
+                        <div class="banner_main">
+                            <a class="banner_main_font">Brand</a>
+                        </div>
+                        <div class="row banner_sub">
+                            <div class="col-12">
+                                <div class="row banner_sub_line3">
+                                    <div class="col-12">
+                                        <div class="banner_sub_brand">
+                                            <a href="https://brand.nongshim.com/main/index" target="_blank" class="banner_sub_brand_main_title">[ 농심 ]</a>
+                                            <div class="banner_sub_brand_main_icon">
+                                                <a href="https://www.facebook.com/nongshim" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                <a href="https://www.instagram.com/nongshim/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                <a href="https://www.youtube.com/user/nongshimPR" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row banner_sub_line3">
+                                    <div class="col-12">
+                                        <div class="banner_sub_brand">
+                                            <a href="https://www.samyangfoods.com/kor/index.do" target="_blank" class="banner_sub_brand_main_title">[ 삼양 ]</a>
+                                            <div class="banner_sub_brand_main_icon">
+                                                <a href="https://www.facebook.com/samyangfoods" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                <a href="https://www.instagram.com/samyangfoods/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                <a href="https://www.youtube.com/@samyangfoods/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                <a href="https://twitter.com/samyangfoods" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row banner_sub_line3">
+                                    <div class="col-6">
+                                        <div class="banner_sub_brand">
+                                            <a href="https://ottogi.co.kr/main/main.asp/" target="_blank" class="banner_sub_brand_main_title">[ 오뚜기 ]</a>
+                                            <div class="banner_sub_brand_main_icon">
+                                                <a href="https://www.facebook.com/Ottogitoday/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                <a href="https://www.instagram.com/ottogi_daily/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                <a href="https://www.youtube.com/user/Ottogimkt" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row banner_sub_line3">
+                                    <div class="col-6">
+                                        <div class="banner_sub_brand">
+                                            <a href="https://store.emart.com/main/main.do" target="_blank" class="banner_sub_brand_main_title">[ 이마트 ]</a>
+                                            <div class="banner_sub_brand_main_icon">
+                                                <a href="https://www.facebook.com/ssgcom/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                <a href="https://www.instagram.com/ssg.com_official/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                <a href="https://www.youtube.com/@emartcompany/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row banner_sub_line3">
+                                    <div class="col-6">
+                                        <div class="banner_sub_brand">
+                                            <a href="https://www.paldofood.co.kr/" target="_blank" class="banner_sub_brand_main_title">[ 팔도 ]</a>
+                                            <div class="banner_sub_brand_main_icon">
+                                                <a href="https://m.facebook.com/paldofood" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                <a href="https://www.instagram.com/paldofood/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                <a href="https://www.youtube.com/user/paldofood6295" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                <a href="https://www.tiktok.com/@paldo_official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row banner_sub_line3">
+                                    <div class="col-6">
+                                        <div class="banner_sub_brand">
+                                            <a href="https://www.pulmuone.co.kr/pulmuone/main/Index.do/" target="_blank" class="banner_sub_brand_main_title">[ 풀무원 ]</a>
+                                            <div class="banner_sub_brand_main_icon">
+                                                <a href="https://www.facebook.com/pulmuonelove/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                                <a href="https://www.instagram.com/pulmuone/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                                <a href="https://www.youtube.com/user/pulmuonelove/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                                <a href="https://twitter.com/yalp_mandu/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 라면 브랜드 베너 끝 -->
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

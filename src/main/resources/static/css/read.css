@@ -5,8 +5,11 @@
 ul li{
     list-style: none;
 }
-a{
+a {
     text-decoration-line: none !important;
+    color: #000;
+}
+a:hover {
     color: #000;
 }
 .main_ramyeon_read_menu1 {
@@ -358,6 +361,23 @@ th {
 .main_ramyeon_read_menu4_btn {
     margin-bottom: -15px;
 }
+.main_ramyeon_read_menu4_delete,
+.main_ramyeon_read_menu4_list,
+.main_ramyeon_read_menu4_modify {
+    height: 35px;
+}
+.main_ramyeon_read_menu4_list {
+    background-color: #ff6f3a;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 3;
+}
+.main_ramyeon_read_menu4_list:hover,
+.main_ramyeon_read_menu4_list:active,
+.main_ramyeon_read_menu4_list:focus {
+    background-color: #ddd;
+    color: #000;
+}
 .main_ramyeon_read_menu5 {
     width: 840px;
     height: 438px;
@@ -373,6 +393,16 @@ th {
 }
 .main_ramyeon_read_menu5_btn {
     margin-top: 10px;
+    background-color: #ff6f3a;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 3;
+}
+.main_ramyeon_read_menu5_btn:hover,
+.main_ramyeon_read_menu5_btn:active,
+.main_ramyeon_read_menu5_btn:focus {
+    background-color: #ff9169;
+    color: #000;
 }
 .card-body-box{
     width: 808px;
@@ -444,6 +474,10 @@ th {
     margin: -2px 0px 0px 0px;
     padding-bottom: 7px;
 }
+.banner_main_font {
+    font-weight: 600;
+    color: #555;
+}
 .banner_review {
     margin-left: 13px;
     margin-top: 0px;
@@ -452,11 +486,6 @@ th {
 .banner_community {
     margin-left: 13px;
     margin-top: 570px;
-    position: absolute;
-}
-.banner_brand {
-    margin-left: 0px;
-    margin-top: 0px;
     position: absolute;
 }
 /* banner_sub */
@@ -471,6 +500,14 @@ th {
     border-top: 0.5px dashed #999;
     margin-left: -10px;
     padding-top: 15px;
+}
+.banner_sub_line2 {
+    width: 160px;
+    height: 60px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    margin-bottom: 5px;
+    padding-top: 10px;
 }
 .banner_sub_line3 {
     width: 160px;
@@ -504,6 +541,8 @@ th {
 .data-wrapper1 {
     position: relative;
     top: 1px;
+    font-weight: 600;
+    color: #555;
 }
 .data-wrapper2 {
     width: 65px;
@@ -526,21 +565,17 @@ th {
 /* community */
 .banner_sub_community {
     display: inline-block;
-    width: 100px;
+    width: 120px;
+    height: 50px;
     font-size: 10px;
     margin-top: 5px;
     margin-left: -2px;
 }
-.banner_sub_community_main_date {
-    margin-top: 2px;
-    margin-bottom: 5px;
-}
-.banner_sub_community_final {
-    display: inline-block;
+.banner_sub_community_main_title {
     width: 100px;
-    font-size: 10px;
-    margin-top: 5px;
-    margin-left: 2px;
+}
+.banner_sub_community_main_date {
+    margin-top: 6px;    
 }
 .box4_space{
     margin-top: 3px;
@@ -566,7 +601,7 @@ th {
     font-size: 20px;
     font-family: 'TAEBAEKfont';    
     margin-top: 17px;
-    margin-left: 109px;
+    /* margin-left: 109px; */
 }
 .review_list {
     height: 336px;

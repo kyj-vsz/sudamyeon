@@ -1,41 +1,96 @@
 <footer xmlns:th="http://www.thymeleaf.org">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
-                <ul>
-                    <li style="font-size: 20px;">Sudamyeon Co.</li>
-                    <li>대표 : 국윤재, 사업자 등록번호 : 311-10-28492(서울특별시 관악구 청룡동 862-1, 14층)</li>
-                    <li>인터넷신문사업 등록번호 : 서울 가02493 / 등록일자 : 2023년 9월 22일</li>
-                    <li>제호 : 수다면 (Sudamyeon) / 발행인 : 한정호 / 편집인 : 임정기, 임형진 / 발행일자 : 2023년 9월 23일</li>
-                    <li>통신판매업 신고 2023-서울강남-0332 ※ 청소년보호책임 및 개인정보 관리 책임자 : 국윤재 (sudamyeon@sudamyeon.com)</li>
-                    <li>벌행소 : 서울시 강남구 새마을로 20-1, 5층 고객센터 : 02) 887-3324 / sudamyeon@sudamyeon.com 호스팅사업자 : 구글 비즈니스 플랫</li>
-                </ul>
+    <div class="container footer_head">
+        <div class="col-12">
+            <div class="container footer_column_wrapper">
+                <div class="col-md-8">
+                    <div class="footer_column1">
+                        <ul>
+                            <li class="footer_column1_text1">Sudamyeon Co.</li>
+                            <li class="footer_column1_text2">대표 : 국윤재, 사업자 등록번호 : 311-10-28492(서울특별시 관악구 청룡동 862-1, 14층)</li>
+                            <li class="footer_column1_text3">인터넷신문사업 등록번호 : 서울 가02493 / 등록일자 : 2023년 9월 22일</li>
+                            <li class="footer_column1_text3">제호 : 수다면 (Sudamyeon) / 발행인 : 한정호 / 편집인 : 임정기, 임형진 / 발행일자 : 2023년 9월 23일</li>
+                            <li class="footer_column1_text3">통신판매업 신고 2023-서울강남-0332 ※ 청소년보호책임 및 개인정보 관리 책임자 : 국윤재 (sudamyeon@sudamyeon.com)</li>
+                            <li class="footer_column1_text3">벌행소 : 서울시 강남구 새마을로 20-1, 5층 고객센터 : 02) 887-3324 / sudamyeon@sudamyeon.com 호스팅사업자 : 구글 비즈니스 플랫</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 footer_column2">
+                    <ul>
+                        <li class="footer_column2_text1">공지사항</li>
+                        <li class="footer_column2_text1">이용문의</li>
+                        <li class="footer_column2_text1">광고 상품 안내</li>
+                        <li class="footer_column2_text1">사업자 등록</li>
+                        <li class="footer_column2_text1">커뮤니티</li>
+                        <li class="footer_column2_text1">F&A</li>
+                        <li class="footer_column2_text1">이용약관</li>
+                        <li class="footer_column2_text1">Contact Us</li>
+                    </ul>
+                </div>
+                <div class="col-md-2 footer_column3">
+                    <ul>
+                        <li class="footer_column3_text1">SNS</li>
+                        <li class="footer_column3_text1">Twitter</li>
+                        <li class="footer_column3_text1">Facebook</li>
+                        <li class="footer_column3_text1">Youtube</li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-sm-2">
-                <ul>
-                    <li>공지사항</li>
-                    <li>이용문의</li>
-                    <li>광고 상품 안내</li>
-                    <li>사업자 등록</li>
-                    <li>커뮤니티</li>
-                    <li>F&A</li>
-                    <li>이용약관</li>
-                    <li>Contact Us</li>
-                </ul>
-            </div>
-            <div class="col-sm-2">
-                <ul>
-                    <li>SNS</li>
-                    <li>Twitter</li>
-                    <li>Facebook</li>
-                    <li>Youtube</li>
-                </ul>
-            </div>
-        </div>
-        <div style="text-align: center; padding-top: 20px;">
-            <p>
-                @2023 sudamyeon.com All Rights Reserved
-            </p>
         </div>
     </div>
+    <div class="container-fluid footer_copyright">
+            <p class="footer_copyright_font">
+                &copy 2023 sudamyeon.com All Rights Reserved
+            </p>
+    </div>
+
+    <button onclick="backToTop()" id="btn-back-to-top" title="위로 가기" ><i class="fa-solid fa-chevron-up" style="margin-top: 5px;"></i></button>
+
+    <script> 
+        // 스크롤 이벤트 리스너
+        window.addEventListener('scroll', () => {
+        // 스크롤 위치가 100px 이상일 때 위로 가기 버튼을 보이게 함
+        if (
+            document.body.scrollTop > 100 ||
+            document.documentElement.scrollTop > 20
+        ) {
+            document.getElementById('btn-back-to-top').style.display = 'block';
+        } else {
+            document.getElementById('btn-back-to-top').style.display = 'none';
+        }
+        });
+
+        // 클릭 시 페이지 맨 위로 스크롤 (애니메이션 효과 추가)
+        function backToTop() {
+        const position =
+            document.documentElement.scrollTop || document.body.scrollTop;
+        if (position) {
+            window.requestAnimationFrame(() => {
+            window.scrollTo(0, position - position / 10);
+            backToTop();
+            });
+        }
+        }
+    </script>
+
+    <style>
+    #btn-back-to-top {
+        display: none;
+        position: fixed;
+        bottom: 50px;
+        right: 30px;
+        z-index: 9999;
+        border: none;
+        outline: none;
+        background-color: #ff6f3a;
+        cursor: pointer;
+        border-radius: 10px;
+        margin-left: 200px;
+        width: 40px;
+        height: 40px;
+    }
+
+    #btn-back-to-top:hover {
+        background-color: #ffae97;
+    }
+    </style>
 </footer>

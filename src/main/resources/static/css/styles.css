@@ -23,6 +23,13 @@ body {
     margin: 0;
     padding: 0;
 }
+a {
+    text-decoration-line: none !important;
+    color: #000;
+}
+a:hover {
+    color: #000;
+}
 header {
     text-align: center;
     color:black;
@@ -68,10 +75,10 @@ header {
     height: 20px;
     background-color: transparent;
 }  
-.searchplace {    
-    border: 1px solid white;
+.searchplace {        
     border-radius: 20px;
-    background-color: gainsboro; 
+    background-color: #ddd;
+    border: 1px solid #000;
 }
 .searchplace:focus {
     outline: none; /* 포커스된 상태에서 기본 아웃라인 스타일을 제거 */
@@ -221,13 +228,14 @@ li {
     text-align: center;
     background-color: white;
     box-sizing: border-box;
-    cursor: pointer; 
+    cursor: pointer;
+    font-weight: 600;
 }
 .list-container {
     display: none;
     padding: 1px;
     position: absolute;
-    z-index: 1; /* 리스트를 다른 요소들 위에 표시 */
+    z-index: 4; /* 리스트를 다른 요소들 위에 표시 */
 }
 .list-container ul {
     list-style: none;
@@ -254,14 +262,6 @@ li {
     padding-top: 10px;
 }
 .list-container-num2 {
-    width: 257px;
-    height: 45px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding-top: 10px;
-}
-.list-container-num3 {
     width: 257px;
     height: 45px;
     background-color: #fff;

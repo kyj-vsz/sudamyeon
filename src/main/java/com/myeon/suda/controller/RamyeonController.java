@@ -1,11 +1,16 @@
 package com.myeon.suda.controller;
 
+import com.myeon.suda.service.FreeBoardService;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myeon.suda.dto.MemberDTO;
@@ -27,12 +32,22 @@ public class RamyeonController {
 
     private final RamyeonService ramyeon_service;
 
-    @GetMapping({"/signup","/login"})
+    private final FreeBoardService board_service;
+
+    @GetMapping("/signup")
     public void signup(){}
+
+    @GetMapping("/login")
+        public String loginPage(HttpServletRequest request) {
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("prevPage", referrer);
+        return "/members/login";
+    }
 
     @GetMapping("/register")
     public void register(Model model){
         model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));
+        model.addAttribute("dto6", board_service.get_list_community(new PageRequestDTO(1,5)));
     }
 
     @PostMapping("/signup")
@@ -52,12 +67,11 @@ public class RamyeonController {
     
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
-        log.info("ddddddd");
-        model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));    
-        
+        model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));
+        model.addAttribute("dto6", board_service.get_list_community(new PageRequestDTO(1,5)));
+
         if(pageRequestDTO.getKeyword() == null) {
             pageRequestDTO.setKeyword("");
-            log.info("kkk :"+pageRequestDTO.getKeyword());
         }
         
         if(pageRequestDTO.getKeyword() != ""){
@@ -73,6 +87,7 @@ public class RamyeonController {
         RamyeonDTO ramyeonDTO = ramyeon_service.get_ramyeon(mno);
         model.addAttribute("dto", ramyeonDTO);
         model.addAttribute("dto5", ramyeon_service.get_main_page_new_review(new PageRequestDTO(1,5)));
+        model.addAttribute("dto6", board_service.get_list_community(new PageRequestDTO(1,5)));
     }
 
     @PostMapping("/modify")

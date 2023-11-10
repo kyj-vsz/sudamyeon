@@ -1,112 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>회원 가입</title>
-    <style>
-        .center-horizontal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    <title>회원가입 ㅣ 수다면</title>
+    <link rel="shortcut icon" type="image/icon" th:href="@{/img/icon/sudamyeon.png}">
 
-        .center-text {
-            text-align: center; /* 텍스트를 가운데 정렬 */
-        }
+    <!-- Fontawesome -->    
+    <script src="https://kit.fontawesome.com/ac43b59d41.js" crossorigin="anonymous"></script>
+    
+    <!-- signup CSS -->
+    <link th:href="@{/css/signup.css}" rel="stylesheet" type="text/css">
 
-        /* 레이아웃 틀 */
-        html {
-            height: 100%;
-        }
-
-        body {
-            margin: 10px;
-            height: 100%;
-            background: #f5f6f7;
-            font-family: Dotum,'돋움',Helvetica,sans-serif;
-        }
-
-        #content {
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%);
-            width: 460px;
-        }
-
-        /* 입력폼 */
-        h3 {
-            margin: 19px 0 8px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-        .int {
-            display: block;
-            position: relative;
-            border: solid 1px #dadada;
-            padding: 10px 14px 10px 14px;
-            box-sizing: border-box;
-            width: 100%;
-            height: 29px;
-            border: none;
-            background: #fff;
-            font-size: 15px;
-        }
-
-        input {
-            font-family: Dotum,'돋움',Helvetica,sans-serif;    
-        }
-
-        /* 버튼 */
-        #btnJoin {
-            width: 100%;
-            padding: 8px 0 10px;
-            border: 0;
-            cursor: pointer;
-            color: #fff;
-            background-color: black;
-            font-size: 20px;
-            font-weight: 400;
-            font-family: Dotum,'돋움',Helvetica,sans-serif;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <div class="center-horizontal">
-        <img th:src="@{/img/sudamyeon.png}" alt="수다면 로고" style="width: 40px; height: 40px;">
-        <h2 class="center-text">수   다   면</h2>
+        <a th:href="@{/}">
+            <img th:src="@{/img/icon/sudamyeon.png}" alt="수다면 로고">
+        </a>
+        <a th:href="@{/}">
+            <h2 class="center-text">수다면</h2>
+        </a>
     </div>
     <form th:action="@{/members/signup}" method="POST" onsubmit="return validateForm()" id="content">
         <div>
-            <h3><label for="email_id">이메일</label></h3>
-            <input class="int" type="text" id="email_id" name="email_id" required="required" placeholder="이메일을 입력하세요" />
+            <h3>회원 정보를 입력해주세요</h3>
+            <div class="icon_box_1">
+                <i class="fa-regular fa-envelope"></i>
+            </div>           
+            <input class="int" type="text" id="email_id" name="email_id" required="required" placeholder="아이디 (이메일)" />            
         </div>
-
         <div>
-            <h3><label for="password">비밀번호</label></h3>
-            <input class="int" type="password" id="password" name="password" required="required" placeholder="비밀번호를 입력하세요" />
+            <div class="icon_box_1">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <input class="int" type="password" id="password" name="password" required="required" placeholder="비밀번호" />
         </div>
-
         <div>
-            <h3><label for="password2">비밀번호 확인</label></h3>
-            <input class="int" type="password" id="password2" name="password2" required="required" placeholder="비밀번호를 다시 입력하세요" />
+            <div class="icon_box_1">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <input class="int" type="password" id="password2" name="password2" required="required" placeholder="비밀번호 확인" />
         </div>
-
         <div>
-            <h3><label for="name">이름</label></h3>
-            <input class="int" type="text" id="name" name="name" required="required" placeholder="이름을 입력하세요" />
+            <div class="icon_box_1">
+                <i class="fa-regular fa-address-card"></i>
+            </div>
+            <input class="int" type="text" id="name" name="name" required="required" placeholder="이름" />
         </div>
-
         <div>
-            <h3><label for="nickname">닉네임</label></h3>
-            <input class="int" type="text" id="nickname" name="nickname" required="required" placeholder="닉네임을 입력하세요" />
+            <div class="icon_box_1">
+                <i class="fa-regular fa-face-smile"></i>
+            </div>
+            <input class="int" type="text" id="nickname" name="nickname" required="required" placeholder="닉네임" />
         </div>
-
         <div>
-            <h3><label for="phone">전화번호</label></h3>
-            <input class="int" type="text" id="phone" name="phone" required="required" placeholder="전화번호를 입력하세요" />
+            <div class="icon_box_1">
+                <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <input class="int" type="text" id="phone" name="phone" required="required" placeholder="휴대폰 번호 (010-0000-0000)" />
         </div>
-
-        <button type="submit" id="btnJoin">가입하기</button>
+        <button type="submit" id="btn_join">가입하기</button>
     </form>
 
     <script>

@@ -12,11 +12,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FreeBoardReplyDTO {
-    private Long free_board_rno;
+    private Long freeBoardRno;
 
-    private String free_board_replyer;
+    private Long freeBoardNo;
 
-    private String free_board_reply_content;
+    private String email_id;
+
+    private String nickname;
+
+    private String freeBoardReplyContent;
 
     private LocalDateTime regdate, moddate;
 }

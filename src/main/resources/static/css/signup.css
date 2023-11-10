@@ -1,7 +1,10 @@
 a {
     text-decoration-line: none !important;
     color: #000;
-}       
+}
+a:hover {
+    color: #000;
+}
 .center-horizontal {
     display: flex;
     justify-content: center;
