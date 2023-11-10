@@ -1,0 +1,333 @@
+a {
+    text-decoration-line: none !important;
+    color: #000;
+}
+a:hover {
+    color: #000;
+}
+.bordered {
+    border: 1px solid #000;
+    padding: 10px;
+}
+.bordered1 {
+    border: 1px solid #000;
+    padding: 10px 10px 0px 10px;
+}
+/* main_page */
+.main_page {
+    margin: 25px 0px 25px 0px;
+}
+/* banner */
+.banner {
+    width: 180px;
+    height: 100%;
+    margin-left: 25px;
+}
+.banner2 {
+    width: 180px;
+    height: 100%;
+    margin-left: 88px;
+}
+/* banner_main */
+.banner_main {
+    text-align: center;
+    margin: -2px 0px 0px 0px;
+    padding-bottom: 7px;
+}
+.banner_main_font {
+    font-weight: 600;
+    color: #555;
+}
+.banner_sub_brand_main_title {
+    font-weight: 600;
+    color: #555;
+}
+.banner_review {
+    margin-left: 13px;
+    margin-top: 0px;
+    position: absolute;
+}
+.banner_community {
+    margin-left: 13px;
+    margin-top: 570px;
+    position: absolute;
+}
+.banner_brand {
+    margin-left: 0px;
+    margin-top: 0px;
+    position: absolute;
+}
+/* banner_sub */
+.banner_sub {
+    width: 180px;
+    height: 100%;
+    margin-left: -6px;
+}
+.banner_sub_line1 {
+    width: 160px;
+    height: 100px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    padding-top: 15px;
+}
+.banner_sub_line2 {
+    width: 160px;
+    height: 60px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    margin-bottom: 5px;
+    padding-top: 10px;
+}
+.banner_sub_line3 {
+    width: 160px;
+    height: 80px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    padding-top: 12px;
+}
+.banner_sub_review_img {
+    width: 71px;
+    height: 62px;
+    border: 0.5px solid #000;
+    border-radius: 5px;
+    margin-left: -11px;
+    margin-top: 5px;
+}
+.banner_sub_review_img a img {
+    width: 65px;
+    height: 100%;
+    margin-left: 2px;
+}
+.banner_sub_review_main {    
+    margin-top: -7px;
+    margin-left: -4px;
+}
+.banner_sub_review_main a {
+    display: inline-block;
+    font-size: 10px;
+    line-height: -5px;
+}
+.data-wrapper1 {
+    position: relative;
+    top: 1px;
+    font-weight: 600;
+    color: #555;
+}
+.data-wrapper2 {
+    width: 65px;
+    height: 30px;
+    margin-top: 3px;    
+}
+.data-wrapper4 {
+    width: 65px;
+    font-size: 10px;
+    margin-top: 3px;
+}
+.banner_sub_review_img_final {
+    width: 70px;
+    height: 62px;
+    border: 0.5px solid #000;
+    border-radius: 5px;
+    margin-left: -10px;
+    margin-left: -5px;
+}
+/* community */
+.banner_sub_community {
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-left: -2px;
+}
+.banner_sub_community_main_title {
+    width: 100px;
+}
+.banner_sub_community_main_date {
+    margin-top: 6px;    
+}
+/* banner brand */
+.banner_sub_brand {
+    display: inline-block;
+    text-align: center;
+    width: 160px;
+    height: 60px;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-left: -14px;    
+}
+.banner_sub_brand_main_icon {
+    font-size: 22px;
+    margin-top: 4px;    
+}
+.banner_sub_brand_main_icon a i {
+    margin-right: 2px;
+}
+.fa-youtube {
+    color: #ff0000;
+}
+.fa-facebook {
+    color: #00498c;
+}
+.fa-twitter {
+    color: #00acee;
+}
+.fa-instagram {
+    color: #ff6f3a;
+}
+.fa-tiktok {
+    color: #ff6f3a;
+}
+/* main_sudamyeon_community */
+.main_sudamyeon_community {
+    width: 615px;
+    height: 100%;
+}
+.search_box {
+    position: relative;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.search_box input[type="text"] {
+    padding-left: 30px;    
+}
+.search_icon {
+    position: absolute;
+    top: 50%;
+    left: 10px; 
+    transform: translateY(-50%);     
+}  
+.searchplace_community {    
+    border: 1px solid #000;
+    border-radius: 20px;
+    background-color: #ddd;
+    float: right;
+    width: 200px;
+    height: 25px;
+}
+.searchplace_community:focus {
+    outline: none;
+    border: 2px solid #ff4200;
+}
+.searchplace_community::placeholder {
+    font-size: 12px;
+}
+.main_sudamyeon_community_searchbtn {
+    float: right;
+    width: 50px;
+    height: 25px;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: -15px;
+    line-height: 15px;    
+    background-color: #ff6f3a;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    z-index: 3;
+}
+.main_sudamyeon_community_registerbtn {
+    position: relative;
+    float: right;
+    width: 62px;
+    height: 25px;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: -15px;
+    line-height: 15px;
+    background-color: #ff6f3a;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 3;
+}
+.col-3 {
+    position: relative;
+    z-index: 2; 
+}
+.main_sudamyeon_community_registerbtn:hover,
+.main_sudamyeon_community_searchbtn:hover {
+    background-color: #ddd;
+    color: #000;
+}
+.main_sudamyeon_community_registerbtn:active,
+.main_sudamyeon_community_registerbtn:focus,
+.main_sudamyeon_community_searchbtn:active,
+.main_sudamyeon_community_searchbtn:focus {
+    background-color: #ddd;
+    color: #000;
+}
+/* main_sudamyeon_community_list */
+.main_sudamyeon_community_list {
+    border: 1px solid #000;
+    width: 620px;
+    height: 1080px;
+    margin-left: -19px;
+}
+/* main_sudamyeon_community_list_column1 */
+.main_sudamyeon_community_list_column1 {
+    width: 615px;
+    height: 1030px;
+    margin-left: -14px;
+    text-align: center;
+}
+/* list column */
+.table {
+    margin-bottom: 0rem;
+}
+.tabel thead tr {
+    text-align: center;
+}
+.table_column1 {
+    font-size: 13px;
+    width: 10%;
+}
+.table_column1_fmno {
+    font-size: 12px;
+}
+.table_column2 {
+    font-size: 13px;
+    width: 45%;
+}
+.table_column2_title {
+    font-size: 12px;
+}
+.table_column3 {
+    font-size: 13px;
+    width: 10%;
+}
+.table_column3_reply_count {
+    font-size: 12px;
+}
+.table_column4 {
+    font-size: 13px;
+    width: 15%;
+}
+.table_column4_writer {
+    font-size: 12px;
+}
+.table_column5 {
+    font-size: 13px;
+    width: 15%;
+}
+.table_column5_datetime {
+    font-size: 12px;
+}
+/* 페이징 버튼 스타일 수정 */
+.main_sudamyeon_review_list_paging_btn {
+    border: none;
+    background: none;
+    color: #000;
+    margin-top: 0px;    
+}
+.page-item.active .page-link {
+    background-color: #ff6f3a;
+    border: none;
+}
+.page-link {
+    background-color: none;
+    border: none;
+    color: #000;
+}

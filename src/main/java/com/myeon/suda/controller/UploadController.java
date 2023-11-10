@@ -1,16 +1,18 @@
 package com.myeon.suda.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import com.myeon.suda.dto.UploadResultDTO;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,10 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.myeon.suda.dto.UploadResultDTO;
-
 import lombok.extern.log4j.Log4j2;
-import net.coobird.thumbnailator.Thumbnailator;
 
 
 
@@ -33,6 +32,42 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class UploadController {
     @Value("${com.myeon.upload.path}")
     private String upload_path;
+
+    @PostMapping("/uploadAjax")
+    public ResponseEntity<Map<String,String>> uploadFile(MultipartFile upload){
+        String original_name = upload.getOriginalFilename();
+        String file_name = original_name.substring(original_name.lastIndexOf("\\")+1);
+        log.info("file name :"+file_name);
+
+        String folder_path=make_folder();
+        String uuid=UUID.randomUUID().toString();
+        log.info("====file seperator===");
+        log.info(File.separator);
+        String save_name=upload_path+File.separator+folder_path+File.separator+uuid+"_"+file_name;
+        Path savePath=Paths.get(save_name);
+        try{
+            upload.transferTo(savePath);
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        // String save_file = folder_path + File.separator + uuid + "_" + file_name;
+        String save_file="";
+        try{
+            save_file=  URLEncoder.encode(folder_path+File.separator+uuid+"_"+file_name, "UTF-8");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+        String url="/display?file_name="+save_file;
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("uploaded", "true");
+        map.put("url",url);
+
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
 
     @PostMapping("/upload_ajax")
     public ResponseEntity<List<UploadResultDTO>> upload_file(MultipartFile[] upload_files){
@@ -51,7 +86,7 @@ public class UploadController {
                 upload_file.transferTo(save_path);
                 String thumbnail_save_name =  upload_path + File.separator + folder_path + File.separator + "s_" + uuid + "_" + file_name;
                 File thumbnail_file = new File(thumbnail_save_name);
-                Thumbnailator.createThumbnail(save_path.toFile(), thumbnail_file, 100, 100);     
+                Thumbnailator.createThumbnail(save_path.toFile(), thumbnail_file, 100, 100);
                 resultDTO_list.add(new UploadResultDTO(file_name, uuid, folder_path));
             }
             catch(Exception e){

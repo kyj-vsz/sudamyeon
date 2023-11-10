@@ -3,82 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link th:href="@{/css/styles.css}" rel="stylesheet">
-    <link th:href="@{/css/read.css}" rel="stylesheet">
+    <title>제품 상세보기 ㅣ 수다면</title>
+    <link rel="shortcut icon" type="image/icon" th:href="@{/img/icon/sudamyeon.png}">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-
+    
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
+    
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-
+    
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
+    
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-    <script th:src="@{/starrr.js}"></script>
+    
+    <!-- Styles CSS -->
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <!-- Read CSS -->
+    <link th:href="@{/css/read.css}" rel="stylesheet">
+    
+    <!-- Starrr JS -->
+    <script th:src="@{/js/starrr.js}"></script>
     <link th:href="@{/css/starrr.css}" rel="stylesheet">
+
     <script th:inline="javascript">
         document.addEventListener("DOMContentLoaded", function (){
 
             const ctx = document.getElementById('myChart');
-
+            var spicy = [[${dto.spicy}]];
+            var avg = [[${dto.avg}]];
+            var noodle_size = [[${dto.noodle_size}]];
+            var soupnum = [[${dto.soupnum}]];
+            var cooktime = [[${dto.cooktime}]];
+            console.log(avg);
+            
             new Chart(ctx, {
                 type: 'radar',
                 data: {
                     labels: ['맵기', '별점', '면굵기', '별첨 스프 구성', '조리시간'],
                     datasets: [{
                     label: '주관평가',
-                    data: [4, 4.3, 3, 3, 3],
-                    borderWidth: 3
+                    data: [spicy, avg, noodle_size, soupnum, cooktime],
+                    borderWidth: 2
                     }]
                 },
                 options:{
                     responsive: false,
-                    plugins: {
+                    plugins: {  
                         legend: false
                     },
                     scale: {
                         r:{
                             min:0,
                             max:5
-                        }                    
+                        }
                     }
                 }
             });
         });
         $(document).ready(function(){
             var msg = [[${msg}]];               
+            var page_number = 1;
 
             console.log(msg);
 
             checkModal(msg);
             // showList(dto);
-
+            
             function checkModal(msg){
                 if(msg == null){
                     return;
                 }
-                /**************************************************************************
                 // 글 작성 후 작성한 글의 상세보기로 이동하는 방식일 경우 이 주석을 해제하여 사용
-
-                if(msg > 0){
-                    $(".modal-body").html("게시글 "+msg+"번이 등록되었습니다.");
+                /**************************************************************************
+                 if(msg > 0){
+                     $(".modal-body").html("게시글 "+msg+"번이 등록되었습니다.");
                 }
                 ***************************************************************************/
-                else if(msg == "modify"){
+               else if(msg == "modify"){
                     $("#alert-body").html("수정이 완료되었습니다.");
                 }
                 $("#alertModal").modal();               
             }
 
             var grade = 0;
+            var mno = [[${dto.mno}]];
+            
 
             $(".starrr").starrr({
                 rating: grade,
@@ -92,13 +107,16 @@
 
             var reviewModal = $(".reviewModal");
             var reply_modal = $(".reply_modal");
-            var inputMid = $("input[name='mid']");
-            var inputText = $("input[name='text']");
+            var input_id = $("input[name='email_id']");
+            var input_review_text = $("textarea[name='review_content']");
+            var input_replyer = $("input[name='replyer']");
+            var input_reply_text = $("textarea[name='reply_content']");
+            var review_space = $("#review_space");
 
             $(".add_review_btn").click(function(){
                 grade=0;
-                inputMid.val("");
-                inputText.val("");
+                input_id.val("");
+                input_review_text.val("");
                 //.starrr초기화
                 
                 var star = $(".starrr").clone();
@@ -113,17 +131,395 @@
                         }
                     }
                 });
-                $(".removeBtn, .modifyBtn").hide();
+                $(".removeBtn, .modifyBtn, .reply_add_btn").hide();
                 $(".reviewSaveBtn").show();                
                 reviewModal.modal("show");
             });
 
+            $(".reviewSaveBtn").click(function(){
+                var data = {mno:mno, grade:grade, review_content:input_review_text.val(), email_id:input_id.val()};
+                console.log(data);
+                $.ajax({
+                    url:"/reviews/"+mno,
+                    type:"POST",
+                    data:JSON.stringify(data),
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success:function(result){
+                        console.log("r ="+result);
+                        // self.location.reload();
+                        get_reviews(page_number);
+                    }
+                });
+                reviewModal.modal("hide");
+            });
+
+            function get_list(param, callback, error){
+                var page = param.page || 1;
+                $.getJSON("/reviews/pages/"+mno+"/"+page+"",function(data){
+                    if(callback){
+                        callback(data.reply_count, data.list);
+                    }
+                }).fail(function(xhr, status, err){
+                    if(error){
+                        error();
+                    }
+                });
+            }
+            
+
+            //페이지가 열리면 바로 리뷰 데이터들을 가져와서 사용한다.
+            function get_reviews(page){
+                function formatTime(str){
+                    var date = new Date(str);
+                    return date.getFullYear() + "/" +
+                        (date.getMonth()+1) + "/" +
+                        date.getDate() + " " +
+                        date.getHours() + ":" +
+                        date.getMinutes();
+                }
+                get_list({mno : mno, page : page || 1}, function(reply_count, list){
+                    if(page == -1){
+                        page_number = Math.ceil(reply_count/4.0);
+                        get_reviews(page_number);
+                        return;
+                    }
+                    var str = "";
+                    if(list == null || list.length ==0 ){
+                        review_space.html("");
+                        return;
+                    }
+                    for(var i = 0, len = list.length || 0; i< len; i++){
+                        str +=  ' <div class="card-body-box">';
+                        str +=      ' <div style="cursor:pointer;" id="review_tag' + i + '" class="card-body" data-rno='+list[i].rno+' data-email_id='+list[i].email_id+'>';
+                        str +=          ' <div class="reviewgrade-text-box">';
+                        str +=              '<span class="reviewgrade_text">평점 :</span>';
+                        str +=              '<span class="reviewgrade" data-grade2='+list[i].grade+'></span>';
+                        str +=          '</div>';
+                        str +=          ' <div class="card-body-text-box">';
+                        str +=              '<span class="card-subtitle mb-2 text-muted">'
+                            +                   list[i].nickname
+                            +                   '<span class="card-text">'
+                            +                       formatTime(list[i].moddate) 
+                            +                   '</span>';
+                        str +=              '</span>';
+                        str +=          '</div>';
+                        str +=          ' <h5 class="card-title">'+list[i].review_content+'</h5>';
+                        str +=      ' </div>';
+                        str +=  '</div>';
+                    }
+                    review_space.html(str);
+
+                    makePagination(reply_count);
+
+                    $(".reviewgrade").each(function(idx,o){
+                        console.log(o);
+                        $(this).starrr({
+                            rating: $(this).data("grade2"),
+                            readOnly: true
+                        });
+                    });
+                    $(".main_ramyeon_read_menu5_font").html("댓글수"+" "+"("+reply_count+")");
+                });              
+            }
+            get_reviews(page_number);
+            
+            let pagination = $("#pagination");
+            // 댓글 페이징 출력
+            function makePagination(reply_count) {
+                var end_number = Math.ceil(page_number / 4.0) * 10;
+                var start_number =end_number - 9;
+                var prev = start_number != 1;
+                var next = false;
+
+                if(end_number * 10 >= reply_count){
+                    end_number = Math.ceil(reply_count /4.0);
+                }
+
+                if(end_number * 10 < reply_count){
+                    next = true;
+                }
+                var str="<ul class='pagination'>";
+	      		   
+                if(prev){
+                    str+="<li class='page-item'><a class='page-link' href='"+(start_number-1)+"'>Previous</a></li>";
+                }
+                for(var i = start_number; i <= end_number; i++){
+                    var active = page_number == i? "active":"";
+                    str+="<li class='page-item "+active+"'><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+                }
+                if(next){
+                    str+="<li class='page-item'><a class='page-link' href='"+(end_number+1)+"'>Next</a></li>";	      			   
+                }
+                str +="</ul></div>";
+                pagination.html(str);
+            }
+
+            //댓글 페이지 버튼 액션
+            pagination.on("click","li a", function(e){
+                e.preventDefault();
+                var target_page_number = $(this).attr("href");
+                page_number = target_page_number;
+                get_reviews(page_number);
+            });
+
+            //modify review
+            var rno;
+            $(".review_list").on("click", ".card-body", function(){                    
+                $(".reviewSaveBtn").hide();
+                $(".removeBtn, .modifyBtn, .reply_add_btn").show();
+                var target_review = $(this);
+                rno = target_review.data("rno");
+                console.log("rno ----" + rno);
+                input_id.val(target_review.data("email_id"));
+                // inputText.val(targetReview.find(".card-title").clone().children().remove().end().text());
+                input_review_text.val(target_review.find(".card-title").text().trim());
+                var grade2 = $(this).find(".reviewgrade").data("grade2");
+                //.starrr초기화
+                var star = $(".starrr").clone();
+                $(".starrr").remove();
+                $("#divGrade").append(star);
+                $(".starrr").starrr({
+                    rating: grade2,
+                    change: function(e, value){
+                        if(value){
+                            console.log(value);
+                            grade = value;
+                        }
+                    }
+                });
+                // $(".starrr a:nth-child("+grade+")").trigger("click");
+                $(".reviewModal").modal("show");   
+            });
+
+            $(".modifyBtn").on("click", function(){
+                var data ={rno: rno, mno:mno, grade:grade, review_content:input_review_text.val(), email_id: input_id.val()};
+                console.log(data);
+                $.ajax({
+                    url:"/reviews/"+mno+"/"+rno,
+                    type:"PUT",
+                    data:JSON.stringify(data),
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success: function(result){
+                        console.log("result=====" +result);
+                        // self.location.reload();
+                        get_reviews(page_number);
+                    }
+                });
+                reviewModal.modal("hide");
+            });
+            $(".removeBtn").on("click", function(){
+                var data = {rno: rno};
+                console.log(data);
+                $.ajax({
+                    url:"/reviews/"+mno+"/"+rno,
+                    type:"DELETE",
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success:function(result){
+                        console.log("==result==");
+                        console.log(result);
+                        // self.location.reload();
+                        get_reviews(page_number);
+                    }
+                });
+                reviewModal.modal("hide");
+            });
+
             $(".reply_add_btn").click(function(){
+                input_replyer.val("");
+                input_reply_text.val("");
                 reviewModal.modal("hide");
                 reply_modal.modal("show");
+                $(".reply_remove_btn, .reply_modify_btn").hide();
+            });
+
+            $(".reply_save_btn").click(function(){
+                var data = {rno:rno, reply_content:input_reply_text.val(), replyer:input_replyer.val()};
+                console.log(data);
+                $.ajax({
+                    url:"/replies/"+rno,
+                    type:"POST",
+                    data:JSON.stringify(data),
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"text",
+                    success:function(result){
+                        console.log("r ="+result);
+                        // self.location.reload();
+                        get_reviews(page_number);
+                    }
+                });
+                reply_modal.modal("hide");
+            });
+            
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+
+            
+            // 브랜드 이름과 이미지 매핑
+            const brandImages = {
+                "이마트": "/img/logo_brand/logo_emart.png",
+                "하림": "/img/logo_brand/logo_harim.png",
+                "홈플러스": "/img/logo_brand/logo_homeplus.png",
+                "농심": "/img/logo_brand/logo_nongshim.png",
+                "오뚜기": "/img/logo_brand/logo_ottogi.png",
+                "팔도": "/img/logo_brand/logo_paldo.png",
+                "풀무원": "/img/logo_brand/logo_pulmuone.png",
+                "삼양": "/img/logo_brand/logo_samyang.png",
+                "더본": "/img/logo_brand/logo_theborn.png",
+                "비폰": "/img/logo_brand/logo_vifon.png",
+                // 다른 브랜드 이미지 URL들...
+            };
+
+            // 브랜드 이름 요소와 이미지 요소 가져오기
+            const brandNameElement = document.querySelector(".main_ramyeon_read_menu_table_dto");
+            const brandImageElement = document.getElementById("brandImage");
+
+            if (brandNameElement && brandImageElement) {
+                // 요소를 찾았을 때 실행할 코드
+                const brandName = brandNameElement.innerText;
+                const imageURL = brandImages[brandName];
+
+                // 이미지 설정
+                brandImageElement.src = imageURL;
+                brandImageElement.alt = `${brandName} 이미지`;
+
+                // 데이터가 올라온 시간을 가져와서 현재 시간과 비교하여 시간 차이 표시
+            function calculateTimeDifference() {
+                const dataTimeSpans = document.querySelectorAll(".data-wrapper3");
+
+                dataTimeSpans.forEach(function(dataTimeSpan) {
+                    const dataTimeText = dataTimeSpan.innerText;
+                    const dataTime = new Date(dataTimeText); // 데이터가 올라온 시간을 JavaScript Date 객체로 변환
+                    const currentTime = new Date();
+                    const timeDifferenceInSeconds = Math.floor((currentTime - dataTime) / 1000); // 시간 차이를 초 단위로 변환
+
+                    let timeDifferenceText;
+
+                    if (timeDifferenceInSeconds >= 86400) {
+                        const days = Math.floor(timeDifferenceInSeconds / 86400);
+                        timeDifferenceText = `${days}일 전`;
+                    } else if (timeDifferenceInSeconds >= 3600) {
+                        const hours = Math.floor(timeDifferenceInSeconds / 3600);
+                        timeDifferenceText = `${hours}시간 전`;
+                    } else if (timeDifferenceInSeconds >= 60) {
+                        const minutes = Math.floor(timeDifferenceInSeconds / 60);
+                        timeDifferenceText = `${minutes}분 전`;
+                    } else {
+                        timeDifferenceText = `${timeDifferenceInSeconds}초 전`;
+                    }
+
+                    // 시간 차이를 출력
+                    dataTimeSpan.innerText = timeDifferenceText;
+                });
+            }
+
+            // 시간 차이 계산 함수 호출
+            calculateTimeDifference();
+            } else {
+                console.error("요소를 찾을 수 없습니다.");
+            }
+            
+        });          
+        $(document).ready(function () {
+            // 모달을 열기 전에 이벤트 핸들러를 등록
+            $('.reviewModal').on('show.bs.modal', function () {
+                // Hidden Input Element에서 사용자 아이디 값을 읽어옴
+                const username = $('#user_id').val();
+                // 사용자의 아이디를 입력란에 설정
+                $('#email_id').val(username);
             });
         });
-    </script>
+
+        $(document).ready(function() {
+            // 나트륨 데이터
+            const sodiumData = [[${dto.sodum}]];
+
+            // 지방 데이터
+            const fatData = [[${dto.fat}]];
+
+            // 탄수화물 데이터
+            const carbohydrateData = [[${dto.carbohydrate}]];
+
+            // 포화지방 데이터
+            const saturatedFatData = [[${dto.saturated_fat}]];
+
+            // 단백질 데이터
+            const proteinData = [[${dto.protein}]];
+
+            // 트랜스지방 데이터
+            const transFatData = [[${dto.trans_fat}]];
+
+            // 당류 데이터
+            const sugarData = [[${dto.sugar}]];
+
+            // 콜레스테롤 데이터
+            const cholesterolData = [[${dto.cholesterol}]];
+
+            // 콜레스테롤 데이터
+            const calciumData = [[${dto.etc}]];
+
+            // 기준치 계산 (단위: 밀리그램)
+            const sodiumDailyLimit = 2300; // 나트륨의 일일 권장 섭취 한도
+            const fatDailyLimit = 70; // 지방의 일일 권장 섭취 한도
+            const carbohydrateDailyLimit = 300; // 탄수화물의 일일 권장 섭취 한도
+            const saturatedFatDailyLimit = 24; // 포화지방의 일일 권장 섭취 한도
+            const proteinDailyLimit = 56; // 단백질의 일일 권장 섭취 한도
+            const transFatDailyLimit = 2; // 트랜스지방의 일일 권장 섭취 한도
+            const sugarDailyLimit = 90; // 당류의 일일 권장 섭취 한도
+            const cholesterolDailyLimit = 300; // 콜레스테롤의 일일 권장 섭취 한도
+            const calciumDailyLimit = 1000; // 칼슘의 일일 권장 섭취 한도
+
+            // 나트륨 백분율 계산
+            const sodiumValue = parseInt(sodiumData);
+            const sodiumPercentage = (sodiumValue / sodiumDailyLimit) * 100;
+            $("#sodiumPercentage").text(sodiumPercentage.toFixed(2) + "%");
+
+            // 지방 백분율 계산
+            const fatValue = parseInt(fatData);
+            const fatPercentage = (fatValue / fatDailyLimit) * 100;
+            $("#fatPercentage").text(fatPercentage.toFixed(2) + "%");
+
+            // 탄수화물 백분율 계산
+            const carbohydrateValue = parseInt(carbohydrateData);
+            const carbohydratePercentage = (carbohydrateValue / carbohydrateDailyLimit) * 100;
+            $("#carbohydratePercentage").text(carbohydratePercentage.toFixed(2) + "%");
+
+            // 포화지방 백분율 계산
+            const saturatedFatValue = parseInt(saturatedFatData);
+            const saturatedFatPercentage = (saturatedFatValue / saturatedFatDailyLimit) * 100;
+            $("#saturatedFatPercentage").text(saturatedFatPercentage.toFixed(2) + "%");
+
+            // 단백질 백분율 계산
+            const proteinValue = parseInt(proteinData);
+            const proteinPercentage = (proteinValue / proteinDailyLimit) * 100;
+            $("#proteinPercentage").text(proteinPercentage.toFixed(2) + "%");
+
+            // 트랜스지방 백분율 계산
+            const transFatValue = parseInt(transFatData);
+            const transFatPercentage = (transFatValue / transFatDailyLimit) * 100;
+            $("#transFatPercentage").text(transFatPercentage.toFixed(2) + "%");
+
+            // 당류 백분율 계산
+            const sugarValue = parseInt(sugarData);
+            const sugarPercentage = (sugarValue / sugarDailyLimit) * 100;
+            $("#sugarPercentage").text(sugarPercentage.toFixed(2) + "%");
+
+            // 콜레스테롤 백분율 계산
+            const cholesterolValue = parseInt(cholesterolData);
+            const cholesterolPercentage = (cholesterolValue / cholesterolDailyLimit) * 100;
+            $("#cholesterolPercentage").text(cholesterolPercentage.toFixed(2) + "%");
+
+            // 칼슘 백분율 계산
+            const calciumValue = parseInt(calciumData);
+            const calciumPercentage = (calciumValue / calciumDailyLimit) * 100;
+            $("#calciumPercentage").text(calciumPercentage.toFixed(2) + "%");            
+
+        });
+
+    </script>   
+    
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -133,375 +529,313 @@
                 <div class="row banner">
                     <!-- 라면 리뷰 배너 시작 -->
                     <div class="banner_review">
-                        <div class="col-12 bordered">
+                        <div class="col-12 bordered1">
                             <div class="banner_main">
-                                <a href="#" class="banner_main_font">New Review</a>
+                                <a th:href="@{/members/list}" class="banner_main_font">New Review</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
+                                    <div class="row banner_sub_line1"  th:each="dto5 : ${dto5.dto_list}">
                                         <div class="col-6">
                                             <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
+                                                <a th:href="@{/members/read(mno=${dto5.mno})}">
+                                                    <img th:src="|/display?file_name=${dto5.imageDTO_list[0].get_image_url()}|">
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[짜파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">일요일은 내가 요리사!</a><br/>
-                                                <p class="banner_sub_review_main_date">15분 전</p>
+                                                <div>
+                                                    <a th:href="@{/members/read(mno=${dto5.mno})}" style="width: 70px;">
+                                                        [ <span class="data-wrapper1" th:text="${#strings.length(dto5.gname) > 4 ? #strings.substring(dto5.gname, 0, 4) + '...' : dto5.gname}"></span> ]
+                                                    </a>
+                                                    <a class="data-wrapper2" th:href="@{/members/read(mno=${dto5.mno})}">
+                                                        <span th:text="${dto5.reviewDTO_list[0].review_content.length() > 10 ? dto5.reviewDTO_list[0].review_content.substring(0, 10) + '...' : dto5.reviewDTO_list[0].review_content}"
+                                                              th:attr="title=${dto5.reviewDTO_list[0].review_content}"></span>
+                                                    </a>
+                                                    <p class="data-wrapper4">
+                                                        [ <span class="data-wrapper3" th:text="${dto5.reviewDTO_list[0].moddate}"></span> ]
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[너구리]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">오동통한 면발 너구리..</a><br/>
-                                                <p class="banner_sub_review_main_date">1시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[스파게티]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">최고의 가설비 인정</a><br/>
-                                                <p class="banner_sub_review_main_date">3시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[진라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">역시 매운맛이 진리다</a><br/>
-                                                <p class="banner_sub_review_main_date">4시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main">
-                                                <a href="#" class="banner_sub_review_main_title">[신라면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">농심을 먹여살림</a><br/>
-                                                <p class="banner_sub_review_main_date">6시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_img_final">
-                                                <a href="#">img</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="banner_sub_review_main_final">
-                                                <a href="#" class="banner_sub_review_main_title">[안성탕면]</a><br/>
-                                                <a href="#" class="banner_sub_review_main_content">우리 아빠가 좋아하는 맛</a><br/>
-                                                <p class="banner_sub_review_main_date">10시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
                     <!-- 라면 리뷰 배너 끝 -->
-                    <!-- 커뮤니티 배너 시작-->
+                    <!-- 라면 커뮤니티 배너 시작-->
                     <div class="banner_community">
-                        <div class="col-12 bordered">
+                        <div class="col-12 bordered1">
                             <div class="banner_main">
-                                <a href="#" class="banner_main_font">Community</a>
+                                <a th:href="@{/flist}" class="banner_main_font">Community</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
+                                    <div class="row banner_sub_line2" th:each="dto6 : ${dto6.dto_list}">
+                                        <div class="col-12">
                                             <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">라면에 대한 진실..</a>
-                                                <p class="banner_sub_community_main_date">30분 전</p>
+                                                <a th:href="@{/fread(freeBoardNo = ${dto6.freeBoardNo})}" class="banner_sub_community_main_title">
+                                                    <span th:text="${dto6.freeBoardTitle.length() > 12 ? dto6.freeBoardTitle.substring(0, 12) + '...' : dto6.freeBoardTitle}"
+                                                        th:attr="title=${dto6.freeBoardTitle}"></span>
+                                                </a>
+                                                <p class="banner_sub_community_main_date">
+                                                    [ <span class="data-wrapper3" th:text="${#temporals.format(dto6.regdate,'yyyy/MM/dd HH:mm:ss')}"></span> ]                                                    
+                                                </p>                                            
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">매운라면 잘 먹는 법</a>
-                                                <p class="banner_sub_community_main_date">45분 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">짜파게티에 관한 견해</a>
-                                                <p class="banner_sub_community_main_date">1시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">신라면 개인적인 생각</a>
-                                                <p class="banner_sub_community_main_date">2시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">라면과 계란의 조화</a>
-                                                <p class="banner_sub_community_main_date">5시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community_final">
-                                                <a href="#" class="banner_sub_community_main_title">라면 공장 방문 후기</a>
-                                                <p class="banner_sub_community_main_date">5시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>            
                             </div>
                         </div>
                     </div>
-                    <!-- 커뮤니티 배너 끝 -->
+                    <!-- 라면 커뮤니티 배너 끝 -->
                 </div>
             </div>
             <div class="col-9">
                 <!-- col-9 안의 새로운 row -->
-                <div class="row info_space">
-                    <div id="box1" class="container form-group">
-                        <div id="image" class="col-lg-4">
-                            img space
-                        </div>
-                        <div id="info" class="col-lg-8">
-                            <div class="info_wrap">                            
-                                <h4>상품명</h4>
-                                <div class="row" style="margin-left: 3.7px;">
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div>img</div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
+                <div class="row">
+                    <!-- read menu 1 -->
+                    <div class="main_ramyeon_read_menu1">
+                        <div class="container form-group">
+                            <div class="main_ramyeon_read_menu_img">
+                                <div>
+                                    <ul>
+                                        <div style="text-align: center;">
+                                            <p class="main_ramyeon_read_menu1_img_font">
+                                                <span th:text="'[ ' + ${dto.gname} + ' ]'" th:remove="tag" ></span>
+                                            </p>
+                                        </div>                                        
+                                        <li style="cursor:pointer;" th:each="image: ${dto.imageDTO_list}" th:data-file="${image.get_image_url()}" class="img_border_box">
+                                            <img th:if="${image.path != null}" th:src="|/display?file_name=${image.get_image_url()}|" class="img_box">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="main_ramyeon_read_menu_table">
+                                <div class="col-8">
+                                    <div class="main_ramyeon_read_menu_table_font">                                        
                                     </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/cost.png}" alt="소비자가격"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                    <div>                            
+                                        <div class="row" style="margin-left: 3.7px;">
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table1">
+                                                    <div class="col-12">
+                                                        <div class="main_ramyeon_read_menu_table_img">
+                                                            <img id="brandImage" src="" alt="브랜드 이미지">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">브랜드</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="brand">[[${dto.brand}]]</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table2">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img1">
+                                                            <img th:src="@{/img/icon/snack.png}" alt="분류">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">분류</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="category">[[${dto.category}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/weight.png}" alt="무게"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table3">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img2">
+                                                            <img th:src="@{/img/icon/cost.png}" alt="가격">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">가격</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="price">[[${dto.price}]]</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table4">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img3">
+                                                            <img th:src="@{/img/icon/cooking2.png}" alt="조리방법">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">조리방법</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="cooking">[[${dto.cooking}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/lamen.png}" alt="칼로리"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table5">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img4">
+                                                            <img th:src="@{/img/icon/weight.png}" alt="무게">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">무게</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="weight">[[${dto.weight}]]g</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table6">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img5">
+                                                            <img th:src="@{/img/icon/time.png}" alt="소비기한">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">소비기한</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="expiry">[[${dto.expiry}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>                            
-                                <div class="row" style="margin-left: 3.7px;">
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/snack.png}" alt="라면종류"></div>
-                                                <div>img</div>
-                                                <div>img</div>
+                                            <div class="col-3">
+                                                <div class="row main_ramyeon_read_menu_table7">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img6">
+                                                            <img th:src="@{/img/icon/lamen.png}" alt="칼로리">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">칼로리</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="calorie">[[${dto.calorie}]]kcal</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row main_ramyeon_read_menu_table8">
+                                                    <div class="col-12">                                            
+                                                        <div class="main_ramyeon_read_menu_table_img7">
+                                                            <img th:src="@{/img/icon/calender.png}" alt="출시년도">
+                                                        </div>
+                                                        <div class="main_ramyeon_read_menu_table_column">출시년도</div>
+                                                        <div class="main_ramyeon_read_menu_table_dto" name="birth">[[${dto.birth}]]</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/cooking2.png}" alt="조리방법"></div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/time.png}" alt="유통기한"></div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 info_item">
-                                        <div class="row">
-                                            <div class="col-12">                                            
-                                                <div><img th:src="@{/img/calender.png}" alt="출시년도"></div>
-                                                <div>img</div>
-                                                <div>img</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                      
-                            </div>  
-                        </div>
-                    </div>
-
-                    <div id="box2" class="container form-group">
-                        <div id="chart" class="col-lg-6">
-                            <canvas id="myChart" style="margin:auto" width="270px;" height="270px;"></canvas>
-                        </div>
-                        <div id="nutrition" class="col-lg-6">
-                            <div class="table-responsive">                                    
-                                <table class="table table-bordered table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>영양소</th>
-                                            <th>105g</th>
-                                            <th>성분비</th>
-                                            <th>영양소</th>
-                                            <th>105g</th>
-                                            <th>성분비</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">나트륨</div></td>
-                                            <td><div class="table_item">1,780mg</div></td>
-                                            <td><div class="table_item">89%</div></td>
-                                            <td><div class="table_item">지방</div></td>
-                                            <td><div class="table_item">17g</div></td>
-                                            <td><div class="table_item">31%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">탄수화물</div></td>
-                                            <td><div class="table_item">81g</div></td>
-                                            <td><div class="table_item">25%</div></td>
-                                            <td><div class="table_item">포화지방</div></td>
-                                            <td><div class="table_item">7g</div></td>
-                                            <td><div class="table_item">47%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">단백질</div></td>
-                                            <td><div class="table_item">10g</div></td>
-                                            <td><div class="table_item">18%</div></td>
-                                            <td><div class="table_item">트랜스지방</div></td>
-                                            <td><div class="table_item">0g</div></td>
-                                            <td><div class="table_item">0%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">당류</div></td>
-                                            <td><div class="table_item">3g</div></td>
-                                            <td><div class="table_item">3%</div></td>
-                                            <td><div class="table_item">콜레스테롤</div></td>
-                                            <td><div class="table_item">0mg</div></td>
-                                            <td><div class="table_item">0%</div></td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <td><div class="table_item">기타</div></td>
-                                            <td colspan="5"><div class="table_item">칼슘 : 13g 성분비율 : 21% </div></td>
-                                        </tr>
-                                    </tbody>                                   
-                                </table>
+                                        </div>                      
+                                    </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div id="box3" class="container form-group">
-                        <label>Content</label>
-                        <textarea name="content" class="form-control" rows="10"></textarea>
-                    </div>        
-                </div>
-
-                <div class="empty container">
-                    <div class="float-right form-group">
-                        <a class="btn btn-primary" th:href="@{/modify}">    
-                            Modify  
-                        </a>
-                        <a class="btn btn-danger" th:href="@{/remove}">
-                            Remove
-                        </a>
-                        <a class="btn btn-info" th:href="@{list}">
-                            List
-                        </a>
-                    </div>            
-                </div>
-                <div class="row review_space">
-                    <div id="box4" class="container form-group">
-                        <div class="box4_space">                        
-                            <label>댓글수(0)</label>
-                            <button class="btn btn-primary btn-sm float-right add_review_btn" type="button">ReviewAdd</button>                            
-                            <div style="cursor:pointer;" class="card-body">
-                                <h5 class="card-title">review.text<span class="reviewgrade"></span>
-                                    <button class="btn btn-primary btn-sm float-right reply_add_btn" type="button">ReplyAdd</button>
-                                </h5>
-                                <h6 class="card-subtitle mb-2 text-muted">review.nickname</h6>
-                                <p class="card-text">formatTime(review.regDate)</p>
+                    <!-- read menu 1.END -->
+                    <!-- read menu 2 -->
+                    <div>
+                        <div class="main_ramyeon_read_menu2">
+                            <div class="row container">
+                                <div class="col-6">
+                                    <div class="chart">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="main_ramyeon_read_menu2_table">
+                                        <table>
+                                            <tr>
+                                                <th class="first_th" scope="col">영양소</th>
+                                                <th class="second_th1" scope="col">[[${dto.weight}]]g</th>
+                                                <th class="third_th1" scope="col">영양성분<br/>기준치(%)</th>
+                                                <th class="fourth_th" scope="col">영양소</th>
+                                                <th class="fifth_th1" scope="col">[[${dto.weight}]]g</th>
+                                                <th class="sixth_th1" scope="col">영양성분<br/>기준치(%)</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">나트륨</th>
+                                                <th class="second_th2" scope="col">[[${dto.sodum}]]g</th>
+                                                <th class="third_th2" scope="col">
+                                                    <span id="sodiumPercentage"></span>
+                                                </th>
+                                                <th class="fourth_th" scope="col">지방</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.fat}]]g</th>
+                                                <th class="sixth_th2" scope="col">
+                                                    <span id="fatPercentage"></span>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">탄수화물</th>
+                                                <th class="second_th2" scope="col">[[${dto.carbohydrate}]]g</th>
+                                                <th class="third_th2" scope="col">
+                                                    <span id="carbohydratePercentage"></span>
+                                                </th>
+                                                <th class="fourth_th" scope="col">포화지방</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.saturated_fat}]]g</th>
+                                                <th class="sixth_th2" scope="col">
+                                                    <span id="saturatedFatPercentage"></span>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">단백질</th>
+                                                <th class="second_th2" scope="col">[[${dto.protein}]]g</th>
+                                                <th class="third_th2" scope="col">
+                                                    <span id="proteinPercentage"></span>
+                                                </th>
+                                                <th class="fourth_th" scope="col">트랜스<br/>지방</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.trans_fat}]]g</th>
+                                                <th class="sixth_th2" scope="col">
+                                                    <span id="transFatPercentage"></span>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">당류</th>
+                                                <th class="second_th2" scope="col">[[${dto.sugar}]]g</th>
+                                                <th class="third_th2" scope="col">
+                                                    <span id="sugarPercentage"></span>
+                                                </th>
+                                                <th class="fourth_th" scope="col">콜레<br/>스테롤</th>
+                                                <th class="fifth_th2" scope="col">[[${dto.cholesterol}]]g</th>
+                                                <th class="sixth_th2" scope="col">
+                                                    <span id="cholesterolPercentage"></span>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="first_th" scope="col">기타<br/>(칼슘)</th>
+                                                <th class="second_th2" scope="col">[[${dto.etc}]]mg</th>                                            
+                                                <th class="third_th2" scope="col">
+                                                    <span id="calciumPercentage"></span>
+                                                </th>
+                                                <th class="fourth_th" scope="col"></th>
+                                                <th class="fifth_th2" scope="col"></th>
+                                                <th class="sixth_th2" scope="col"></th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>
+                    <!-- read menu 2.END -->
+                    <!-- read menu 3 -->
+                    <div>
+                        <div class="main_ramyeon_read_menu3">
+                            <div class="container form-group">
+                                <label class="content_box_font">Content</label>
+                                <textarea name="content" class="form-control main_ramyeon_read_menu3_content" rows="8" readonly="true">[[${dto.content}]]</textarea>
+                            </div>
+                        </div>        
+                    </div>
+                    <!-- read menu 3.END -->
+
+                    <!-- read menu 5 -->
+                    <div>
+                        <div class="row main_ramyeon_read_menu5">
+                            <div class="container form-group">                        
+                                    <label class="main_ramyeon_read_menu5_font">댓글수 ([[${dto.review_count}]])</label>
+                                    <button class="btn btn-primary btn-sm float-right add_review_btn main_ramyeon_read_menu5_btn" type="button"
+                                            th:if="${#authorization.expression('hasRole(''USER'')')}">
+                                        리뷰 등록
+                                    </button>                            
+                                    <div id="accordion" class="list-group review_list">
+                                        <ul id="review_space">
+
+                                        </ul>
+                                    </div>
+                                    <div id="pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- read menu 5.END -->
+                    <!-- read menu 4 -->
+                    <div class="main_ramyeon_read_menu4_btn">
+                        <div class="main_ramyeon_read_menu4">
+                                <a class="btn btn-danger main_ramyeon_read_menu4_delete" th:href="@{/members/remove(mno=${dto.mno})}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                                    삭제
+                                </a>
+                                <a class="btn btn-primary main_ramyeon_read_menu4_modify" th:href="@{/members/modify(mno=${dto.mno})}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">    
+                                    수정
+                                </a>                                
+                                <a class="btn btn-info main_ramyeon_read_menu4_list" th:href="@{/members/list(page=${page_requestDTO.page})}">
+                                    목록
+                                </a>
+                        </div>            
+                    </div>
+                    <!-- read menu 4.END -->
                 </div>               
             </div>
         </div>
@@ -519,7 +853,7 @@
                     <p>처리가 완료 되었습니다</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
@@ -528,7 +862,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Ramyeon Review</h5>
+                    <h5 class="modal-title">라면 리뷰</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -536,56 +870,35 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label >Reviewer ID</label>
-                        <input type="text" class="form-control" name="mid" >
+                        <label>작성자</label>
+                        <div sec:authorize="isAuthenticated()">                            
+                            <input type="text" class="form-control" name="email_id" id="email_id" th:value="${#authentication.principal.email_id}" readonly/>
+                            
+                            <!-- Thymeleaf를 사용하여 Hidden Input Element를 생성하고 사용자 정보(예: 아이디)를 저장 -->
+                            <input type="hidden" id="user_id" th:value="${#authentication.principal.username}" />
+                        </div>
+                        <div sec:authorize="isAnonymous()">
+                            <input type="text" class="form-control" name="email_id" id="email_id_anony" />
+                        </div>       
                     </div>
                     <div class="form-group" id="divGrade">
-                        <label >Grade <span class="grade"></span></label>
+                        <label>별점<span class="grade"></span></label>
                         <div class="starrr"></div>
                     </div>
                     <div class="form-group">
-                        <label >Review Text</label>
+                        <label>리뷰 내용</label>
                         <textarea class="form-control" name="review_content" rows="15" placeholder="내용입력!"></textarea>                        
                     </div>                    
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary reviewSaveBtn">Save changes</button>
-                    <button type="button" class="btn btn-warning modifyBtn">Modify </button>
-                    <button type="button" class="btn btn-danger removeBtn">Remove </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>                    
+                    <button type="button" class="btn btn-primary reviewSaveBtn">저장</button>
+                    <button type="button" class="btn btn-warning modifyBtn">수정</button>
+                    <button type="button" class="btn btn-danger removeBtn">삭제</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="reply_modal modal" tabindex="-2" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Review Reply</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label >Reviewer ID</label>
-                        <input type="text" class="form-control" name="mid" >
-                    </div>                    
-                    <div class="form-group">
-                        <label >Review Text</label>
-                        <textarea class="form-control" name="review_content" rows="15" placeholder="내용입력!"></textarea>                        
-                    </div>                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary reviewSaveBtn">Save changes</button>
-                    <button type="button" class="btn btn-warning modifyBtn">Modify </button>
-                    <button type="button" class="btn btn-danger removeBtn">Remove </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div>    
     <div th:replace="fragments/footer :: footer"></div>
     </body>
 </html>

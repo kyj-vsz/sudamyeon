@@ -1,12 +1,21 @@
-.horizontal-content {
+/* header footer */
+.horizontal-content1 {
     display: flex;
-    align-items: center; /* 수직 가운데 정렬 */
+    /* 수직 가운데 정렬 */
+    align-items: center; 
+    width: 200px;
+    margin-left: 10px;
+}
+.horizontal-content2 {
+    display: flex;
+    /* 수직 가운데 정렬 */
+    align-items: center; 
+    width: 200px;
+    margin-left: 10px;
 }
 .welcome_logout {
-    margin-left: 20px; /* 좌우 여백 추가 (선택사항) */
-}
-.horizontal-content > * {
-    margin: 0 10px; /* 좌우 여백 추가 (선택사항) */
+    /* 좌우 여백 추가 (선택사항) */
+    margin-left: 20px;
 }
 body {
     font-family: Arial, sans-serif;
@@ -14,25 +23,44 @@ body {
     margin: 0;
     padding: 0;
 }
+a {
+    text-decoration-line: none !important;
+    color: #000;
+}
+a:hover {
+    color: #000;
+}
 header {
     text-align: center;
     color:black;
-    padding: 10px 0;
+    padding-top: 0px;    
 }
 .header-content {
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 100px;
 }
 .name {
     font-weight: bold;
+    font-size: 15px;
+    margin-right: 3px;
 }
- /* 돋보기 아이콘 스타일 */
+.logo_icon img {
+    width: 35px; 
+    height: 100%;
+    margin-top: -2px;
+    margin-right: 7px;
+}
+/* 돋보기 아이콘 스타일 */
 .search-box {
     position: relative;
 }
 .search-box input[type="text"] {
-    padding-left: 30px; /* 왼쪽에 아이콘을 감싸기 위한 여분의 패딩 */
+
+    /* 왼쪽에 아이콘을 감싸기 위한 여분의 패딩 */
+    padding-left: 30px;    
 }
 .search-icon {
     position: absolute;
@@ -41,14 +69,48 @@ header {
     transform: translateY(-50%); /* 수직 가운데 정렬 */
 }
 .search-icon img {
-    width: 20px; /* 아이콘 이미지 크기 조정 */
+
+    /* 아이콘 이미지 크기 조정 */
+    width: 20px;
     height: 20px;
     background-color: transparent;
-}
-.searchplace {
-    border: 1px solid white;
+}  
+.searchplace {        
     border-radius: 20px;
-    background-color: gainsboro; 
+    background-color: #ddd;
+    border: 1px solid #000;
+}
+.searchplace:focus {
+    outline: none; /* 포커스된 상태에서 기본 아웃라인 스타일을 제거 */
+    border: 2px solid #ff4200; /* 클릭되었을 때 border-bottom 스타일 변경 */
+}
+input::placeholder {
+    padding-left: 5px;
+}
+.login_font {
+    font-size: 13px;
+    margin-right: 5px;
+}
+.logout_font {
+    font-size: 13px;
+}
+.login_logout_middle {
+    margin-top: -3px;
+    margin-right: -5px;
+}
+.login_view_font1 {
+    font-size: 13px;
+    margin-left: -5px;
+}
+.login_view_font2 {
+    font-size: 13px;
+}
+.login_view_font3 {
+    margin-top: -3px;
+    margin-right: 0px;
+}
+.login_view_font4 {
+    font-size: 13px;
 }
 .header-controls {
     display: flex;
@@ -58,7 +120,7 @@ header {
     padding: 10px;
 }
 .search-box input {
-    width: 500px;
+    width: 400px;    
     padding: 5px;
 }
 .login-button, .signup-button {
@@ -126,8 +188,12 @@ li {
     padding-bottom: 2px;
 }
 .footer_column2 {
+    width: 200px;
     margin-left: 40px;
     padding-left: 80px;
+}
+.footer_column2 ul {
+    width: 200px;
 }
 .footer_column2_text1 {
     font-size: 12px;
@@ -135,7 +201,11 @@ li {
     padding-bottom: 2px;
 }
 .footer_column3 {
+    width: 200px;
     padding-left: 80px;
+}
+.footer_column3 ul {
+    width: 200px;
 }
 .footer_column3_text1 {
     font-size: 12px;
@@ -143,24 +213,75 @@ li {
     padding-bottom: 2px;
 }
 .boxes {
-    display: grid; /* Grid 레이아웃 사용 */
-    grid-template-columns: repeat(4, 1fr); /* 4개의 열로 나눔 */
-    gap: 0px; /* 각 상자 사이의 간격 설정 */
-    padding-left: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0px;
+    margin-left: 50px;    
+    box-shadow: 2px 2px 2px 2px rgba(160, 160, 160, 0.3);
 }
 .box {
-    width: 266px;
+    width: 267px;
     height: 80px;
-    padding: 10px; /* 상자 내부 여백 설정 */
+    padding: 10px;
     border: 1px solid #000;
     border-top: none;
     text-align: center;
     background-color: white;
     box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 600;
 }
-#box_item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* 높이 설정 */
+.list-container {
+    display: none;
+    padding: 1px;
+    position: absolute;
+    z-index: 4; /* 리스트를 다른 요소들 위에 표시 */
+}
+.list-container ul {
+    list-style: none;
+    width: 257px;
+    height: 100%;
+    padding: 0;
+    margin-top: 10px;
+    margin-left: -6px;
+    border-radius: 3px;    
+    box-shadow: 3px 3px 5px 1.5px rgba(150, 150, 150, 0.2), /* 왼쪽 아래 */
+                -3px -3px 5px 1.5px rgba(150, 150, 150, 0.2), /* 오른쪽 위 */
+                -3px 3px 5px 1.5px rgba(150, 150, 150, 0.2), /* 왼쪽 위 */
+                3px -3px 5px 1.5px rgba(150, 150, 150, 0.2); /* 오른쪽 아래 */
+}
+.list-container ul li {
+    cursor: pointer;
+}
+.list-container-num1 {
+    width: 257px;
+    height: 45px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding-top: 10px;
+}
+.list-container-num2 {
+    width: 257px;
+    height: 45px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding-top: 10px;
+}
+.list-container-num4 {
+    width: 257px;
+    height: 45px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding-top: 10px;
+}
+.list-container-num5 {
+    width: 257px;
+    height: 45px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding-top: 10px;
 }

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>수다면</title>
+    <title>제품 검색 ㅣ 수다면</title>
+    <link rel="shortcut icon" type="image/icon" th:href="@{/img/icon/sudamyeon.png}">
         
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -27,7 +28,23 @@
 
     <!-- List CSS -->
     <link th:href="@{/css/list.css}" rel="stylesheet" type="text/css">
-    
+
+    <style>
+        .main_ramyeon_review_list_register_btn {
+            height: 30px;
+            float: right;
+            background-color: #ff6f3a;
+            border: none;
+            width: 80px;
+        }
+        .main_ramyeon_review_list_register_btn:hover,
+        .main_ramyeon_review_list_register_btn:active,
+        .main_ramyeon_review_list_register_btn:focus {
+            background-color: #ddd;
+            color: #000;
+        }
+    </style>
+
     <script th:inline="javascript">
         $(document).ready(function(){
             var msg = [[${msg}]];
@@ -64,20 +81,21 @@
                     const dataTimeText = dataTimeSpan.innerText;
                     const dataTime = new Date(dataTimeText); // 데이터가 올라온 시간을 JavaScript Date 객체로 변환
                     const currentTime = new Date();
-                    const timeDifference = Math.floor((currentTime - dataTime) / 1000); // 시간 차이를 초 단위로 변환
+                    const timeDifferenceInSeconds = Math.floor((currentTime - dataTime) / 1000); // 시간 차이를 초 단위로 변환
 
-                    // 시간 차이를 시간, 분, 초로 변환하여 출력
-                    const hours = Math.floor(timeDifference / 3600);
-                    const minutes = Math.floor((timeDifference % 3600) / 60);
-                    const seconds = timeDifference % 60;
+                    let timeDifferenceText;
 
-                    let timeDifferenceText = "";
-                    if (hours > 0) {
+                    if (timeDifferenceInSeconds >= 86400) {
+                        const days = Math.floor(timeDifferenceInSeconds / 86400);
+                        timeDifferenceText = `${days}일 전`;
+                    } else if (timeDifferenceInSeconds >= 3600) {
+                        const hours = Math.floor(timeDifferenceInSeconds / 3600);
                         timeDifferenceText = `${hours}시간 전`;
-                    } else if (minutes > 0) {
+                    } else if (timeDifferenceInSeconds >= 60) {
+                        const minutes = Math.floor(timeDifferenceInSeconds / 60);
                         timeDifferenceText = `${minutes}분 전`;
                     } else {
-                        timeDifferenceText = `${seconds}초 전`;
+                        timeDifferenceText = `${timeDifferenceInSeconds}초 전`;
                     }
 
                     // 시간 차이를 출력
@@ -102,7 +120,7 @@
                     <div class="banner_review">
                         <div class="col-12 bordered1">
                             <div class="banner_main">
-                                <a href="#" class="banner_main_font">New Review</a>
+                                <a th:href="@{/members/list}" class="banner_main_font">New Review</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
@@ -117,11 +135,12 @@
                                         <div class="col-6">
                                             <div class="banner_sub_review_main">
                                                 <div>
-                                                    <a th:href="@{/members/read(mno=${dto5.mno})}">                                                        
-                                                        [ <span class="data-wrapper1" th:text="${dto5.gname}"></span> ]                                                        
+                                                    <a th:href="@{/members/read(mno=${dto5.mno})}" style="width: 70px;">
+                                                        [ <span class="data-wrapper1" th:text="${#strings.length(dto5.gname) > 4 ? #strings.substring(dto5.gname, 0, 4) + '...' : dto5.gname}"></span> ]
                                                     </a>
                                                     <a class="data-wrapper2" th:href="@{/members/read(mno=${dto5.mno})}">
-                                                        <span th:text="${dto5.reviewDTO_list[0].review_content.length() > 10 ? dto5.reviewDTO_list[0].review_content.substring(0, 10) + '...' : dto5.reviewDTO_list[0].review_content}"></span>
+                                                        <span th:text="${dto5.reviewDTO_list[0].review_content.length() > 10 ? dto5.reviewDTO_list[0].review_content.substring(0, 10) + '...' : dto5.reviewDTO_list[0].review_content}"
+                                                              th:attr="title=${dto5.reviewDTO_list[0].review_content}"></span>
                                                     </a>
                                                     <p class="data-wrapper4">
                                                         [ <span class="data-wrapper3" th:text="${dto5.reviewDTO_list[0].moddate}"></span> ]
@@ -135,77 +154,32 @@
                         </div>
                     </div>
                     <!-- 라면 리뷰 배너 끝 -->
-                    <!-- 커뮤니티 배너 시작-->
+                    <!-- 라면 커뮤니티 배너 시작-->
                     <div class="banner_community">
-                        <div class="col-12 bordered">
+                        <div class="col-12 bordered1">
                             <div class="banner_main">
-                                <a href="#" class="banner_main_font">Community</a>
+                                <a th:href="@{/flist}" class="banner_main_font">Community</a>
                             </div>
                             <div class="row banner_sub">
                                 <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
+                                    <div class="row banner_sub_line2" th:each="dto6 : ${dto6.dto_list}">
+                                        <div class="col-12">
                                             <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">라면에 대한 진실..</a>
-                                                <p class="banner_sub_community_main_date">30분 전</p>
+                                                <a th:href="@{/fread(freeBoardNo = ${dto6.freeBoardNo})}" class="banner_sub_community_main_title">
+                                                    <span th:text="${dto6.freeBoardTitle.length() > 12 ? dto6.freeBoardTitle.substring(0, 12) + '...' : dto6.freeBoardTitle}"
+                                                        th:attr="title=${dto6.freeBoardTitle}"></span>
+                                                </a>
+                                                <p class="banner_sub_community_main_date">
+                                                    [ <span class="data-wrapper3" th:text="${#temporals.format(dto6.regdate,'yyyy/MM/dd HH:mm:ss')}"></span> ]                                                    
+                                                </p>                                            
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">매운라면 잘 먹는 법</a>
-                                                <p class="banner_sub_community_main_date">45분 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">짜파게티에 관한 견해</a>
-                                                <p class="banner_sub_community_main_date">1시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">신라면 개인적인 생각</a>
-                                                <p class="banner_sub_community_main_date">2시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row banner_sub_line">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community">
-                                                <a href="#" class="banner_sub_community_main_title">라면과 계란의 조화</a>
-                                                <p class="banner_sub_community_main_date">5시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="banner_sub_community_final">
-                                                <a href="#" class="banner_sub_community_main_title">라면 공장 방문 후기</a>
-                                                <p class="banner_sub_community_main_date">5시간 전</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>            
                             </div>
                         </div>
                     </div>
-                    <!-- 커뮤니티 배너 끝 -->
+                    <!-- 라면 커뮤니티 배너 끝 -->
                 </div>
             </div>
             <div class="col-9 ">
@@ -450,7 +424,7 @@
                     </li>
                 </ul>
                 <!-- 페이징 end -->
-                <a th:href="@{/members/register}" class="btn btn-sm btn-primary main_ramyeon_review_list_register_btn">Register</a>
+                <a th:href="@{/members/register}" class="btn btn-sm btn-primary main_ramyeon_review_list_register_btn" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">제품 등록</a>
                 <div class="modal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

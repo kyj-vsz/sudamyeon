@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>로그인 ㅣ 수다면</title>
+    <link rel="shortcut icon" type="image/icon" th:href="@{/img/icon/sudamyeon.png}">
 
     <!-- Fontawesome -->    
     <script src="https://kit.fontawesome.com/ac43b59d41.js" crossorigin="anonymous"></script>
     
     <!-- signup CSS -->
     <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
-
+    
 </head>
 <body>
     <div class="center-horizontal">
@@ -38,9 +39,11 @@
             <button type="submit" id="btn_login">로그인</button>
         </div>
         <div>
-            <button type="submit" id="btn_enter_join">
-                <a th:href="@{/members/signup}">회원가입하기</a>
-            </button>
+            <a th:href="@{/members/signup}">
+                <button type="button" id="btn_enter_join">
+                    <p>회원가입하기</p>
+                </button>
+            </a>
         </div>
     </form>
 </body>

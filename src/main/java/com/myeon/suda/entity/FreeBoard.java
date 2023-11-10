@@ -23,22 +23,25 @@ import lombok.ToString;
 public class FreeBoard extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long free_board_no;
+    private Long freeBoardNo;
 
     @Column(length = 50, nullable = false)
-    private String free_board_title;
+    private String freeBoardTitle;
 
-    @Column(length = 2000, nullable = false)
-    private String free_board_content;
+    @Column(length = 5000, nullable = false)
+    private String freeBoardContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member writer;
 
-    public void change_board_title(String board_title){
-        this.free_board_title = board_title;
+    @Column(length = 1, nullable = false)
+    private Long boardCategory;
+
+    public void change_board_title(String freeBoardTitle){
+        this.freeBoardTitle= freeBoardTitle;
     }
 
-    public void change_board_content(String board_content){
-        this.free_board_content = board_content;
+    public void change_board_content(String freeBoardContent){
+        this.freeBoardContent = freeBoardContent;
     }
 }

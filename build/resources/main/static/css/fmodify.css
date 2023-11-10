@@ -1,0 +1,250 @@
+a {
+    text-decoration-line: none !important;
+    color: #000;
+}
+a:hover {
+    color: #000;
+}
+.bordered {
+    border: 1px solid #000;
+    padding: 10px;
+}
+.bordered1 {
+    border: 1px solid #000;
+    padding: 10px 10px 0px 10px;
+}
+/* main_page */
+.main_page {
+    margin: 25px 0px 25px 0px;
+}
+/* banner */
+.banner {
+    width: 180px;
+    height: 100%;
+    margin-left: 25px;
+}
+.banner2 {
+    width: 180px;
+    height: 100%;
+    margin-left: 88px;
+}
+/* banner_main */
+.banner_main {
+    text-align: center;
+    margin: -2px 0px 0px 0px;
+    padding-bottom: 7px;
+}
+.banner_main_font {
+    font-weight: 600;
+    color: #555;
+}
+.banner_sub_brand_main_title {
+    font-weight: 600;
+    color: #555;
+}
+.banner_review {
+    margin-left: 13px;
+    margin-top: 0px;
+    position: absolute;
+}
+.banner_community {
+    margin-left: 13px;
+    margin-top: 570px;
+    position: absolute;
+}
+.banner_brand {
+    margin-left: 0px;
+    margin-top: 0px;
+    position: absolute;
+}
+/* banner_sub */
+.banner_sub {
+    width: 180px;
+    height: 100%;
+    margin-left: -6px;
+}
+.banner_sub_line1 {
+    width: 160px;
+    height: 100px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    padding-top: 15px;
+}
+.banner_sub_line2 {
+    width: 160px;
+    height: 60px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    margin-bottom: 5px;
+    padding-top: 10px;
+}
+.banner_sub_line3 {
+    width: 160px;
+    height: 80px;
+    border-top: 0.5px dashed #999;
+    margin-left: -10px;
+    padding-top: 12px;
+}
+.banner_sub_review_img {
+    width: 71px;
+    height: 62px;
+    border: 0.5px solid #000;
+    border-radius: 5px;
+    margin-left: -11px;
+    margin-top: 5px;
+}
+.banner_sub_review_img a img {
+    width: 65px;
+    height: 100%;
+    margin-left: 2px;
+}
+.banner_sub_review_main {    
+    margin-top: -7px;
+    margin-left: -4px;
+}
+.banner_sub_review_main a {
+    display: inline-block;
+    font-size: 10px;
+    line-height: -5px;
+}
+.data-wrapper1 {
+    position: relative;
+    top: 1px;
+    font-weight: 600;
+    color: #555;
+}
+.data-wrapper2 {
+    width: 65px;
+    height: 30px;
+    margin-top: 3px;    
+}
+.data-wrapper4 {
+    width: 65px;
+    font-size: 10px;
+    margin-top: 3px;
+}
+.banner_sub_review_img_final {
+    width: 70px;
+    height: 62px;
+    border: 0.5px solid #000;
+    border-radius: 5px;
+    margin-left: -10px;
+    margin-left: -5px;
+}
+/* community */
+.banner_sub_community {
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-left: -2px;
+}
+.banner_sub_community_main_title {
+    width: 100px;
+}
+.banner_sub_community_main_date {
+    margin-top: 6px;    
+}
+/* banner brand */
+.banner_sub_brand {
+    display: inline-block;
+    text-align: center;
+    width: 160px;
+    height: 60px;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-left: -14px;    
+}
+.banner_sub_brand_main_icon {
+    font-size: 22px;
+    margin-top: 4px;    
+}
+.banner_sub_brand_main_icon a i {
+    margin-right: 2px;
+}
+.fa-youtube {
+    color: #ff0000;
+}
+.fa-facebook {
+    color: #00498c;
+}
+.fa-twitter {
+    color: #00acee;
+}
+.fa-instagram {
+    color: #ff6f3a;
+}
+.fa-tiktok {
+    color: #ff6f3a;
+}
+.ck-editor__editable { 
+    width: 100%;
+    height: 800px;    
+}
+.editor_box {
+    margin-left: -16px;
+}
+/* main_sudamyeon_community_fmodify */
+.main_sudamyeon_community_fmodify {
+    width: 615px;
+    height: 100%;
+    border: 1px solid #000;
+    margin-left: -18px;
+}
+.main_sudamyeon_community_fmodify_title {
+    font-size: 15px;
+    margin-top: 15px;
+    margin-left: 1px;
+}
+.main_sudamyeon_community_fmodify_title_input {
+    width: 340px;
+    margin-left: -1px;
+    margin-bottom: 15px;
+}
+.main_sudamyeon_community_fmodify_email_id {
+    font-size: 15px;
+    margin-top: 15px;
+    margin-left: 11px;
+}
+.main_sudamyeon_community_fmodify_email_id_input {
+    width: 215px;
+    margin-left: 10px;
+}
+.main_sudamyeon_community_fmodify_content {
+    font-size: 15px; 
+    margin-left: 2px; 
+}
+/* sudamyeon_fmodify_btn_box */
+.sudamyeon_fmodify_btn_box {
+    left: 465px;
+    position: relative;
+    z-index: 3;    
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.sudamyeon_fmodify_btn_box_modify {
+    height: 35px;
+    font-size: 13px;
+    background-color: #ff6f3a;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+.sudamyeon_fmodify_btn_box_modify:hover,
+.sudamyeon_fmodify_btn_box_modify:active,
+.sudamyeon_fmodify_btn_box_modify:focus {
+    background-color: #ddd;
+    color: #000;
+}
+.sudamyeon_fmodify_btn_box_reset {
+    height: 35px;
+    font-size: 13px;
+}
+.sudamyeon_fmodify_btn_box_back {
+    height: 35px;
+    font-size: 13px;
+}
+.col-3 {
+    position: relative;
+    z-index: 2; 
+}

@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.myeon.suda.security.handler.CustomLoginSuccessHandler;
 import com.myeon.suda.security.handler.LoginSuccessHandler;
 
 
@@ -22,7 +24,8 @@ public class SecurityConfig {
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.formLogin().loginPage("/members/login");      
+        http.formLogin().loginPage("/members/login")
+        .successHandler(successHandler1());  
         http.csrf().disable();
         http.logout();
         return http.build();
@@ -31,5 +34,10 @@ public class SecurityConfig {
     @Bean
     public LoginSuccessHandler successHandler(){    
         return new LoginSuccessHandler(passwordEncoder());
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler1() {
+        return new CustomLoginSuccessHandler("/defaultUrl");
     }
 }

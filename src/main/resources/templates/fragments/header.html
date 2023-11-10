@@ -16,6 +16,14 @@
           </div>
         </form>
       </div>
+         <!-- 스프링 시큐리티를 통해 로그인한 에게만 보이는 내용 -->
+      <div th:if="${#request.isUserInRole('ADMIN')}" class="horizontal-content1">
+        <div class="welcome_logout login_view_font1">
+            Welcome, 관리자님 !
+            <span class="login_view_font3">|</span>
+            <a th:href="@{/logout}" class="login_view_font4">로그아웃</a>
+        </div>
+    </div> 
         <!-- 스프링 시큐리티를 통해 로그인한 사용자에게만 보이는 내용 -->
         <div th:if="${#request.isUserInRole('USER')}" class="horizontal-content1">
             <div class="welcome_logout login_view_font1">
@@ -25,7 +33,7 @@
             </div>
         </div> 
         <!-- 스프링 시큐리티를 통해 로그인을 하지 않은 사용자에게만 보이는 내용 -->
-        <div th:unless="${#request.isUserInRole('USER')}" class="horizontal-content2">
+        <div sec:authorize="isAnonymous()" class="horizontal-content2">
             <a th:href="@{/members/login}" class="login_font">로그인</a>
             <span class="login_logout_middle">|</span>
             <a th:href="@{/members/signup}" class="signup-button logout_font">회원가입</a>
@@ -57,18 +65,17 @@
   
   <div class="container" id="box_item">
     <div class="boxes">
-      <div class="box" style="padding-top: 30px; border-right: none;">
-        <a th:href="@{/members/list}">라면 정보 & 리뷰
+      <a th:href="@{/members/list}">
+        <div class="box" style="padding-top: 30px; border-right: none;">라면 정보 & 리뷰
           <div class="list-container"></div>
-        </a>
-      </div>
+        </div>
+      </a>
       <div class="box" style="padding-top: 30px; border-right: none;">의견 나누기
         <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
         <div class="list-container">
           <ul>
-            <li class="list-container-num1"><a>나만의 레시피</a></li>
-            <li class="list-container-num2"><a>제품 추천하기</a></li>
-            <li class="list-container-num3"><a>마켓 구경하기</a></li>
+            <a th:href="@{/flist}"><li class="list-container-num1">수다면 커뮤니티</li></a>
+            <a th:href="@{/rlist}"><li class="list-container-num2">나만의 레시피</li></a>           
           </ul>
         </div>
       </div>
@@ -76,14 +83,16 @@
         <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
         <div class="list-container">
           <ul>
-            <li class="list-container-num4"><a th:href="'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=라면'" target="_blank">국내 기사 검색하기</a></li>
-            <li class="list-container-num5"><a th:href="'https://www.google.com/search?q=ramyeon+news&tbm=nws'" target="_blank">해외 기사 검색하기</a></li>
+            <a th:href="'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=라면'" target="_blank"><li class="list-container-num4">국내 기사 검색하기</li></a>
+            <a th:href="'https://www.google.com/search?q=ramyeon+news&tbm=nws'" target="_blank"><li class="list-container-num5">해외 기사 검색하기</li></a>
           </ul>
         </div>
       </div>        
-      <div class="box" style="padding-top: 30px;">
-          <a th:href="@{/sudamyeon}">사이트 소개</a>
-      </div>        
+      <a th:href="@{/sudamyeon}">
+        <div class="box" style="padding-top: 30px;">
+          사이트 소개
+        </div>
+      </a>
     </div>
 </div>
 <script>
